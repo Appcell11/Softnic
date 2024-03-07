@@ -21,5 +21,12 @@ namespace Ventas.CapaPresentacion
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var Menu = new FrmPrincipal();
+            Menu.Show(this);
+            this.Close();
+        }
     }
 }

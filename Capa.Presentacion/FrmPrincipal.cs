@@ -119,7 +119,14 @@ namespace Ventas.CapaPresentacion
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            var FrmLogin = new Login();
+            FrmLogin.Show();
+        }
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var FrmCaja = new Caja();
+            FrmCaja.ShowDialog();
         }
     }
 }
