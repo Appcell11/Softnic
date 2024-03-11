@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caja.cs">
+    <Compile Include="FrmNewCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Caja.Designer.cs">
-      <DependentUpon>Caja.cs</DependentUpon>
+    <Compile Include="FrmNewCliente.Designer.cs">
+      <DependentUpon>FrmNewCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
@@ -67,8 +67,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Caja.resx">
-      <DependentUpon>Caja.cs</DependentUpon>
+    <EmbeddedResource Include="FrmNewCliente.resx">
+      <DependentUpon>FrmNewCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
@@ -100,6 +100,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">
+      <Project>{13f70dd8-5952-4d1e-a3c4-c1961a1db04b}</Project>
+      <Name>CapaNegocio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ventas.CapaNegocios\Ventas.CapaNegocios.csproj">
       <Project>{e03390d8-28d9-4607-97e4-865e9bf49407}</Project>
       <Name>Ventas.CapaNegocios</Name>
@@ -118,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconCaja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EyeIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

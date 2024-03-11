@@ -119,14 +119,55 @@ namespace Ventas.CapaPresentacion
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            var FrmLogin = new Login();
-            FrmLogin.Show();
+            if (Login.Access)
+            {
+                MessageBox.Show("Bienvenido");
+            }
+            else
+            {
+                var Logueo = new Login();
+                Logueo.ShowDialog();
+            }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void FrmPrincipal_Activated(object sender, EventArgs e)
         {
-            var FrmCaja = new Caja();
+            if (Login.Access)
+            {
+                
+            }
+            else
+            {
+                var Logueo = new Login();
+                Logueo.ShowDialog();
+            }
+        }
+
+        private void btn_Caja_Click(object sender, EventArgs e)
+        {
+            var FrmCaja = new FrmNewCliente();
             FrmCaja.ShowDialog();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Caja_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_AgregarCliente_Click(object sender, EventArgs e)
+        {
+            var FrmAddCliente = new FrmNewCliente();
+            FrmAddCliente.ShowDialog();
         }
     }
 }
