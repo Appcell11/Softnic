@@ -138,8 +138,7 @@ namespace Ventas.CapaPresentacion
             }
             else
             {
-                var Logueo = new Login();
-                Logueo.ShowDialog();
+                this.Close();
             }
         }
 

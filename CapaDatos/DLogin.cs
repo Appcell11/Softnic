@@ -19,7 +19,7 @@ namespace CapaDatos
             try
             {
                 sqlcon = Conexion.getInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("obtenerPerfiles", sqlcon);
+                SqlCommand Comando = new SqlCommand("sp_ObtenerPerfiles", sqlcon);
                 Comando.CommandType = CommandType.StoredProcedure;
                 sqlcon.Open();
                 Resultado = Comando.ExecuteReader();
@@ -33,6 +33,31 @@ namespace CapaDatos
             finally
             {
                 if(sqlcon.State == ConnectionState.Open) sqlcon.Close();
+            }
+        }
+
+        public bool ValidarCredenciales(string NombreUsuario, string Contrasena)
+        {
+            SqlDataReader Resultado;
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("sp_ValidarAcceso", sqlcon);
+                Comando.Parameters.Add(new SqlParameter("@NombreUsuario", NombreUsuario));
+                Comando.Parameters.Add(new SqlParameter("@Contrasena", Contrasena));
+                Comando.CommandType = CommandType.StoredProcedure;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                return Resultado.GetBoolean(0);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
         }
 

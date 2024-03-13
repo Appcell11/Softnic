@@ -18,8 +18,8 @@ namespace CapaDatos
 
         private Conexion()
         {
-            this.Base = "";
-            this.Servidor = "";
+            this.Base = "Softnic";
+            this.Servidor = "DESKTOP-KFG6V88";
             this.Usuario = "";
             this.Clave = "";
             this.Seguridad = true;

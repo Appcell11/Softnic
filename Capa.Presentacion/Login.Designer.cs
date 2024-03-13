@@ -114,6 +114,7 @@
             // 
             // cmb_Usuario
             // 
+            this.cmb_Usuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Usuario.FormattingEnabled = true;
             this.cmb_Usuario.Location = new System.Drawing.Point(128, 144);
             this.cmb_Usuario.Name = "cmb_Usuario";
