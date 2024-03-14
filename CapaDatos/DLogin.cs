@@ -36,20 +36,22 @@ namespace CapaDatos
             }
         }
 
-        public bool ValidarCredenciales(string NombreUsuario, string Contrasena)
+        public DataTable ValidarCredenciales(string NombreUsuario, string Contrasena)
         {
             SqlDataReader Resultado;
+            DataTable Responce = new DataTable();
             SqlConnection sqlcon = new SqlConnection();
             try
             {
                 sqlcon = Conexion.getInstancia().CrearConexion();
                 SqlCommand Comando = new SqlCommand("sp_ValidarAcceso", sqlcon);
-                Comando.Parameters.Add(new SqlParameter("@NombreUsuario", NombreUsuario));
-                Comando.Parameters.Add(new SqlParameter("@Contrasena", Contrasena));
                 Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+                Comando.Parameters.Add("@Contrasena", SqlDbType.VarChar).Value = Contrasena;
                 sqlcon.Open();
                 Resultado = Comando.ExecuteReader();
-                return Resultado.GetBoolean(0);
+                Responce.Load(Resultado);
+                return Responce;
             }
             catch (Exception ex)
             {

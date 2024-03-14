@@ -55,15 +55,29 @@ BEGIN
 	BEGIN
 		IF(SELECT Contraseña FROM Usuario WHERE Contraseña = @Contrasena) = @Contrasena
 		BEGIN
-			RETURN 1;
+			select '1';
 		END
 		ELSE
 		BEGIN
-			RETURN 0;
+			SELECT '0';
 		END
 	END
 	ELSE
 	BEGIN
-		RETURN 0;
+		SELECT '0';
 	END
+END
+-------------------------------------------------------
+--SP para mostrar informacion de los examenes
+CREATE OR ALTER PROC sp_MostrarExamenes
+AS
+BEGIN
+	SELECT 
+		id_Examen AS ID,
+		Examenes.Nombre AS Examen,
+		Precio,
+		Estado.id_Estado AS Estado
+	FROM
+		Examenes (NOLOCK)
+		INNER JOIN Estado (NOLOCK) ON Examenes.id_Estado = Estado.id_Estado
 END

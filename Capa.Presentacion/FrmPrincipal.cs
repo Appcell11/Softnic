@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -128,6 +129,8 @@ namespace Ventas.CapaPresentacion
                 var Logueo = new Login();
                 Logueo.ShowDialog();
             }
+
+            CargarDatos.CargarDatosExamenes().ForEach(item => cmb_Examenes.Items.Add(item));
         }
 
         private void FrmPrincipal_Activated(object sender, EventArgs e)

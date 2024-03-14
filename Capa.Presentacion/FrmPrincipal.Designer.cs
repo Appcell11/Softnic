@@ -34,7 +34,9 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.CajaPage = new System.Windows.Forms.TabPage();
+            this.btn_AgregarCliente = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmb_Descuentos = new System.Windows.Forms.ComboBox();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -45,42 +47,40 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmb_Clientes = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmb_Examenes = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
+            this.btn_Imprimir = new System.Windows.Forms.Button();
+            this.btn_Buscar = new System.Windows.Forms.Button();
+            this.dgv_Examenes = new System.Windows.Forms.DataGridView();
             this.UsersPage = new System.Windows.Forms.TabPage();
-            this.btn_AgregarCliente = new System.Windows.Forms.Button();
-            this.cmb_Descuentos = new System.Windows.Forms.ComboBox();
-            this.FormUserGroup = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.GroupUsers = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.btn_AddUser = new System.Windows.Forms.Button();
-            this.btn_RemoveUser = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.btn_RemoveUser = new System.Windows.Forms.Button();
+            this.btn_AddUser = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).BeginInit();
             this.UsersPage.SuspendLayout();
-            this.FormUserGroup.SuspendLayout();
             this.GroupUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.FormUserGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -115,16 +115,16 @@
             // 
             this.CajaPage.Controls.Add(this.btn_AgregarCliente);
             this.CajaPage.Controls.Add(this.groupBox1);
-            this.CajaPage.Controls.Add(this.comboBox2);
+            this.CajaPage.Controls.Add(this.cmb_Clientes);
             this.CajaPage.Controls.Add(this.label13);
-            this.CajaPage.Controls.Add(this.comboBox1);
+            this.CajaPage.Controls.Add(this.cmb_Examenes);
             this.CajaPage.Controls.Add(this.label9);
             this.CajaPage.Controls.Add(this.label2);
             this.CajaPage.Controls.Add(this.label1);
-            this.CajaPage.Controls.Add(this.button3);
-            this.CajaPage.Controls.Add(this.button2);
-            this.CajaPage.Controls.Add(this.button1);
-            this.CajaPage.Controls.Add(this.dataGridView1);
+            this.CajaPage.Controls.Add(this.btn_Cancelar);
+            this.CajaPage.Controls.Add(this.btn_Imprimir);
+            this.CajaPage.Controls.Add(this.btn_Buscar);
+            this.CajaPage.Controls.Add(this.dgv_Examenes);
             this.CajaPage.Location = new System.Drawing.Point(4, 22);
             this.CajaPage.Margin = new System.Windows.Forms.Padding(2);
             this.CajaPage.Name = "CajaPage";
@@ -133,6 +133,16 @@
             this.CajaPage.TabIndex = 0;
             this.CajaPage.Text = "Caja";
             this.CajaPage.UseVisualStyleBackColor = true;
+            // 
+            // btn_AgregarCliente
+            // 
+            this.btn_AgregarCliente.Location = new System.Drawing.Point(520, 36);
+            this.btn_AgregarCliente.Name = "btn_AgregarCliente";
+            this.btn_AgregarCliente.Size = new System.Drawing.Size(22, 22);
+            this.btn_AgregarCliente.TabIndex = 28;
+            this.btn_AgregarCliente.Text = "+";
+            this.btn_AgregarCliente.UseVisualStyleBackColor = true;
+            this.btn_AgregarCliente.Click += new System.EventHandler(this.btn_AgregarCliente_Click);
             // 
             // groupBox1
             // 
@@ -152,6 +162,15 @@
             this.groupBox1.Size = new System.Drawing.Size(257, 226);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
+            // 
+            // cmb_Descuentos
+            // 
+            this.cmb_Descuentos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Descuentos.FormattingEnabled = true;
+            this.cmb_Descuentos.Location = new System.Drawing.Point(127, 53);
+            this.cmb_Descuentos.Name = "cmb_Descuentos";
+            this.cmb_Descuentos.Size = new System.Drawing.Size(120, 21);
+            this.cmb_Descuentos.TabIndex = 32;
             // 
             // numericUpDown2
             // 
@@ -263,13 +282,14 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Total a pagar:";
             // 
-            // comboBox2
+            // cmb_Clientes
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(312, 36);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(202, 21);
-            this.comboBox2.TabIndex = 26;
+            this.cmb_Clientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Clientes.FormattingEnabled = true;
+            this.cmb_Clientes.Location = new System.Drawing.Point(312, 36);
+            this.cmb_Clientes.Name = "cmb_Clientes";
+            this.cmb_Clientes.Size = new System.Drawing.Size(202, 21);
+            this.cmb_Clientes.TabIndex = 26;
             // 
             // label13
             // 
@@ -282,13 +302,14 @@
             this.label13.TabIndex = 24;
             this.label13.Text = "0000";
             // 
-            // comboBox1
+            // cmb_Examenes
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(15, 36);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(291, 21);
-            this.comboBox1.TabIndex = 23;
+            this.cmb_Examenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Examenes.FormattingEnabled = true;
+            this.cmb_Examenes.Location = new System.Drawing.Point(15, 36);
+            this.cmb_Examenes.Name = "cmb_Examenes";
+            this.cmb_Examenes.Size = new System.Drawing.Size(291, 21);
+            this.cmb_Examenes.TabIndex = 23;
             // 
             // label9
             // 
@@ -323,49 +344,49 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Recibo:";
             // 
-            // button3
+            // btn_Cancelar
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(213, 292);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(93, 23);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "✖ Cancelar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Cancelar.Location = new System.Drawing.Point(213, 292);
+            this.btn_Cancelar.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(93, 23);
+            this.btn_Cancelar.TabIndex = 12;
+            this.btn_Cancelar.Text = "✖ Cancelar";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_Imprimir
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(111, 292);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "🖨 Imprimir";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Imprimir.Location = new System.Drawing.Point(111, 292);
+            this.btn_Imprimir.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Imprimir.Name = "btn_Imprimir";
+            this.btn_Imprimir.Size = new System.Drawing.Size(98, 23);
+            this.btn_Imprimir.TabIndex = 11;
+            this.btn_Imprimir.Text = "🖨 Imprimir";
+            this.btn_Imprimir.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_Buscar
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(15, 293);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 22);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "🔍 Buscar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_Buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Buscar.Location = new System.Drawing.Point(15, 293);
+            this.btn_Buscar.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Buscar.Name = "btn_Buscar";
+            this.btn_Buscar.Size = new System.Drawing.Size(92, 22);
+            this.btn_Buscar.TabIndex = 10;
+            this.btn_Buscar.Text = "🔍 Buscar";
+            this.btn_Buscar.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgv_Examenes
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 62);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(527, 227);
-            this.dataGridView1.TabIndex = 8;
+            this.dgv_Examenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Examenes.Location = new System.Drawing.Point(15, 62);
+            this.dgv_Examenes.Margin = new System.Windows.Forms.Padding(2);
+            this.dgv_Examenes.Name = "dgv_Examenes";
+            this.dgv_Examenes.RowHeadersWidth = 62;
+            this.dgv_Examenes.RowTemplate.Height = 28;
+            this.dgv_Examenes.Size = new System.Drawing.Size(527, 227);
+            this.dgv_Examenes.TabIndex = 8;
             // 
             // UsersPage
             // 
@@ -380,23 +401,23 @@
             this.UsersPage.Text = "Usuarios";
             this.UsersPage.UseVisualStyleBackColor = true;
             // 
-            // btn_AgregarCliente
+            // GroupUsers
             // 
-            this.btn_AgregarCliente.Location = new System.Drawing.Point(520, 36);
-            this.btn_AgregarCliente.Name = "btn_AgregarCliente";
-            this.btn_AgregarCliente.Size = new System.Drawing.Size(22, 22);
-            this.btn_AgregarCliente.TabIndex = 28;
-            this.btn_AgregarCliente.Text = "+";
-            this.btn_AgregarCliente.UseVisualStyleBackColor = true;
-            this.btn_AgregarCliente.Click += new System.EventHandler(this.btn_AgregarCliente_Click);
+            this.GroupUsers.Controls.Add(this.dataGridView2);
+            this.GroupUsers.Location = new System.Drawing.Point(245, 6);
+            this.GroupUsers.Name = "GroupUsers";
+            this.GroupUsers.Size = new System.Drawing.Size(579, 366);
+            this.GroupUsers.TabIndex = 1;
+            this.GroupUsers.TabStop = false;
+            this.GroupUsers.Text = "Lista de Usuarios";
             // 
-            // cmb_Descuentos
+            // dataGridView2
             // 
-            this.cmb_Descuentos.FormattingEnabled = true;
-            this.cmb_Descuentos.Location = new System.Drawing.Point(127, 53);
-            this.cmb_Descuentos.Name = "cmb_Descuentos";
-            this.cmb_Descuentos.Size = new System.Drawing.Size(120, 21);
-            this.cmb_Descuentos.TabIndex = 32;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(7, 20);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(566, 340);
+            this.dataGridView2.TabIndex = 0;
             // 
             // FormUserGroup
             // 
@@ -417,39 +438,54 @@
             this.FormUserGroup.TabStop = false;
             this.FormUserGroup.Text = "Datos de Usuario";
             // 
-            // textBox1
+            // button6
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 79);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(217, 20);
-            this.textBox1.TabIndex = 0;
+            this.button6.BackColor = System.Drawing.Color.Orange;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.Black;
+            this.button6.Location = new System.Drawing.Point(6, 242);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(217, 23);
+            this.button6.TabIndex = 9;
+            this.button6.Text = "Modificar Usuario";
+            this.button6.UseVisualStyleBackColor = false;
             // 
-            // label3
+            // button5
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Nombre de Usuario";
+            this.button5.BackgroundImage = global::Ventas.CapaPresentacion.Properties.Resources.EyeIcon;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.Location = new System.Drawing.Point(189, 134);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(34, 23);
+            this.button5.TabIndex = 8;
+            this.button5.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // btn_RemoveUser
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 16);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "ID:";
+            this.btn_RemoveUser.BackColor = System.Drawing.Color.LightCoral;
+            this.btn_RemoveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_RemoveUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_RemoveUser.ForeColor = System.Drawing.Color.Black;
+            this.btn_RemoveUser.Location = new System.Drawing.Point(6, 213);
+            this.btn_RemoveUser.Name = "btn_RemoveUser";
+            this.btn_RemoveUser.Size = new System.Drawing.Size(217, 23);
+            this.btn_RemoveUser.TabIndex = 7;
+            this.btn_RemoveUser.Text = "➖ Eliminar Usuario";
+            this.btn_RemoveUser.UseVisualStyleBackColor = false;
             // 
-            // textBox2
+            // btn_AddUser
             // 
-            this.textBox2.Location = new System.Drawing.Point(38, 26);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(74, 20);
-            this.textBox2.TabIndex = 3;
+            this.btn_AddUser.BackColor = System.Drawing.Color.LawnGreen;
+            this.btn_AddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_AddUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_AddUser.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btn_AddUser.Location = new System.Drawing.Point(6, 184);
+            this.btn_AddUser.Name = "btn_AddUser";
+            this.btn_AddUser.Size = new System.Drawing.Size(217, 23);
+            this.btn_AddUser.TabIndex = 6;
+            this.btn_AddUser.Text = "➕ Agregar Nuevo Usuario";
+            this.btn_AddUser.UseVisualStyleBackColor = false;
             // 
             // label10
             // 
@@ -469,72 +505,39 @@
             this.textBox3.TabIndex = 4;
             this.textBox3.UseSystemPasswordChar = true;
             // 
-            // GroupUsers
+            // textBox2
             // 
-            this.GroupUsers.Controls.Add(this.dataGridView2);
-            this.GroupUsers.Location = new System.Drawing.Point(245, 6);
-            this.GroupUsers.Name = "GroupUsers";
-            this.GroupUsers.Size = new System.Drawing.Size(579, 366);
-            this.GroupUsers.TabIndex = 1;
-            this.GroupUsers.TabStop = false;
-            this.GroupUsers.Text = "Lista de Usuarios";
+            this.textBox2.Location = new System.Drawing.Point(38, 26);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(74, 20);
+            this.textBox2.TabIndex = 3;
             // 
-            // dataGridView2
+            // label4
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 20);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(566, 340);
-            this.dataGridView2.TabIndex = 0;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(26, 16);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "ID:";
             // 
-            // btn_AddUser
+            // label3
             // 
-            this.btn_AddUser.BackColor = System.Drawing.Color.LawnGreen;
-            this.btn_AddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_AddUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddUser.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_AddUser.Location = new System.Drawing.Point(6, 184);
-            this.btn_AddUser.Name = "btn_AddUser";
-            this.btn_AddUser.Size = new System.Drawing.Size(217, 23);
-            this.btn_AddUser.TabIndex = 6;
-            this.btn_AddUser.Text = "➕ Agregar Nuevo Usuario";
-            this.btn_AddUser.UseVisualStyleBackColor = false;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 16);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Nombre de Usuario";
             // 
-            // btn_RemoveUser
+            // textBox1
             // 
-            this.btn_RemoveUser.BackColor = System.Drawing.Color.LightCoral;
-            this.btn_RemoveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_RemoveUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_RemoveUser.ForeColor = System.Drawing.Color.Black;
-            this.btn_RemoveUser.Location = new System.Drawing.Point(6, 213);
-            this.btn_RemoveUser.Name = "btn_RemoveUser";
-            this.btn_RemoveUser.Size = new System.Drawing.Size(217, 23);
-            this.btn_RemoveUser.TabIndex = 7;
-            this.btn_RemoveUser.Text = "➖ Eliminar Usuario";
-            this.btn_RemoveUser.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = global::Ventas.CapaPresentacion.Properties.Resources.EyeIcon;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.Location = new System.Drawing.Point(189, 134);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(34, 23);
-            this.button5.TabIndex = 8;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.Orange;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(6, 242);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(217, 23);
-            this.button6.TabIndex = 9;
-            this.button6.Text = "Modificar Usuario";
-            this.button6.UseVisualStyleBackColor = false;
+            this.textBox1.Location = new System.Drawing.Point(6, 79);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(217, 20);
+            this.textBox1.TabIndex = 0;
             // 
             // FrmPrincipal
             // 
@@ -556,12 +559,12 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).EndInit();
             this.UsersPage.ResumeLayout(false);
-            this.FormUserGroup.ResumeLayout(false);
-            this.FormUserGroup.PerformLayout();
             this.GroupUsers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.FormUserGroup.ResumeLayout(false);
+            this.FormUserGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,16 +586,16 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmb_Clientes;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmb_Examenes;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btn_Cancelar;
+        private System.Windows.Forms.Button btn_Imprimir;
+        private System.Windows.Forms.Button btn_Buscar;
+        private System.Windows.Forms.DataGridView dgv_Examenes;
         private System.Windows.Forms.TabPage UsersPage;
         private System.Windows.Forms.Button btn_AgregarCliente;
         private System.Windows.Forms.ComboBox cmb_Descuentos;

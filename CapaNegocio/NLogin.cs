@@ -39,7 +39,16 @@ namespace CapaNegocio
             //});
 
             var Access = new DLogin();
-            Access.ValidarCredenciales(nombre, contraseña);
+
+            string ResultAccess = Access.ValidarCredenciales(nombre, contraseña).Select()[0][0].ToString();
+            if (ResultAccess == "0")
+            {
+                Acceso = false;
+            }
+            else if (ResultAccess == "1") 
+            {
+                Acceso = true;
+            }
 
             return Acceso;
         }
