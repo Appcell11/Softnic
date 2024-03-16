@@ -57,29 +57,20 @@
             this.btn_Imprimir = new System.Windows.Forms.Button();
             this.btn_Buscar = new System.Windows.Forms.Button();
             this.dgv_Examenes = new System.Windows.Forms.DataGridView();
-            this.UsersPage = new System.Windows.Forms.TabPage();
-            this.GroupUsers = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ManagPage = new System.Windows.Forms.TabPage();
+            this.GroupRegister = new System.Windows.Forms.GroupBox();
+            this.dgv_Register = new System.Windows.Forms.DataGridView();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.btn_RemoveUser = new System.Windows.Forms.Button();
-            this.btn_AddUser = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_AdminUsuarios = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).BeginInit();
-            this.UsersPage.SuspendLayout();
-            this.GroupUsers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.ManagPage.SuspendLayout();
+            this.GroupRegister.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Register)).BeginInit();
             this.FormUserGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,10 +93,12 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.CajaPage);
-            this.tabControl1.Controls.Add(this.UsersPage);
+            this.tabControl1.Controls.Add(this.ManagPage);
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(840, 403);
@@ -125,11 +118,11 @@
             this.CajaPage.Controls.Add(this.btn_Imprimir);
             this.CajaPage.Controls.Add(this.btn_Buscar);
             this.CajaPage.Controls.Add(this.dgv_Examenes);
-            this.CajaPage.Location = new System.Drawing.Point(4, 22);
+            this.CajaPage.Location = new System.Drawing.Point(4, 25);
             this.CajaPage.Margin = new System.Windows.Forms.Padding(2);
             this.CajaPage.Name = "CajaPage";
             this.CajaPage.Padding = new System.Windows.Forms.Padding(2);
-            this.CajaPage.Size = new System.Drawing.Size(832, 377);
+            this.CajaPage.Size = new System.Drawing.Size(832, 374);
             this.CajaPage.TabIndex = 0;
             this.CajaPage.Text = "Caja";
             this.CajaPage.UseVisualStyleBackColor = true;
@@ -379,6 +372,9 @@
             // 
             // dgv_Examenes
             // 
+            this.dgv_Examenes.AllowUserToAddRows = false;
+            this.dgv_Examenes.AllowUserToDeleteRows = false;
+            this.dgv_Examenes.AllowUserToResizeRows = false;
             this.dgv_Examenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Examenes.Location = new System.Drawing.Point(15, 62);
             this.dgv_Examenes.Margin = new System.Windows.Forms.Padding(2);
@@ -388,156 +384,56 @@
             this.dgv_Examenes.Size = new System.Drawing.Size(527, 227);
             this.dgv_Examenes.TabIndex = 8;
             // 
-            // UsersPage
+            // ManagPage
             // 
-            this.UsersPage.Controls.Add(this.GroupUsers);
-            this.UsersPage.Controls.Add(this.FormUserGroup);
-            this.UsersPage.Location = new System.Drawing.Point(4, 22);
-            this.UsersPage.Margin = new System.Windows.Forms.Padding(2);
-            this.UsersPage.Name = "UsersPage";
-            this.UsersPage.Padding = new System.Windows.Forms.Padding(2);
-            this.UsersPage.Size = new System.Drawing.Size(832, 377);
-            this.UsersPage.TabIndex = 1;
-            this.UsersPage.Text = "Usuarios";
-            this.UsersPage.UseVisualStyleBackColor = true;
+            this.ManagPage.Controls.Add(this.GroupRegister);
+            this.ManagPage.Controls.Add(this.FormUserGroup);
+            this.ManagPage.Location = new System.Drawing.Point(4, 25);
+            this.ManagPage.Margin = new System.Windows.Forms.Padding(2);
+            this.ManagPage.Name = "ManagPage";
+            this.ManagPage.Padding = new System.Windows.Forms.Padding(2);
+            this.ManagPage.Size = new System.Drawing.Size(832, 374);
+            this.ManagPage.TabIndex = 1;
+            this.ManagPage.Text = "Mantenimiento";
+            this.ManagPage.UseVisualStyleBackColor = true;
             // 
-            // GroupUsers
+            // GroupRegister
             // 
-            this.GroupUsers.Controls.Add(this.dataGridView2);
-            this.GroupUsers.Location = new System.Drawing.Point(245, 6);
-            this.GroupUsers.Name = "GroupUsers";
-            this.GroupUsers.Size = new System.Drawing.Size(579, 366);
-            this.GroupUsers.TabIndex = 1;
-            this.GroupUsers.TabStop = false;
-            this.GroupUsers.Text = "Lista de Usuarios";
+            this.GroupRegister.Controls.Add(this.dgv_Register);
+            this.GroupRegister.Location = new System.Drawing.Point(245, 6);
+            this.GroupRegister.Name = "GroupRegister";
+            this.GroupRegister.Size = new System.Drawing.Size(579, 366);
+            this.GroupRegister.TabIndex = 1;
+            this.GroupRegister.TabStop = false;
+            this.GroupRegister.Text = "Registro de examenes realizados";
             // 
-            // dataGridView2
+            // dgv_Register
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 20);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(566, 340);
-            this.dataGridView2.TabIndex = 0;
+            this.dgv_Register.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Register.Location = new System.Drawing.Point(7, 20);
+            this.dgv_Register.Name = "dgv_Register";
+            this.dgv_Register.Size = new System.Drawing.Size(566, 340);
+            this.dgv_Register.TabIndex = 0;
             // 
             // FormUserGroup
             // 
-            this.FormUserGroup.Controls.Add(this.button6);
-            this.FormUserGroup.Controls.Add(this.button5);
-            this.FormUserGroup.Controls.Add(this.btn_RemoveUser);
-            this.FormUserGroup.Controls.Add(this.btn_AddUser);
-            this.FormUserGroup.Controls.Add(this.label10);
-            this.FormUserGroup.Controls.Add(this.textBox3);
-            this.FormUserGroup.Controls.Add(this.textBox2);
-            this.FormUserGroup.Controls.Add(this.label4);
-            this.FormUserGroup.Controls.Add(this.label3);
-            this.FormUserGroup.Controls.Add(this.textBox1);
+            this.FormUserGroup.Controls.Add(this.btn_AdminUsuarios);
             this.FormUserGroup.Location = new System.Drawing.Point(9, 6);
             this.FormUserGroup.Name = "FormUserGroup";
             this.FormUserGroup.Size = new System.Drawing.Size(229, 366);
             this.FormUserGroup.TabIndex = 0;
             this.FormUserGroup.TabStop = false;
-            this.FormUserGroup.Text = "Datos de Usuario";
+            this.FormUserGroup.Text = "Acciones";
             // 
-            // button6
+            // btn_AdminUsuarios
             // 
-            this.button6.BackColor = System.Drawing.Color.Orange;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(6, 242);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(217, 23);
-            this.button6.TabIndex = 9;
-            this.button6.Text = "Modificar Usuario";
-            this.button6.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = global::Ventas.CapaPresentacion.Properties.Resources.EyeIcon;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.Location = new System.Drawing.Point(189, 134);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(34, 23);
-            this.button5.TabIndex = 8;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // btn_RemoveUser
-            // 
-            this.btn_RemoveUser.BackColor = System.Drawing.Color.LightCoral;
-            this.btn_RemoveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_RemoveUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_RemoveUser.ForeColor = System.Drawing.Color.Black;
-            this.btn_RemoveUser.Location = new System.Drawing.Point(6, 213);
-            this.btn_RemoveUser.Name = "btn_RemoveUser";
-            this.btn_RemoveUser.Size = new System.Drawing.Size(217, 23);
-            this.btn_RemoveUser.TabIndex = 7;
-            this.btn_RemoveUser.Text = "➖ Eliminar Usuario";
-            this.btn_RemoveUser.UseVisualStyleBackColor = false;
-            // 
-            // btn_AddUser
-            // 
-            this.btn_AddUser.BackColor = System.Drawing.Color.LawnGreen;
-            this.btn_AddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_AddUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddUser.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_AddUser.Location = new System.Drawing.Point(6, 184);
-            this.btn_AddUser.Name = "btn_AddUser";
-            this.btn_AddUser.Size = new System.Drawing.Size(217, 23);
-            this.btn_AddUser.TabIndex = 6;
-            this.btn_AddUser.Text = "➕ Agregar Nuevo Usuario";
-            this.btn_AddUser.UseVisualStyleBackColor = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 117);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(86, 16);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "Contraseña";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(6, 136);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(177, 20);
-            this.textBox3.TabIndex = 4;
-            this.textBox3.UseSystemPasswordChar = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(38, 26);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(74, 20);
-            this.textBox2.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 16);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "ID:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Nombre de Usuario";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 79);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(217, 20);
-            this.textBox1.TabIndex = 0;
+            this.btn_AdminUsuarios.Location = new System.Drawing.Point(6, 31);
+            this.btn_AdminUsuarios.Name = "btn_AdminUsuarios";
+            this.btn_AdminUsuarios.Size = new System.Drawing.Size(217, 35);
+            this.btn_AdminUsuarios.TabIndex = 10;
+            this.btn_AdminUsuarios.Text = "Control de Perfiles";
+            this.btn_AdminUsuarios.UseVisualStyleBackColor = true;
+            this.btn_AdminUsuarios.Click += new System.EventHandler(this.btn_AdminUsuarios_Click);
             // 
             // FrmPrincipal
             // 
@@ -547,6 +443,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip);
             this.IsMdiContainer = true;
+            this.MaximizeBox = false;
             this.Name = "FrmPrincipal";
             this.Text = "Principal";
             this.Activated += new System.EventHandler(this.FrmPrincipal_Activated);
@@ -560,11 +457,10 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).EndInit();
-            this.UsersPage.ResumeLayout(false);
-            this.GroupUsers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.ManagPage.ResumeLayout(false);
+            this.GroupRegister.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Register)).EndInit();
             this.FormUserGroup.ResumeLayout(false);
-            this.FormUserGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -596,22 +492,13 @@
         private System.Windows.Forms.Button btn_Imprimir;
         private System.Windows.Forms.Button btn_Buscar;
         private System.Windows.Forms.DataGridView dgv_Examenes;
-        private System.Windows.Forms.TabPage UsersPage;
+        private System.Windows.Forms.TabPage ManagPage;
         private System.Windows.Forms.Button btn_AgregarCliente;
         private System.Windows.Forms.ComboBox cmb_Descuentos;
         private System.Windows.Forms.GroupBox FormUserGroup;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox GroupUsers;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Button btn_RemoveUser;
-        private System.Windows.Forms.Button btn_AddUser;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox GroupRegister;
+        private System.Windows.Forms.DataGridView dgv_Register;
+        private System.Windows.Forms.Button btn_AdminUsuarios;
     }
 }
 

@@ -55,7 +55,14 @@ BEGIN
 	BEGIN
 		IF(SELECT Contraseña FROM Usuario WHERE Contraseña = @Contrasena) = @Contrasena
 		BEGIN
-			select '1';
+			IF @NombreUsuario = 'Admin'
+			BEGIN
+				SELECT 'Admin'
+			END
+			ELSE
+			BEGIN
+				select '1';
+			END
 		END
 		ELSE
 		BEGIN
@@ -80,4 +87,23 @@ BEGIN
 	FROM
 		Examenes (NOLOCK)
 		INNER JOIN Estado (NOLOCK) ON Examenes.id_Estado = Estado.id_Estado
+END
+---------------------------------------------------------------
+--SP para mostrar informacion de los Pacientes
+CREATE OR ALTER PROC sp_MostrarClientes
+AS
+BEGIN
+	SELECT 
+		id_Paciente AS ID,
+		PrimerNombre,
+		SegundoNombre,
+		PrimerApellido,
+		SegundoApellido,
+		FechaDeNacimiento,
+		Sexo.Nombre AS Sexo,
+		Estado.id_Estado AS Estado
+	FROM
+		Pacientes (NOLOCK)
+		INNER JOIN Estado (NOLOCK) ON Pacientes.id_Estado = Estado.id_Estado
+		INNER JOIN Sexo (NOLOCK) ON Pacientes.id_sexo = Sexo.id_Sexo
 END

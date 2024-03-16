@@ -53,6 +53,12 @@
     <Compile Include="FrmNewCliente.Designer.cs">
       <DependentUpon>FrmNewCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPerfilesUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPerfilesUsuarios.Designer.cs">
+      <DependentUpon>FrmPerfilesUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmNewCliente.resx">
       <DependentUpon>FrmNewCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPerfilesUsuarios.resx">
+      <DependentUpon>FrmPerfilesUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>

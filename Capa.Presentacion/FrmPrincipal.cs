@@ -118,31 +118,32 @@ namespace Ventas.CapaPresentacion
             
         }
 
-        private void FrmPrincipal_Load(object sender, EventArgs e)
+        protected void Empezar()
         {
-            if (Login.Access)
+            if (Login.Access == "Admin" || Login.Access == "1")
             {
-                MessageBox.Show("Bienvenido");
+                
             }
             else
             {
                 var Logueo = new Login();
                 Logueo.ShowDialog();
             }
+        }
 
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+            Empezar();
             CargarDatos.CargarDatosExamenes().ForEach(item => cmb_Examenes.Items.Add(item));
+            CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
+            var bindingSource = new BindingSource();
+            bindingSource.DataSource = CargarDatos.cargarInformacionExamenes();
+            dgv_Examenes.DataSource = bindingSource;
         }
 
         private void FrmPrincipal_Activated(object sender, EventArgs e)
         {
-            if (Login.Access)
-            {
-                
-            }
-            else
-            {
-                this.Close();
-            }
+            Empezar();
         }
 
         private void btn_Caja_Click(object sender, EventArgs e)
@@ -170,6 +171,19 @@ namespace Ventas.CapaPresentacion
         {
             var FrmAddCliente = new FrmNewCliente();
             FrmAddCliente.ShowDialog();
+        }
+
+        private void btn_AdminUsuarios_Click(object sender, EventArgs e)
+        {
+            if(Login.Access == "Admin")
+            {
+                var FrmPerfiles = new FrmPerfilesUsuarios();
+                FrmPerfiles.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Solo el administrador puede modificar los perfiles");
+            }
         }
     }
 }

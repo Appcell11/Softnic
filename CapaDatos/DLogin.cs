@@ -61,12 +61,6 @@ namespace CapaDatos
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
-        }
-
-        public static List<Login> LoginOffline = new List<Login>()
-         {
-             new Login() {IdLogin = 1, Nombre = "Admin", Contrasena = "Admin", LoginEstado = 1}
-         };
-        
+        }  
     }
 }

@@ -14,7 +14,7 @@ namespace Ventas.CapaPresentacion
 {
     public partial class Login : Form
     {
-        public static bool Access = false;
+        public static string Access = "false";
         public Login()
         {
             InitializeComponent();
@@ -26,17 +26,24 @@ namespace Ventas.CapaPresentacion
 
         }
 
-        public bool Acceso(string perfil, string contrasena)
+        public string Acceso(string perfil, string contrasena)
         {
-            bool Access = NLogin.ValidarAcceso(perfil, contrasena);
+            string Access = NLogin.ValidarAcceso(perfil, contrasena);
             return Access;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text))
+            if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text) == "Admin")
             {
-                Access = true;
+                Access = "Admin";
+                var Menu = new FrmPrincipal();
+                Menu.Show(this);
+                this.Close();
+            }
+            else if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text) == "1")
+            {
+                Access = "1";
                 var Menu = new FrmPrincipal();
                 Menu.Show(this);
                 this.Close();

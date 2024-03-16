@@ -13,5 +13,13 @@ namespace CapaEntidades
         public string Nombre { get; set; }
         public SqlMoney Precio { get; set; }
         public string Estado { get; set;}
+
+        public Examenes(int Id, string Nombre, SqlMoney Precio, string Estado)
+        {
+            this.id_Examen = Id;
+            this.Nombre = Nombre;
+            this.Precio = Precio;
+            this.Estado = Estado;
+        }
     }
 }

@@ -21,36 +21,14 @@ namespace CapaNegocio
                 result.Add(item[0].ToString());
             }
 
-            //Login.LogIn().ForEach(x =>
-            //{
-            //    result.Add(x.Nombre);
-            //});
-
             return result;
         }
 
-        public static bool ValidarAcceso(string nombre, string contraseña)
+        public static string ValidarAcceso(string nombre, string contraseña)
         {
-            bool Acceso = false;
-            //DLogin.LoginOffline.ForEach(login => { 
-            //    if (login.Nombre == nombre && login.Contrasena == contraseña) {
-            //        Acceso = true;
-            //    }
-            //});
-
             var Access = new DLogin();
-
             string ResultAccess = Access.ValidarCredenciales(nombre, contraseña).Select()[0][0].ToString();
-            if (ResultAccess == "0")
-            {
-                Acceso = false;
-            }
-            else if (ResultAccess == "1") 
-            {
-                Acceso = true;
-            }
-
-            return Acceso;
+            return ResultAccess;
         }
     }
 }
