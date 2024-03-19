@@ -136,6 +136,7 @@ namespace Ventas.CapaPresentacion
             Empezar();
             CargarDatos.CargarDatosExamenes().ForEach(item => cmb_Examenes.Items.Add(item));
             CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
+            CargarDatos.CargarDatosDescuentos().ForEach(item => cmb_Descuentos.Items.Add(item));
             var bindingSource = new BindingSource();
             bindingSource.DataSource = CargarDatos.cargarInformacionExamenes();
             dgv_Examenes.DataSource = bindingSource;

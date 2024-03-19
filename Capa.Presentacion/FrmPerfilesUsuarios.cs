@@ -16,5 +16,10 @@ namespace Ventas.CapaPresentacion
         {
             InitializeComponent();
         }
+
+        private void btn_AddUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

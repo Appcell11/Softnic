@@ -21,6 +21,7 @@ VALUES ('Sangre', 500, 1), ('Glucosa', 700, 1);
 GO
 INSERT INTO Recibo
 VALUES (1, 1, 1, 500, 1, 500, 0, 07/03/2024);
+select * from Recibo
 GO
 INSERT INTO Cierre_de_Caja
 VALUES (500, 0, 500, 1, 07/03/2024);
@@ -30,4 +31,5 @@ VALUES (1, 'Admin', 'Admin', 1);
 SELECT * FROM Usuario;
 GO
 INSERT INTO Descuento
-VALUES (0.0, 1), (0.10, 1), (0.15, 1), (0.20, 1);
+VALUES (0.0, 1, '0%'), (0.10, 1, '10%'), (0.15, 1, '15%'), (0.20, 1, '20%');
+SELECT * from Descuento

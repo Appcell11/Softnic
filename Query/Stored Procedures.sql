@@ -43,6 +43,7 @@ BEGIN
 		INNER JOIN Rol (NOLOCK) ON Usuario.id_Rol = Rol.id_Rol
 		INNER JOIN Estado (NOLOCK) ON Usuario.id_Estado = Estado.id_Estado
 END
+GO
 ------------------------------------------------------------------
 --SP para validar contraseña
 CREATE OR ALTER PROC sp_ValidarAcceso(
@@ -55,7 +56,7 @@ BEGIN
 	BEGIN
 		IF(SELECT Contraseña FROM Usuario WHERE Contraseña = @Contrasena) = @Contrasena
 		BEGIN
-			IF @NombreUsuario = 'Admin'
+			IF (SELECT id_Rol FROM Usuario WHERE Nombre = @NombreUsuario) = 1
 			BEGIN
 				SELECT 'Admin'
 			END
@@ -74,6 +75,7 @@ BEGIN
 		SELECT '0';
 	END
 END
+GO
 -------------------------------------------------------
 --SP para mostrar informacion de los examenes
 CREATE OR ALTER PROC sp_MostrarExamenes
@@ -83,11 +85,13 @@ BEGIN
 		id_Examen AS ID,
 		Examenes.Nombre AS Examen,
 		Precio,
-		Estado.id_Estado AS Estado
+		Estado.Nombre AS Estado
 	FROM
 		Examenes (NOLOCK)
 		INNER JOIN Estado (NOLOCK) ON Examenes.id_Estado = Estado.id_Estado
 END
+--exec sp_MostrarExamenes
+GO
 ---------------------------------------------------------------
 --SP para mostrar informacion de los Pacientes
 CREATE OR ALTER PROC sp_MostrarClientes
@@ -101,9 +105,29 @@ BEGIN
 		SegundoApellido,
 		FechaDeNacimiento,
 		Sexo.Nombre AS Sexo,
-		Estado.id_Estado AS Estado
+		Estado.Nombre AS Estado
 	FROM
 		Pacientes (NOLOCK)
 		INNER JOIN Estado (NOLOCK) ON Pacientes.id_Estado = Estado.id_Estado
 		INNER JOIN Sexo (NOLOCK) ON Pacientes.id_sexo = Sexo.id_Sexo
 END
+exec sp_MostrarClientes
+GO
+-------------------------------------------------
+--SP para mostrar los descuentos disponibles-----
+CREATE OR ALTER PROC sp_MostrarDescuentos
+AS
+BEGIN
+	SELECT 
+		Descuento.id_descuento,
+		Descuento.Nombre,
+		Descuento.Cantidad,
+		Estado.Nombre AS Estado
+	FROM
+		Descuento (NOLOCK)
+		INNER JOIN Estado (NOLOCK) ON Descuento.id_Estado = Estado.id_Estado
+END
+GO
+
+--EXEC sp_MostrarDescuentos
+------------------------------------------

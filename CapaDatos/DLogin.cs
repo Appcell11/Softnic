@@ -61,6 +61,29 @@ namespace CapaDatos
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
-        }  
+        }
+
+        public static void AñadirPerfilUsuario(string NombreUsuario, string Contrasena, int Rol)
+        {
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("sp_AgregarPerfil", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = NombreUsuario;
+                Comando.Parameters.Add("@Contrasena", SqlDbType.VarChar).Value = Contrasena;
+                Comando.Parameters.Add("@Rol", SqlDbType.Int).Value = Rol;
+                sqlcon.Open();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
+            }
+        }
     }
 }

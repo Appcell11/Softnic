@@ -36,5 +36,15 @@ namespace CapaNegocio
             }
             return list;
         }
+
+        public static List<string> CargarDatosDescuentos()
+        {
+            var list = new List<string>();
+            foreach (var item in ExecSP.Exec("sp_MostrarDescuentos").Select())
+            {
+                list.Add(item[1].ToString());
+            }
+            return list;
+        }
     }
 }

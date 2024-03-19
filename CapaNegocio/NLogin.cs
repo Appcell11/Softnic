@@ -30,5 +30,11 @@ namespace CapaNegocio
             string ResultAccess = Access.ValidarCredenciales(nombre, contraseña).Select()[0][0].ToString();
             return ResultAccess;
         }
+
+        public static void AñadirPerfilUsuario(string Nombre, string Contraseña, int Rol)
+        {
+            string ContraseñaEncriptada = Encriptar.GetSHA256(Contraseña);
+            DLogin.AñadirPerfilUsuario(Nombre, ContraseñaEncriptada, Rol);
+        }
     }
 }

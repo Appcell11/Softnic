@@ -4,6 +4,14 @@ CREATE TABLE Estado(
 id_Estado INT PRIMARY KEY IDENTITY,
 Nombre VARCHAR(20)
 );
+
+CREATE TABLE Descuento(
+	id_descuento INT PRIMARY KEY IDENTITY,
+	Cantidad FLOAT,
+	id_Estado INT REFERENCES Estado(id_Estado),
+	Nombre VARCHAR(20)
+);
+
 CREATE TABLE Rol(
 id_Rol INT PRIMARY KEY IDENTITY,
 Nombre VARCHAR(30),
@@ -59,10 +67,4 @@ id_Rol INT REFERENCES Rol(id_Rol),
 Nombre VARCHAR(80),
 Contraseña VARCHAR(12),
 id_Estado INT REFERENCES Estado(id_Estado)
-);
-
-CREATE TABLE Descuento(
-	id_descuento INT PRIMARY KEY IDENTITY,
-	Cantidad FLOAT,
-	id_Estado INT REFERENCES Estado(id_Estado)
 );
