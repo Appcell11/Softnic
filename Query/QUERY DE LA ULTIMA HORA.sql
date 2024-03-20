@@ -65,6 +65,7 @@ CREATE TABLE Usuario(
 id_Usuario INT PRIMARY KEY IDENTITY,
 id_Rol INT REFERENCES Rol(id_Rol),
 Nombre VARCHAR(80),
-Contraseña VARCHAR(12),
+Contraseña VARCHAR(64),
 id_Estado INT REFERENCES Estado(id_Estado)
 );
+

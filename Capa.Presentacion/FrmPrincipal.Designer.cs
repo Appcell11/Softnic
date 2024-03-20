@@ -37,18 +37,18 @@
             this.btn_AgregarCliente = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmb_Descuentos = new System.Windows.Forms.ComboBox();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.txt_importe = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.label_Saldo = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
+            this.label_Total = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cmb_Clientes = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.label_NumRecibo = new System.Windows.Forms.Label();
             this.cmb_Examenes = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,7 +66,7 @@
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_importe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).BeginInit();
             this.ManagPage.SuspendLayout();
             this.GroupRegister.SuspendLayout();
@@ -109,7 +109,7 @@
             this.CajaPage.Controls.Add(this.btn_AgregarCliente);
             this.CajaPage.Controls.Add(this.groupBox1);
             this.CajaPage.Controls.Add(this.cmb_Clientes);
-            this.CajaPage.Controls.Add(this.label13);
+            this.CajaPage.Controls.Add(this.label_NumRecibo);
             this.CajaPage.Controls.Add(this.cmb_Examenes);
             this.CajaPage.Controls.Add(this.label9);
             this.CajaPage.Controls.Add(this.label2);
@@ -140,12 +140,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cmb_Descuentos);
-            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.txt_importe);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.label_Saldo);
             this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label_Total);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label8);
@@ -165,20 +165,20 @@
             this.cmb_Descuentos.Size = new System.Drawing.Size(120, 21);
             this.cmb_Descuentos.TabIndex = 32;
             // 
-            // numericUpDown2
+            // txt_importe
             // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.numericUpDown2.Location = new System.Drawing.Point(127, 19);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.txt_importe.DecimalPlaces = 2;
+            this.txt_importe.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txt_importe.Location = new System.Drawing.Point(127, 19);
+            this.txt_importe.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown2.TabIndex = 31;
-            this.numericUpDown2.ThousandsSeparator = true;
+            this.txt_importe.Name = "txt_importe";
+            this.txt_importe.Size = new System.Drawing.Size(120, 20);
+            this.txt_importe.TabIndex = 31;
+            this.txt_importe.ThousandsSeparator = true;
             // 
             // label18
             // 
@@ -200,15 +200,15 @@
             this.label17.TabIndex = 29;
             this.label17.Text = "C$";
             // 
-            // label16
+            // label_Saldo
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(167, 89);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(45, 16);
-            this.label16.TabIndex = 27;
-            this.label16.Text = "000.00";
+            this.label_Saldo.AutoSize = true;
+            this.label_Saldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Saldo.Location = new System.Drawing.Point(167, 89);
+            this.label_Saldo.Name = "label_Saldo";
+            this.label_Saldo.Size = new System.Drawing.Size(45, 16);
+            this.label_Saldo.TabIndex = 27;
+            this.label_Saldo.Text = "000.00";
             // 
             // button4
             // 
@@ -221,15 +221,15 @@
             this.button4.Text = "Guardar";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // label_Total
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(167, 115);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(45, 15);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "000.00";
+            this.label_Total.AutoSize = true;
+            this.label_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Total.Location = new System.Drawing.Point(167, 115);
+            this.label_Total.Name = "label_Total";
+            this.label_Total.Size = new System.Drawing.Size(45, 15);
+            this.label_Total.TabIndex = 25;
+            this.label_Total.Text = "000.00";
             // 
             // label6
             // 
@@ -284,16 +284,16 @@
             this.cmb_Clientes.Size = new System.Drawing.Size(202, 21);
             this.cmb_Clientes.TabIndex = 26;
             // 
-            // label13
+            // label_NumRecibo
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label13.Location = new System.Drawing.Point(632, 10);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 16);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "0000";
+            this.label_NumRecibo.AutoSize = true;
+            this.label_NumRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_NumRecibo.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label_NumRecibo.Location = new System.Drawing.Point(632, 10);
+            this.label_NumRecibo.Name = "label_NumRecibo";
+            this.label_NumRecibo.Size = new System.Drawing.Size(35, 16);
+            this.label_NumRecibo.TabIndex = 24;
+            this.label_NumRecibo.Text = "0000";
             // 
             // cmb_Examenes
             // 
@@ -455,7 +455,7 @@
             this.CajaPage.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_importe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).EndInit();
             this.ManagPage.ResumeLayout(false);
             this.GroupRegister.ResumeLayout(false);
@@ -472,18 +472,18 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage CajaPage;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown txt_importe;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label_Saldo;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label_Total;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmb_Clientes;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label_NumRecibo;
         private System.Windows.Forms.ComboBox cmb_Examenes;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label2;

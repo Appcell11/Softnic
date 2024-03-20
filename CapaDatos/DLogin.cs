@@ -63,8 +63,10 @@ namespace CapaDatos
             }
         }
 
-        public static void AñadirPerfilUsuario(string NombreUsuario, string Contrasena, int Rol)
+        public static DataTable AñadirPerfilUsuario(string NombreUsuario, string Contrasena, int Rol)
         {
+            SqlDataReader Resultado;
+            DataTable Responce = new DataTable();
             SqlConnection sqlcon = new SqlConnection();
             try
             {
@@ -72,9 +74,12 @@ namespace CapaDatos
                 SqlCommand Comando = new SqlCommand("sp_AgregarPerfil", sqlcon);
                 Comando.CommandType = CommandType.StoredProcedure;
                 Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = NombreUsuario;
-                Comando.Parameters.Add("@Contrasena", SqlDbType.VarChar).Value = Contrasena;
+                Comando.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = Contrasena;
                 Comando.Parameters.Add("@Rol", SqlDbType.Int).Value = Rol;
                 sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Responce.Load(Resultado);
+                return Responce;
             }
             catch (Exception ex)
             {

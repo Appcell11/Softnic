@@ -12,16 +12,6 @@ namespace CapaNegocio
 {
     public static class CargarDatos
     {
-        public static List<string> CargarDatosExamenes()
-        {
-            var list = new List<string>();
-            foreach(var item in ExecSP.Exec("sp_MostrarExamenes").Select())
-            {
-                list.Add(item[1].ToString());
-            }
-            return list;
-        }
-
         public static DataTable cargarInformacionExamenes()
         {
             return ExecSP.Exec("sp_MostrarExamenes");
@@ -37,14 +27,19 @@ namespace CapaNegocio
             return list;
         }
 
-        public static List<string> CargarDatosDescuentos()
+        public static List<string> CargarDatosCmb(string sp, int col)
         {
             var list = new List<string>();
-            foreach (var item in ExecSP.Exec("sp_MostrarDescuentos").Select())
+            foreach (var item in ExecSP.Exec(sp).Select())
             {
-                list.Add(item[1].ToString());
+                list.Add(item[col].ToString());
             }
             return list;
+        }
+
+        public static DataTable CargarPerfiles()
+        {
+            return ExecSP.Exec("sp_MostrarPerfiles");
         }
     }
 }

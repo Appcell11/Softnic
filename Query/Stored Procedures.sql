@@ -9,22 +9,24 @@ END
 EXEC sp_ObtenerPerfiles;
 GO
 
+SELECT * FROM Usuario
+
 --SP para agregar un nuevo perfil para iniciar sesión
 CREATE OR ALTER PROC sp_AgregarPerfil(
 	@Rol INT,
 	@Nombre VARCHAR(80),
-	@Contraseña VARCHAR(12)
+	@Contraseña VARCHAR(64)
 )
 AS
 BEGIN
 	IF(SELECT @Nombre FROM Usuario WHERE Nombre = @Nombre) = @Nombre
 	BEGIN
-		RETURN 0;
+		SELECT '0';
 	END
 	ELSE
 	BEGIN
 		INSERT INTO Usuario VALUES (@Rol, @Nombre, @Contraseña, 1);
-		RETURN 1;
+		SELECT '1';
 	END
 END
 GO
@@ -34,10 +36,9 @@ AS
 BEGIN
 	SELECT 
 		id_Usuario AS ID,
-		Rol.id_Rol AS Rol,
+		Rol.Nombre AS Rol,
 		Usuario.Nombre,
-		Contraseña,
-		Estado.id_Estado AS Estado
+		Estado.Nombre AS Estado
 	FROM
 		Usuario (NOLOCK)
 		INNER JOIN Rol (NOLOCK) ON Usuario.id_Rol = Rol.id_Rol
@@ -48,7 +49,7 @@ GO
 --SP para validar contraseña
 CREATE OR ALTER PROC sp_ValidarAcceso(
 	@NombreUsuario VARCHAR(80),
-	@Contrasena VARCHAR(12)
+	@Contrasena VARCHAR(64)
 )
 AS
 BEGIN
@@ -131,3 +132,18 @@ GO
 
 --EXEC sp_MostrarDescuentos
 ------------------------------------------
+--SP para mostrar los roles
+
+CREATE OR ALTER PROC sp_MostrarRoles
+AS
+BEGIN
+	SELECT 
+		Rol.id_Rol,
+		Rol.Nombre,
+		Estado.Nombre AS Estado
+	FROM
+		Rol (NOLOCK)
+		INNER JOIN Estado (NOLOCK) ON Rol.id_Estado = Estado.id_Estado
+END
+GO
+EXEC sp_MostrarRoles

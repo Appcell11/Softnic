@@ -134,9 +134,9 @@ namespace Ventas.CapaPresentacion
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             Empezar();
-            CargarDatos.CargarDatosExamenes().ForEach(item => cmb_Examenes.Items.Add(item));
+            CargarDatos.CargarDatosCmb("sp_MostrarExamenes", 1).ForEach(item => cmb_Examenes.Items.Add(item));
+            CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
             CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
-            CargarDatos.CargarDatosDescuentos().ForEach(item => cmb_Descuentos.Items.Add(item));
             var bindingSource = new BindingSource();
             bindingSource.DataSource = CargarDatos.cargarInformacionExamenes();
             dgv_Examenes.DataSource = bindingSource;
