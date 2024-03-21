@@ -11,6 +11,8 @@ GO
 
 SELECT * FROM Usuario
 
+GO
+
 --SP para agregar un nuevo perfil para iniciar sesión
 CREATE OR ALTER PROC sp_AgregarPerfil(
 	@Rol INT,
@@ -30,6 +32,31 @@ BEGIN
 	END
 END
 GO
+---------------------------------------------------------------
+--SP Para modificar los perfiles de usuario
+
+CREATE OR ALTER PROC sp_ModificarPerfiles(
+	@Id INT,
+	@Rol INT,
+	@Nombre VARCHAR(80),
+	@Contraseña VARCHAR(64)
+)
+AS
+BEGIN
+	IF(SELECT @Id FROM Usuario WHERE id_Usuario = @Id) = @Id
+	BEGIN
+		UPDATE Usuario SET id_Rol = @Rol WHERE id_Usuario = @Id;
+		UPDATE Usuario SET Nombre = @Nombre WHERE id_Usuario = @Id;
+		UPDATE Usuario SET Contraseña = @Contraseña WHERE id_Usuario = @Id;
+		SELECT '1';
+	END
+	ELSE
+	BEGIN
+		SELECT '0';
+	END
+END
+GO
+
 --SP para ver la información de los perfiles de usuarios
 CREATE OR ALTER PROC sp_MostrarPerfiles
 AS
@@ -45,6 +72,10 @@ BEGIN
 		INNER JOIN Estado (NOLOCK) ON Usuario.id_Estado = Estado.id_Estado
 END
 GO
+-----------------------------------------------------------------
+
+
+
 ------------------------------------------------------------------
 --SP para validar contraseña
 CREATE OR ALTER PROC sp_ValidarAcceso(

@@ -27,8 +27,9 @@ INSERT INTO Cierre_de_Caja
 VALUES (500, 0, 500, 1, 07/03/2024);
 GO
 INSERT INTO Usuario
-VALUES (1, 'Admin', 'Admin', 1);
+VALUES (1, 'Admin', 'b3e31edde87865993eb19e1154c23ccb09a7ebe4194e3331f6a97617d689307f', 1);
 SELECT * FROM Usuario;
+--DELETE FROM Usuario WHERE id_Usuario = 5
 GO
 INSERT INTO Descuento
 VALUES (0.0, 1, '0%'), (0.10, 1, '10%'), (0.15, 1, '15%'), (0.20, 1, '20%');

@@ -39,5 +39,13 @@ namespace CapaNegocio
             return Response == "1" ? true : false;
 
         }
+
+        public static bool ModificarPerfilUsuario(int Id, string Nombre, string Contraseña, int Rol)
+        {
+            string ContraseñaEncriptada = Encriptar.GetSHA256(Contraseña);
+            string Response = DLogin.ModificarPerfilUsuario(Id, Nombre, ContraseñaEncriptada, Rol).Select()[0][0].ToString();
+            return Response == "1" ? true : false;
+
+        }
     }
 }

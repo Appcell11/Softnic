@@ -90,5 +90,34 @@ namespace CapaDatos
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
         }
+
+        public static DataTable ModificarPerfilUsuario(int Id, string NombreUsuario, string Contrasena, int Rol)
+        {
+            SqlDataReader Resultado;
+            DataTable Responce = new DataTable();
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("sp_ModificarPerfiles", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@Id", SqlDbType.Int).Value = Id;
+                Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = NombreUsuario;
+                Comando.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = Contrasena;
+                Comando.Parameters.Add("@Rol", SqlDbType.Int).Value = Rol;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Responce.Load(Resultado);
+                return Responce;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
+            }
+        }
     }
 }

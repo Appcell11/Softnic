@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.cmb_Roles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -102,6 +102,7 @@
             this.btn_UpdateUser.TabIndex = 9;
             this.btn_UpdateUser.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btn_UpdateUser.UseVisualStyleBackColor = false;
+            this.btn_UpdateUser.Click += new System.EventHandler(this.btn_UpdateUser_Click);
             // 
             // btn_VisiblePass
             // 
@@ -162,6 +163,7 @@
             // 
             // txt_Id
             // 
+            this.txt_Id.Enabled = false;
             this.txt_Id.Location = new System.Drawing.Point(38, 30);
             this.txt_Id.Name = "txt_Id";
             this.txt_Id.Size = new System.Drawing.Size(51, 20);
@@ -198,18 +200,22 @@
             // 
             this.dgv_Perfiles.AllowUserToAddRows = false;
             this.dgv_Perfiles.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_Perfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_Perfiles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_Perfiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Perfiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgv_Perfiles.Location = new System.Drawing.Point(252, 13);
             this.dgv_Perfiles.Name = "dgv_Perfiles";
+            this.dgv_Perfiles.ReadOnly = true;
             this.dgv_Perfiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Perfiles.Size = new System.Drawing.Size(274, 296);
             this.dgv_Perfiles.TabIndex = 2;
+            this.dgv_Perfiles.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_Perfiles_DataBindingComplete);
+            this.dgv_Perfiles.SelectionChanged += new System.EventHandler(this.dgv_Perfiles_SelectionChanged);
             // 
             // FrmPerfilesUsuarios
             // 
