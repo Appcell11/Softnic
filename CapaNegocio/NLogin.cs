@@ -47,5 +47,11 @@ namespace CapaNegocio
             return Response == "1" ? true : false;
 
         }
+
+        public static bool EliminarPerfilUsuario(int Id)
+        {
+            string Response = DLogin.EliminarPerfilUsuario(Id).Select()[0][0].ToString();
+            return Response == "1" ? true : false;
+        }
     }
 }

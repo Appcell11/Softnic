@@ -375,6 +375,7 @@
             this.dgv_Examenes.AllowUserToAddRows = false;
             this.dgv_Examenes.AllowUserToDeleteRows = false;
             this.dgv_Examenes.AllowUserToResizeRows = false;
+            this.dgv_Examenes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Examenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Examenes.Location = new System.Drawing.Point(15, 62);
             this.dgv_Examenes.Margin = new System.Windows.Forms.Padding(2);

@@ -4,9 +4,9 @@ go
 CREATE or ALTER PROC sp_ObtenerPerfiles
 AS
 BEGIN
-	SELECT Nombre FROM Usuario;
+	SELECT Nombre FROM Usuario WHERE Usuario.id_Estado = 1;
 END
-EXEC sp_ObtenerPerfiles;
+--EXEC sp_ObtenerPerfiles;
 GO
 
 SELECT * FROM Usuario
@@ -21,7 +21,7 @@ CREATE OR ALTER PROC sp_AgregarPerfil(
 )
 AS
 BEGIN
-	IF(SELECT @Nombre FROM Usuario WHERE Nombre = @Nombre) = @Nombre
+	IF(SELECT @Nombre FROM Usuario WHERE Nombre = @Nombre AND id_Estado = 1) = @Nombre
 	BEGIN
 		SELECT '0';
 	END
@@ -56,6 +56,34 @@ BEGIN
 	END
 END
 GO
+---------------------------------------------------------------
+---SP para eliminar los perfiles de usuario-------------------
+
+CREATE OR ALTER PROC sp_EliminarPerfiles(
+	@Id INT
+)
+AS
+BEGIN
+	IF(SELECT @Id FROM Usuario WHERE id_Usuario = @Id) = @Id
+	BEGIN
+		IF(SELECT COUNT(*) AS TOTAL FROM Usuario) = 1
+		BEGIN
+			INSERT INTO Usuario VALUES (1, 'Admin', '2db510f09acac9e13300eba51a2f4bb2ef9b2ce403c30d854cf39e48cbddf700', 1)
+			--La contraseña es Administrador.---No olvidar el punto---
+			SELECT '1';
+		END
+		ELSE
+		BEGIN
+			UPDATE Usuario SET id_Estado = 3 WHERE id_Usuario = @Id;
+			SELECT '1';
+		END
+	END
+	ELSE
+	BEGIN
+		SELECT '0';
+	END
+END
+GO
 
 --SP para ver la información de los perfiles de usuarios
 CREATE OR ALTER PROC sp_MostrarPerfiles
@@ -70,8 +98,20 @@ BEGIN
 		Usuario (NOLOCK)
 		INNER JOIN Rol (NOLOCK) ON Usuario.id_Rol = Rol.id_Rol
 		INNER JOIN Estado (NOLOCK) ON Usuario.id_Estado = Estado.id_Estado
+	WHERE Usuario.id_Estado != 3
 END
 GO
+
+--EXEC sp_MostrarPerfiles
+--SELECT 
+--		id_Usuario AS ID,
+--		Rol.Nombre AS Rol,
+--		Usuario.Nombre,
+--		Estado.Nombre AS Estado
+--	FROM
+--		Usuario (NOLOCK)
+--		INNER JOIN Rol (NOLOCK) ON Usuario.id_Rol = Rol.id_Rol
+--		INNER JOIN Estado (NOLOCK) ON Usuario.id_Estado = Estado.id_Estado
 -----------------------------------------------------------------
 
 
@@ -84,11 +124,11 @@ CREATE OR ALTER PROC sp_ValidarAcceso(
 )
 AS
 BEGIN
-	IF(SELECT Nombre FROM Usuario WHERE Nombre = @NombreUsuario) = @NombreUsuario
+	IF(SELECT Nombre FROM Usuario WHERE Nombre = @NombreUsuario AND id_Estado = 1) = @NombreUsuario
 	BEGIN
-		IF(SELECT Contraseña FROM Usuario WHERE Contraseña = @Contrasena) = @Contrasena
+		IF(SELECT Contraseña FROM Usuario WHERE Contraseña = @Contrasena AND id_Estado = 1) = @Contrasena
 		BEGIN
-			IF (SELECT id_Rol FROM Usuario WHERE Nombre = @NombreUsuario) = 1
+			IF (SELECT id_Rol FROM Usuario WHERE Nombre = @NombreUsuario AND id_Estado = 1) = 1
 			BEGIN
 				SELECT 'Admin'
 			END
@@ -108,6 +148,7 @@ BEGIN
 	END
 END
 GO
+
 -------------------------------------------------------
 --SP para mostrar informacion de los examenes
 CREATE OR ALTER PROC sp_MostrarExamenes

@@ -119,5 +119,31 @@ namespace CapaDatos
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
         }
+
+        public static DataTable EliminarPerfilUsuario(int Id)
+        {
+            SqlDataReader Resultado;
+            DataTable Responce = new DataTable();
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("sp_EliminarPerfiles", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@Id", SqlDbType.Int).Value = Id;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Responce.Load(Resultado);
+                return Responce;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
+            }
+        }
     }
 }

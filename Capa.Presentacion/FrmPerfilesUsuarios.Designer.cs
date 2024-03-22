@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.cmb_Roles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -127,6 +127,7 @@
             this.btn_RemoveUser.Size = new System.Drawing.Size(64, 28);
             this.btn_RemoveUser.TabIndex = 7;
             this.btn_RemoveUser.UseVisualStyleBackColor = false;
+            this.btn_RemoveUser.Click += new System.EventHandler(this.btn_RemoveUser_Click);
             // 
             // btn_AddUser
             // 
@@ -200,8 +201,8 @@
             // 
             this.dgv_Perfiles.AllowUserToAddRows = false;
             this.dgv_Perfiles.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_Perfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -227,6 +228,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmPerfilesUsuarios";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmPerfilesUsuarios";
             this.Load += new System.EventHandler(this.FrmPerfilesUsuarios_Load);
             this.FormUserGroup.ResumeLayout(false);

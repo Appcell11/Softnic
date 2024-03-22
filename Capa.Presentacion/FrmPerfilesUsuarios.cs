@@ -61,6 +61,7 @@ namespace Ventas.CapaPresentacion
 
         private void Cargar()
         {
+            cmb_Roles.Items.Clear();
             CargarDatos.CargarDatosCmb("sp_MostrarRoles", 1).ForEach(item => cmb_Roles.Items.Add(item));
             var bindingSource = new BindingSource();
             bindingSource.DataSource = CargarDatos.CargarPerfiles();
@@ -114,6 +115,13 @@ namespace Ventas.CapaPresentacion
                 }
             }
             else MessageBox.Show("Por favor rellena todos los campos solicitados");
+        }
+
+        private void btn_RemoveUser_Click(object sender, EventArgs e)
+        {
+            DialogResult confirmacion = MessageBox.Show("¿Está seguro que quieres eliminar este usuario?", "Confirmar eliminar usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirmacion == DialogResult.Yes) NLogin.EliminarPerfilUsuario(int.Parse(txt_Id.Text));
+            Cargar();
         }
     }
 }
