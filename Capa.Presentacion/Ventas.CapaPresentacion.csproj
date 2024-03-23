@@ -147,5 +147,8 @@
   <ItemGroup>
     <None Include="Resources\ModifyUser.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NotVisible.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

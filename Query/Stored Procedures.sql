@@ -219,3 +219,32 @@ BEGIN
 END
 GO
 EXEC sp_MostrarRoles
+GO
+------------------------------------------------
+--SP para mostrar información del recibo-------
+CREATE OR ALTER PROC sp_informacionRecibo
+(
+	@id_Paciente INT
+)
+AS
+BEGIN
+	SELECT
+		id_Recibo AS Recibo,
+		Pacientes.PrimerNombre AS Nombre,
+		Pacientes.PrimerApellido AS Apellido,
+		Examenes.Nombre AS Examen,
+		Importe,
+		Descuento.Nombre AS Descuento,
+		Total_Pagar,
+		Saldo,
+		Fecha,
+		Estado.Nombre AS Estado
+	FROM Recibo
+	INNER JOIN Pacientes ON Recibo.id_Paciente = Pacientes.id_Paciente
+	INNER JOIN Examenes ON Recibo.id_Examen = Examenes.id_Examen
+	INNER JOIN Descuento ON Recibo.Descuento = Descuento.id_descuento
+	INNER JOIN Estado ON Recibo.id_Estado = Estado.id_Estado
+	WHERE Recibo.id_Estado = 1 AND Recibo.id_Paciente = @id_Paciente
+END
+---------------------------------------------------------------
+--

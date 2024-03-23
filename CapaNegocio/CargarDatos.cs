@@ -22,7 +22,7 @@ namespace CapaNegocio
             var list = new List<string>();
             foreach (var item in ExecSP.Exec("sp_MostrarClientes").Select())
             {
-                list.Add(item[1].ToString() + " " + item[3]);
+                list.Add(item[0]+ " " + item[1].ToString() + " " + item[3]);
             }
             return list;
         }
@@ -40,6 +40,11 @@ namespace CapaNegocio
         public static DataTable CargarPerfiles()
         {
             return ExecSP.Exec("sp_MostrarPerfiles");
+        }
+
+        public static DataTable CargarInfoRecibo(int idPaciente)
+        {
+           return ExecSP.CargarInfoRecibo(idPaciente);
         }
     }
 }

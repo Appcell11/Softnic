@@ -15,6 +15,8 @@ namespace Ventas.CapaPresentacion
     public partial class FrmPerfilesUsuarios : Form
     {
         bool ItsReady = false;
+        bool visiblePass = false;
+        //Image[] Images = { Image.FromFile(Properties.Resources.NotVisible.ToString()), Image.FromFile(Properties.Resources.EyeIcon.ToString()) };
         public FrmPerfilesUsuarios()
         {
             InitializeComponent();
@@ -122,6 +124,22 @@ namespace Ventas.CapaPresentacion
             DialogResult confirmacion = MessageBox.Show("¿Está seguro que quieres eliminar este usuario?", "Confirmar eliminar usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmacion == DialogResult.Yes) NLogin.EliminarPerfilUsuario(int.Parse(txt_Id.Text));
             Cargar();
+        }
+
+        private void btn_VisiblePass_Click(object sender, EventArgs e)
+        {
+            if(!visiblePass)
+            {
+                txt_Contrasena.UseSystemPasswordChar = true;
+                visiblePass = true;
+                //btn_VisiblePass.BackgroundImage = Images[0];
+            }
+            else
+            {
+                txt_Contrasena.UseSystemPasswordChar = false;
+                visiblePass = false;
+                //btn_VisiblePass.BackgroundImage = Images[1];
+            }
         }
     }
 }

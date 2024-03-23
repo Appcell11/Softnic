@@ -137,9 +137,6 @@ namespace Ventas.CapaPresentacion
             CargarDatos.CargarDatosCmb("sp_MostrarExamenes", 1).ForEach(item => cmb_Examenes.Items.Add(item));
             CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
             CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
-            var bindingSource = new BindingSource();
-            bindingSource.DataSource = CargarDatos.cargarInformacionExamenes();
-            dgv_Examenes.DataSource = bindingSource;
         }
 
         private void FrmPrincipal_Activated(object sender, EventArgs e)
@@ -185,6 +182,13 @@ namespace Ventas.CapaPresentacion
             {
                 MessageBox.Show("Solo el administrador puede modificar los perfiles");
             }
+        }
+
+        private void btn_Guardar_Click(object sender, EventArgs e)
+        {
+            var bindingSource = new BindingSource();
+            bindingSource.DataSource = CargarDatos.CargarInfoRecibo(int.Parse(cmb_Clientes.Text[0].ToString()));
+            dgv_Examenes.DataSource = bindingSource;
         }
     }
 }

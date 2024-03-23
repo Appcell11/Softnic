@@ -41,7 +41,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label_Saldo = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_Guardar = new System.Windows.Forms.Button();
             this.label_Total = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -144,7 +144,7 @@
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label_Saldo);
-            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.btn_Guardar);
             this.groupBox1.Controls.Add(this.label_Total);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
@@ -210,16 +210,17 @@
             this.label_Saldo.TabIndex = 27;
             this.label_Saldo.Text = "000.00";
             // 
-            // button4
+            // btn_Guardar
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(170, 198);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 23);
-            this.button4.TabIndex = 26;
-            this.button4.Text = "Guardar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_Guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Guardar.Location = new System.Drawing.Point(170, 198);
+            this.btn_Guardar.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Guardar.Name = "btn_Guardar";
+            this.btn_Guardar.Size = new System.Drawing.Size(82, 23);
+            this.btn_Guardar.TabIndex = 26;
+            this.btn_Guardar.Text = "Guardar";
+            this.btn_Guardar.UseVisualStyleBackColor = true;
+            this.btn_Guardar.Click += new System.EventHandler(this.btn_Guardar_Click);
             // 
             // label_Total
             // 
@@ -375,7 +376,6 @@
             this.dgv_Examenes.AllowUserToAddRows = false;
             this.dgv_Examenes.AllowUserToDeleteRows = false;
             this.dgv_Examenes.AllowUserToResizeRows = false;
-            this.dgv_Examenes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Examenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Examenes.Location = new System.Drawing.Point(15, 62);
             this.dgv_Examenes.Margin = new System.Windows.Forms.Padding(2);
@@ -477,7 +477,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label_Saldo;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_Guardar;
         private System.Windows.Forms.Label label_Total;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;

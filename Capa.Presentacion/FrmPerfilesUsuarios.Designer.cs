@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.cmb_Roles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -113,6 +113,7 @@
             this.btn_VisiblePass.Size = new System.Drawing.Size(34, 23);
             this.btn_VisiblePass.TabIndex = 8;
             this.btn_VisiblePass.UseVisualStyleBackColor = true;
+            this.btn_VisiblePass.Click += new System.EventHandler(this.btn_VisiblePass_Click);
             // 
             // btn_RemoveUser
             // 
@@ -201,8 +202,8 @@
             // 
             this.dgv_Perfiles.AllowUserToAddRows = false;
             this.dgv_Perfiles.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_Perfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
