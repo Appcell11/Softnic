@@ -28,10 +28,13 @@ PrimerNombre VARCHAR(20),
 SegundoNombre VARCHAR(20),
 PrimerApellido VARCHAR(20),
 SegundoApellido VARCHAR(20),
+NumeroCedula VARCHAR(14),
 FechaDeNacimiento DATE,
 id_sexo INT REFERENCES Sexo(id_Sexo),
 id_Estado INT REFERENCES Estado(id_Estado)
 );
+
+--ALTER TABLE Pacientes ADD NumeroCedula VARCHAR(14)
 
 CREATE TABLE Examenes(
 id_Examen INT PRIMARY KEY IDENTITY,

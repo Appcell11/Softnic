@@ -16,7 +16,7 @@ namespace Ventas.CapaPresentacion
     {
         bool ItsReady = false;
         bool visiblePass = false;
-        //Image[] Images = { Image.FromFile(Properties.Resources.NotVisible.ToString()), Image.FromFile(Properties.Resources.EyeIcon.ToString()) };
+        Image[] Images = { Properties.Resources.NotVisible, Properties.Resources.EyeIcon };
         public FrmPerfilesUsuarios()
         {
             InitializeComponent();
@@ -121,8 +121,11 @@ namespace Ventas.CapaPresentacion
 
         private void btn_RemoveUser_Click(object sender, EventArgs e)
         {
+            bool Result = false;
             DialogResult confirmacion = MessageBox.Show("¿Está seguro que quieres eliminar este usuario?", "Confirmar eliminar usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirmacion == DialogResult.Yes) NLogin.EliminarPerfilUsuario(int.Parse(txt_Id.Text));
+            if (confirmacion == DialogResult.Yes) Result = NLogin.EliminarPerfilUsuario(int.Parse(txt_Id.Text));
+            if (Result) MessageBox.Show("Usuario Eliminado");
+            else MessageBox.Show("No se ha podido eliminar este usuario");
             Cargar();
         }
 
@@ -132,13 +135,13 @@ namespace Ventas.CapaPresentacion
             {
                 txt_Contrasena.UseSystemPasswordChar = true;
                 visiblePass = true;
-                //btn_VisiblePass.BackgroundImage = Images[0];
+                btn_VisiblePass.BackgroundImage = Images[1];
             }
             else
             {
                 txt_Contrasena.UseSystemPasswordChar = false;
                 visiblePass = false;
-                //btn_VisiblePass.BackgroundImage = Images[1];
+                btn_VisiblePass.BackgroundImage = Images[0];
             }
         }
     }

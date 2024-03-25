@@ -46,5 +46,10 @@ namespace CapaNegocio
         {
            return ExecSP.CargarInfoRecibo(idPaciente);
         }
+
+        public static DataTable CargarInfoDataGrid(string SP)
+        {
+            return ExecSP.Exec(SP);
+        }
     }
 }

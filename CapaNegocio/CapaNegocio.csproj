@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CargarDatos.cs" />
     <Compile Include="Encriptar.cs" />
+    <Compile Include="NClientes.cs" />
     <Compile Include="NLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

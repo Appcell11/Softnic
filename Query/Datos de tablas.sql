@@ -13,7 +13,7 @@ VALUES ('Masculino', 1), ('Femenino', 1), ('No binario', 1), ('Terreneitor', 1);
 SELECT * FROM Sexo;
 GO
 INSERT INTO Pacientes
-VALUES ('Norwing', 'Jordy', 'Silva', 'García', '1987-12-24', 4, 1);
+VALUES ('Norwing', 'Jordy', 'Silva', 'García', '1987-12-24', 4, 1, '3611101041004Y');
 SELECT * FROM Pacientes;
 GO
 INSERT INTO Examenes
@@ -27,9 +27,9 @@ INSERT INTO Cierre_de_Caja
 VALUES (500, 0, 500, 1, 07/03/2024);
 GO
 INSERT INTO Usuario
-VALUES (1, 'Admin', 'b3e31edde87865993eb19e1154c23ccb09a7ebe4194e3331f6a97617d689307f', 1);
+VALUES (1, 'Admin', '2db510f09acac9e13300eba51a2f4bb2ef9b2ce403c30d854cf39e48cbddf700', 1);
 SELECT * FROM Usuario;
---DELETE FROM Usuario WHERE id_Usuario = 5
+--DELETE FROM Usuario WHERE id_Usuario = 14
 GO
 INSERT INTO Descuento
 VALUES (0.0, 1, '0%'), (0.10, 1, '10%'), (0.15, 1, '15%'), (0.20, 1, '20%');

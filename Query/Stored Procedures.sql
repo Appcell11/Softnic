@@ -66,11 +66,10 @@ AS
 BEGIN
 	IF(SELECT @Id FROM Usuario WHERE id_Usuario = @Id) = @Id
 	BEGIN
-		IF(SELECT COUNT(*) AS TOTAL FROM Usuario) = 1
+		IF(SELECT COUNT(*) AS TOTAL FROM Usuario WHERE id_Estado = 1) <= 1
 		BEGIN
-			INSERT INTO Usuario VALUES (1, 'Admin', '2db510f09acac9e13300eba51a2f4bb2ef9b2ce403c30d854cf39e48cbddf700', 1)
 			--La contraseña es Administrador.---No olvidar el punto---
-			SELECT '1';
+			SELECT '0';
 		END
 		ELSE
 		BEGIN
@@ -247,4 +246,103 @@ BEGIN
 	WHERE Recibo.id_Estado = 1 AND Recibo.id_Paciente = @id_Paciente
 END
 ---------------------------------------------------------------
---
+---------------------------------------------------------------
+
+--SP para agregar un nuevo cliente
+CREATE OR ALTER PROC sp_AgregarCliente(
+	@PrimerNombre VARCHAR(20),
+	@SegundoNombre VARCHAR(20),
+	@PrimerApellido VARCHAR(20),
+	@SegundoApellido VARCHAR(20),
+	@Nacimiento DATE,
+	@id_Sexo INT,
+	@NumeroCedula VARCHAR(14)
+)
+AS
+BEGIN
+	IF(
+	SELECT NumeroCedula FROM Pacientes
+	WHERE NumeroCedula = @NumeroCedula
+	AND id_Estado = 1) = @NumeroCedula
+	BEGIN
+		SELECT '0';
+	END
+	ELSE
+	BEGIN
+		INSERT INTO Pacientes VALUES (@PrimerNombre, @PrimerApellido, @SegundoNombre, @SegundoApellido, @Nacimiento, @id_Sexo, 1, @NumeroCedula);
+		SELECT '1';
+	END
+END
+GO
+
+--select * from Pacientes
+---------------------------------------------------------------
+--SP Para modificar los clientes
+
+CREATE OR ALTER PROC sp_ModificarCliente(
+	@Id_Paciente int,
+	@PrimerNombre VARCHAR(20),
+	@SegundoNombre VARCHAR(20),
+	@PrimerApellido VARCHAR(20),
+	@SegundoApellido VARCHAR(20),
+	@Nacimiento DATE,
+	@id_Sexo INT,
+	@NumeroCedula VARCHAR(14)
+)
+AS
+BEGIN
+	IF(SELECT id_Paciente FROM Pacientes WHERE id_Paciente = @Id_Paciente) = @Id_Paciente
+	BEGIN
+		UPDATE Pacientes SET PrimerNombre = @PrimerNombre WHERE id_Paciente = @Id_Paciente;
+		UPDATE Pacientes SET SegundoNombre = @SegundoNombre WHERE id_Paciente = @Id_Paciente;
+		UPDATE Pacientes SET PrimerApellido = @PrimerApellido WHERE id_Paciente = @Id_Paciente;
+		UPDATE Pacientes SET SegundoApellido = @SegundoApellido WHERE id_Paciente = @Id_Paciente;
+		UPDATE Pacientes SET FechaDeNacimiento = @Nacimiento WHERE id_Paciente = @Id_Paciente;
+		UPDATE Pacientes SET id_sexo = @id_Sexo WHERE id_Paciente = @Id_Paciente;
+		UPDATE Pacientes SET @NumeroCedula = @NumeroCedula WHERE id_Paciente = @Id_Paciente;
+
+		SELECT '1';
+	END
+	ELSE
+	BEGIN
+		SELECT '0';
+	END
+END
+GO
+---------------------------------------------------------------
+---SP para eliminar los cliente-------------------
+
+CREATE OR ALTER PROC sp_EliminarCliente(
+	@Id INT
+)
+AS
+BEGIN
+	IF(SELECT @Id FROM Pacientes WHERE id_Paciente = @Id) = @Id
+	BEGIN
+		IF(SELECT COUNT(*) AS TOTAL FROM Usuario WHERE id_Estado = 1) <= 0
+		BEGIN
+			SELECT '0';
+		END
+		ELSE
+		BEGIN
+			UPDATE Pacientes SET id_Estado = 3 WHERE id_Paciente = @Id;
+			SELECT '1';
+		END
+	END
+	ELSE
+	BEGIN
+		SELECT '0';
+	END
+END
+GO
+---------------------------------------------------------
+---SP para mostrar los sexos en el cmb
+CREATE OR ALTER PROC sp_MostrarSexos
+AS
+BEGIN
+	SELECT 
+		Nombre
+	FROM
+		Sexo
+END
+GO
