@@ -15,6 +15,7 @@ GO
 INSERT INTO Pacientes
 VALUES ('Norwing', 'Jordy', 'Silva', 'García', '1987-12-24', 4, 1, '3611101041004Y');
 SELECT * FROM Pacientes;
+--DELETE FROM Pacientes WHERE id_Paciente = 2
 GO
 INSERT INTO Examenes
 VALUES ('Sangre', 500, 1), ('Glucosa', 700, 1);

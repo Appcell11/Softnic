@@ -25,6 +25,7 @@ namespace CapaDatos
                 Comando.Parameters.Add("@PrimerApellido", SqlDbType.VarChar).Value = PrimerApellido;
                 Comando.Parameters.Add("@SegundoApellido", SqlDbType.VarChar).Value = SegundoApellido;
                 Comando.Parameters.Add("@id_Sexo", SqlDbType.Int).Value = Sexo;
+                Comando.Parameters.Add("@Nacimiento", SqlDbType.DateTime).Value = Nacimiento;
                 Comando.Parameters.Add("@NumeroCedula", SqlDbType.VarChar).Value = cedula;
                 sqlcon.Open();
                 Resultado = Comando.ExecuteReader();

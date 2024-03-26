@@ -247,6 +247,28 @@ BEGIN
 END
 ---------------------------------------------------------------
 ---------------------------------------------------------------
+--SP para mostrar datos de los clientes
+
+CREATE OR ALTER PROC sp_MostrarClientes
+AS
+BEGIN
+	SELECT
+	id_Paciente AS ID,
+	PrimerNombre AS 'Primer Nombre',
+	SegundoNombre AS 'Segundo Nombre',
+	PrimerApellido AS 'Primer Apellido',
+	SegundoApellido AS 'Segundo Apellido',
+	NumeroCedula AS 'Número de cédula',
+	FechaDeNacimiento AS 'Fecha de nacimiento',
+	Sexo.Nombre AS Sexo
+	FROM Pacientes
+	INNER JOIN Sexo ON Sexo.id_Sexo = Pacientes.id_sexo
+	WHERE Pacientes.id_Estado = 1
+END
+
+EXEC sp_MostrarClientes
+--DELETE FROM Pacientes WHERE id_Paciente != 3
+---------------------------------------------------------------
 
 --SP para agregar un nuevo cliente
 CREATE OR ALTER PROC sp_AgregarCliente(
@@ -269,7 +291,7 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		INSERT INTO Pacientes VALUES (@PrimerNombre, @PrimerApellido, @SegundoNombre, @SegundoApellido, @Nacimiento, @id_Sexo, 1, @NumeroCedula);
+		INSERT INTO Pacientes VALUES (@PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Nacimiento, @id_Sexo, 1, @NumeroCedula);
 		SELECT '1';
 	END
 END

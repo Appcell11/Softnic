@@ -38,15 +38,15 @@ namespace Ventas.CapaPresentacion
             {
                 Access = "Admin";
                 var Menu = new FrmPrincipal();
-                Menu.Show(this);
-                this.Close();
+                Menu.Show();
+                this.Hide();
             }
             else if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text) == "1")
             {
                 Access = "1";
                 var Menu = new FrmPrincipal();
-                Menu.Show(this);
-                this.Close();
+                Menu.Show();
+                this.Hide();
             }
             else
             {

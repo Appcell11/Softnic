@@ -134,6 +134,9 @@ namespace Ventas.CapaPresentacion
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             Empezar();
+            cmb_Clientes.Items.Clear();
+            cmb_Descuentos.Items.Clear();
+            cmb_Examenes.Items.Clear();
             CargarDatos.CargarDatosCmb("sp_MostrarExamenes", 1).ForEach(item => cmb_Examenes.Items.Add(item));
             CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
             CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
@@ -189,6 +192,17 @@ namespace Ventas.CapaPresentacion
             var bindingSource = new BindingSource();
             bindingSource.DataSource = CargarDatos.CargarInfoRecibo(int.Parse(cmb_Clientes.Text[0].ToString()));
             dgv_Examenes.DataSource = bindingSource;
+        }
+
+        private void FrmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void cmb_Clientes_MouseClick(object sender, MouseEventArgs e)
+        {
+            cmb_Clientes.Items.Clear();
+            CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
         }
     }
 }

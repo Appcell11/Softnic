@@ -284,6 +284,7 @@
             this.cmb_Clientes.Name = "cmb_Clientes";
             this.cmb_Clientes.Size = new System.Drawing.Size(202, 21);
             this.cmb_Clientes.TabIndex = 26;
+            this.cmb_Clientes.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmb_Clientes_MouseClick);
             // 
             // label_NumRecibo
             // 
@@ -448,6 +449,7 @@
             this.Name = "FrmPrincipal";
             this.Text = "Principal";
             this.Activated += new System.EventHandler(this.FrmPrincipal_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
