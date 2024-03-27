@@ -73,6 +73,16 @@ namespace Ventas.CapaPresentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Clear_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clear-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap compra_m {
             get {
                 object obj = ResourceManager.GetObject("compra_m", resourceCulture);

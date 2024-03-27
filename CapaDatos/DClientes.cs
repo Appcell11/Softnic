@@ -42,7 +42,7 @@ namespace CapaDatos
             }
         }
 
-        public static DataTable ModificarCliente(string PrimerNombre, string SegundoNombre, string PrimerApellido, string SegundoApellido, DateTime Nacimiento, int Sexo, string cedula)
+        public static DataTable ModificarCliente(int id, string PrimerNombre, string SegundoNombre, string PrimerApellido, string SegundoApellido, DateTime Nacimiento, int Sexo, string cedula)
         {
             SqlDataReader Resultado;
             DataTable Responce = new DataTable();
@@ -52,12 +52,14 @@ namespace CapaDatos
                 sqlcon = Conexion.getInstancia().CrearConexion();
                 SqlCommand Comando = new SqlCommand("sp_ModificarCliente", sqlcon);
                 Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@Id_Paciente", SqlDbType.Int).Value = id;
                 Comando.Parameters.Add("@PrimerNombre", SqlDbType.VarChar).Value = PrimerNombre;
                 Comando.Parameters.Add("@SegundoNombre", SqlDbType.VarChar).Value = SegundoNombre;
                 Comando.Parameters.Add("@PrimerApellido", SqlDbType.VarChar).Value = PrimerApellido;
                 Comando.Parameters.Add("@SegundoApellido", SqlDbType.VarChar).Value = SegundoApellido;
                 Comando.Parameters.Add("@id_Sexo", SqlDbType.Int).Value = Sexo;
                 Comando.Parameters.Add("@NumeroCedula", SqlDbType.VarChar).Value = cedula;
+                Comando.Parameters.Add("@Nacimiento", SqlDbType.Date).Value = Nacimiento;
                 sqlcon.Open();
                 Resultado = Comando.ExecuteReader();
                 Responce.Load(Resultado);

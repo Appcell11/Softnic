@@ -82,5 +82,64 @@ namespace Ventas.CapaPresentacion
             else MessageBox.Show("No se ha podido eliminar este usuario");
             Cargar();
         }
+
+        private void btn_Update_Click(object sender, EventArgs e)
+        {
+            if (txt_PrimerNombre.Text != string.Empty && txt_PrimerApellido.Text != string.Empty && txt_NumeroCedula.Text != string.Empty && cmb_sexo.Text != string.Empty && txt_NumeroCedula.Text.Length == 14)
+            {
+                if (dateTimePicker.Value < DateTime.Now.AddYears(-16))
+                {
+                    int Id = int.Parse(dgv_Clientes.CurrentRow.Cells["ID"].Value.ToString());
+                    string PNombre = txt_PrimerNombre.Text;
+                    string SNombre = txt_SegundoNombre.Text;
+                    string PApellido = txt_PrimerApellido.Text;
+                    string SApellido = txt_SegundoApellido.Text;
+                    string Cedula = txt_NumeroCedula.Text;
+                    DateTime FechaNacimiento = dateTimePicker.Value;
+                    int id_Sexo = cmb_sexo.SelectedIndex + 1;
+                    bool responce = NClientes.ModificarCliente(Id, PNombre, SNombre, PApellido, SApellido, FechaNacimiento, id_Sexo, Cedula);
+                    if (responce) MessageBox.Show("Se han modificado los datos del cliente");
+                    else MessageBox.Show("Ha ocurrido un error al modificar los datos del cliente");
+                    Cargar();
+                    txt_PrimerNombre.Text = string.Empty;
+                    txt_SegundoNombre.Text = string.Empty;
+                    txt_PrimerApellido.Text = string.Empty;
+                    txt_SegundoApellido.Text = string.Empty;
+                    txt_NumeroCedula.Text = string.Empty;
+                    cmb_sexo.SelectedIndex = 0;
+                    dateTimePicker.Value = DateTime.Now.AddYears(-16);
+                }
+                else MessageBox.Show("Por favor ingrese una fecha válida");
+            }
+            else if (txt_NumeroCedula.Text.Length != 14) MessageBox.Show("Por favor ingresa un número de cédula válido");
+            else MessageBox.Show("Por favor llena todos los campos requeridos");
+        }
+
+        private void FilaSeleccionada()
+        {
+            txt_PrimerNombre.Text = dgv_Clientes.CurrentRow.Cells["Primer Nombre"].Value.ToString();
+            txt_SegundoNombre.Text = dgv_Clientes.CurrentRow.Cells["Segundo Nombre"].Value.ToString();
+            txt_PrimerApellido.Text = dgv_Clientes.CurrentRow.Cells["Primer Apellido"].Value.ToString();
+            txt_SegundoApellido.Text = dgv_Clientes.CurrentRow.Cells["Segundo Apellido"].Value.ToString();
+            txt_NumeroCedula.Text = dgv_Clientes.CurrentRow.Cells["Número de Cédula"].Value.ToString();
+            dateTimePicker.Value = DateTime.Parse(dgv_Clientes.CurrentRow.Cells["Fecha de nacimiento"].Value.ToString());
+            cmb_sexo.SelectedValue = dgv_Clientes.CurrentRow.Cells["Sexo"].Value.ToString();
+        }
+
+        private void dgv_Clientes_SelectionChanged(object sender, EventArgs e)
+        {
+            FilaSeleccionada();
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            txt_PrimerNombre.Text = string.Empty;
+            txt_SegundoNombre.Text = string.Empty;
+            txt_PrimerApellido.Text = string.Empty;
+            txt_SegundoApellido.Text = string.Empty;
+            txt_NumeroCedula.Text = string.Empty;
+            cmb_sexo.SelectedIndex = 0;
+            dateTimePicker.Value = DateTime.Now.AddYears(-16);
+        }
     }
 }

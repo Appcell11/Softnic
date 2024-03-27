@@ -153,5 +153,8 @@
   <ItemGroup>
     <None Include="Resources\Lupa.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clear-Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

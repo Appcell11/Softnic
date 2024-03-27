@@ -16,10 +16,10 @@ namespace CapaNegocio
 
         }
 
-        public static bool ModificarCliente(string PrimerNombre, string SegundoNombre, string PrimerApellido, string SegundoApellido, DateTime Nacimiento, int Sexo, string cedula)
+        public static bool ModificarCliente(int Id, string PrimerNombre, string SegundoNombre, string PrimerApellido, string SegundoApellido, DateTime Nacimiento, int Sexo, string cedula)
         {
-            string Response = DClientes.ModificarCliente(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Nacimiento, Sexo, cedula).Select()[0][0].ToString();
-            return Response == "1" ? true : false;
+            string Response = DClientes.ModificarCliente(Id, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Nacimiento, Sexo, cedula).Select()[0][0].ToString();
+            return Response == "1";
 
         }
 
