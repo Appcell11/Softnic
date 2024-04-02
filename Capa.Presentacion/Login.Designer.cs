@@ -37,6 +37,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmb_Usuario = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.btn_VisiblePass = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -82,12 +83,13 @@
             this.txt_Contrasena.Location = new System.Drawing.Point(128, 170);
             this.txt_Contrasena.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Contrasena.Name = "txt_Contrasena";
-            this.txt_Contrasena.Size = new System.Drawing.Size(176, 20);
+            this.txt_Contrasena.Size = new System.Drawing.Size(137, 20);
             this.txt_Contrasena.TabIndex = 4;
             this.txt_Contrasena.UseSystemPasswordChar = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_VisiblePass);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.cmb_Usuario);
             this.groupBox1.Controls.Add(this.button1);
@@ -135,6 +137,17 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btn_VisiblePass
+            // 
+            this.btn_VisiblePass.BackgroundImage = global::Ventas.CapaPresentacion.Properties.Resources.EyeIcon;
+            this.btn_VisiblePass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_VisiblePass.Location = new System.Drawing.Point(270, 170);
+            this.btn_VisiblePass.Name = "btn_VisiblePass";
+            this.btn_VisiblePass.Size = new System.Drawing.Size(34, 20);
+            this.btn_VisiblePass.TabIndex = 9;
+            this.btn_VisiblePass.UseVisualStyleBackColor = true;
+            this.btn_VisiblePass.Click += new System.EventHandler(this.btn_VisiblePass_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,5 +182,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cmb_Usuario;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btn_VisiblePass;
     }
 }

@@ -34,7 +34,6 @@ id_sexo INT REFERENCES Sexo(id_Sexo),
 id_Estado INT REFERENCES Estado(id_Estado)
 );
 
---ALTER TABLE Pacientes ADD NumeroCedula VARCHAR(14)
 
 CREATE TABLE Examenes(
 id_Examen INT PRIMARY KEY IDENTITY,
@@ -43,17 +42,28 @@ Precio MONEY,
 id_Estado INT REFERENCES Estado(id_Estado)
 );
 
-CREATE TABLE Recibo(
-id_Recibo INT PRIMARY KEY IDENTITY,
+CREATE TABLE DetalleRecibo(
+id_Detalle INT PRIMARY KEY IDENTITY,
+id_Recibo INT REFERENCES Recibo(id_Recibo),
 id_Paciente INT REFERENCES Pacientes(id_Paciente),
 id_Examen INT REFERENCES Examenes(id_Examen),
 id_Estado INT REFERENCES Estado(id_Estado),
-Total_Pagar MONEY,
-Descuento INT REFERENCES Descuento(id_descuento),
 Importe MONEY,
-Saldo MONEY,
 Fecha DATETIME
 );
+
+CREATE TABLE Recibo(
+id_Recibo INT PRIMARY KEY IDENTITY,
+id_Paciente INT REFERENCES Pacientes(id_Paciente),
+id_Estado INT REFERENCES Estado(id_Estado),
+Importe MONEY,
+Fecha DATETIME
+);
+
+--ALTER TABLE Recibo DROP COLUMN Descuento
+--ALTER TABLE Recibo DROP COLUMN Saldo
+--ALTER TABLE Recibo DROP COLUMN Total_Pagar
+--ALTER TABLE Recibo DROP COLUMN id_Examen
 
 CREATE TABLE Cierre_de_Caja(
 id_cdcaja INT PRIMARY KEY IDENTITY,

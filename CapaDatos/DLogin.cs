@@ -28,12 +28,14 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
                 if(sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+
+            return Tabla;
         }
 
         public DataTable ValidarCredenciales(string NombreUsuario, string Contrasena)
@@ -55,12 +57,13 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message); ;
             }
             finally
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+            return Responce;
         }
 
         public static DataTable AñadirPerfilUsuario(string NombreUsuario, string Contrasena, int Rol)
@@ -83,12 +86,13 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+            return Responce;
         }
 
         public static DataTable ModificarPerfilUsuario(int Id, string NombreUsuario, string Contrasena, int Rol)
@@ -112,12 +116,14 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+
+            return Responce;
         }
 
         public static DataTable EliminarPerfilUsuario(int Id)
@@ -138,12 +144,14 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+
+            return Responce;
         }
     }
 }

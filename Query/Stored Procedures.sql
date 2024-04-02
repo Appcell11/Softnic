@@ -223,7 +223,7 @@ GO
 --SP para mostrar información del recibo-------
 CREATE OR ALTER PROC sp_informacionRecibo
 (
-	@id_Paciente INT
+	@id_Recibo INT
 )
 AS
 BEGIN
@@ -243,8 +243,10 @@ BEGIN
 	INNER JOIN Examenes ON Recibo.id_Examen = Examenes.id_Examen
 	INNER JOIN Descuento ON Recibo.Descuento = Descuento.id_descuento
 	INNER JOIN Estado ON Recibo.id_Estado = Estado.id_Estado
-	WHERE Recibo.id_Estado = 1 AND Recibo.id_Paciente = @id_Paciente
+	WHERE Recibo.id_Estado = 1 AND Recibo.id_Recibo = @id_Recibo
 END
+
+
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 --SP para mostrar datos de los clientes
@@ -357,6 +359,35 @@ BEGIN
 	END
 END
 GO
+
+---------------------------------------------------------
+---SP PARA BUSCAR LOS CLIENTES
+CREATE OR ALTER PROC sp_BuscarCliente (
+	@ValorBuscar VARCHAR(50)
+)
+AS
+BEGIN
+	SELECT
+	id_Paciente AS ID,
+	PrimerNombre AS 'Primer Nombre',
+	SegundoNombre AS 'Segundo Nombre',
+	PrimerApellido AS 'Primer Apellido',
+	SegundoApellido AS 'Segundo Apellido',
+	NumeroCedula AS 'Número de cédula',
+	FechaDeNacimiento AS 'Fecha de nacimiento',
+	Sexo.Nombre AS Sexo
+	FROM Pacientes
+	INNER JOIN Sexo ON Sexo.id_Sexo = Pacientes.id_sexo
+	WHERE 
+	Pacientes.id_Estado = 1
+	AND id_Paciente like CONCAT('%',@ValorBuscar, '%')
+	OR PrimerNombre like CONCAT('%',@ValorBuscar, '%') AND Pacientes.id_Estado = 1
+	OR SegundoNombre like CONCAT('%',@ValorBuscar, '%') AND Pacientes.id_Estado = 1
+	OR PrimerApellido like CONCAT('%',@ValorBuscar, '%') AND Pacientes.id_Estado = 1
+	OR SegundoApellido like CONCAT('%',@ValorBuscar, '%') AND Pacientes.id_Estado = 1
+	OR NumeroCedula like CONCAT('%',@ValorBuscar, '%') AND Pacientes.id_Estado = 1
+END
+go
 ---------------------------------------------------------
 ---SP para mostrar los sexos en el cmb
 CREATE OR ALTER PROC sp_MostrarSexos
@@ -368,3 +399,5 @@ BEGIN
 		Sexo
 END
 GO
+-----------------------------------------
+SELECT * FROM Recibo

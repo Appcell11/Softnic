@@ -1,6 +1,7 @@
 ﻿using CapaDatos;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,11 @@ namespace CapaNegocio
         {
             string Response = DClientes.EliminarCliente(Id).Select()[0][0].ToString();
             return Response == "1" ? true : false;
+        }
+
+        public static DataTable BuscarClientes(string ValorBuscar)
+        {
+            return DClientes.BuscarCliente(ValorBuscar.Trim());
         }
     }
 }

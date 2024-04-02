@@ -15,7 +15,7 @@ namespace Ventas.CapaPresentacion
     public partial class FrmPerfilesUsuarios : Form
     {
         bool ItsReady = false;
-        bool visiblePass = false;
+        bool NotvisiblePass = true;
         Image[] Images = { Properties.Resources.NotVisible, Properties.Resources.EyeIcon };
         public FrmPerfilesUsuarios()
         {
@@ -131,16 +131,16 @@ namespace Ventas.CapaPresentacion
 
         private void btn_VisiblePass_Click(object sender, EventArgs e)
         {
-            if(!visiblePass)
+            if(!NotvisiblePass)
             {
-                txt_Contrasena.UseSystemPasswordChar = true;
-                visiblePass = true;
+                NotvisiblePass = true;
+                txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
                 btn_VisiblePass.BackgroundImage = Images[1];
             }
             else
             {
-                txt_Contrasena.UseSystemPasswordChar = false;
-                visiblePass = false;
+                NotvisiblePass = false;
+                txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
                 btn_VisiblePass.BackgroundImage = Images[0];
             }
         }

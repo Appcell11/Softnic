@@ -34,12 +34,14 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+
+            return Responce;
         }
 
         public static DataTable ModificarCliente(int id, string PrimerNombre, string SegundoNombre, string PrimerApellido, string SegundoApellido, DateTime Nacimiento, int Sexo, string cedula)
@@ -67,12 +69,14 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+
+            return Responce;
         }
 
         public static DataTable EliminarCliente(int Id)
@@ -93,12 +97,43 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
                 if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
             }
+
+            return Responce; ;
         }
+
+        public static DataTable BuscarCliente(string ValorBuscar)
+        {
+            SqlDataReader Resultado;
+            DataTable Responce = new DataTable();
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("sp_BuscarCliente", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@ValorBuscar", SqlDbType.VarChar).Value = ValorBuscar;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Responce.Load(Resultado);
+                return Responce;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
+            }
+
+            return Responce;
+        }
+
     }
 }

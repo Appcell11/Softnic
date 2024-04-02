@@ -37,8 +37,13 @@ namespace Ventas.CapaPresentacion
         {
             cmb_sexo.Items.Clear();
             CargarDatos.CargarDatosCmb("sp_MostrarSexos", 0).ForEach(item => cmb_sexo.Items.Add(item));
+            ActualizarBusqueda();
+        }
+
+        private void ActualizarBusqueda()
+        {
             var bindingSource = new BindingSource();
-            bindingSource.DataSource = CargarDatos.CargarInfoDataGrid("sp_MostrarClientes");
+            bindingSource.DataSource = txt_Buscar.Text == string.Empty || txt_Buscar.Text == " " ? CargarDatos.CargarInfoDataGrid("sp_MostrarClientes") : NClientes.BuscarClientes(txt_Buscar.Text);
             dgv_Clientes.DataSource = bindingSource;
         }
 
@@ -76,11 +81,18 @@ namespace Ventas.CapaPresentacion
         private void btn_Remove_Click(object sender, EventArgs e)
         {
             bool Result = false;
-            DialogResult confirmacion = MessageBox.Show("¿Está seguro que quieres eliminar este cliente?", "Confirmar eliminar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirmacion == DialogResult.Yes) Result = NClientes.EliminarCliente(int.Parse(dgv_Clientes.CurrentRow.Cells[0].Value.ToString()));
-            if (Result) MessageBox.Show("Usuario Eliminado");
-            else MessageBox.Show("No se ha podido eliminar este usuario");
-            Cargar();
+            if(txt_PrimerNombre.Text != string.Empty && txt_PrimerApellido.Text != string.Empty)
+            {
+                DialogResult confirmacion = MessageBox.Show("¿Está seguro que quieres eliminar este cliente?", "Confirmar eliminar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirmacion == DialogResult.Yes) Result = NClientes.EliminarCliente(int.Parse(dgv_Clientes.CurrentRow.Cells[0].Value.ToString()));
+                if (Result) MessageBox.Show("Usuario Eliminado");
+                else MessageBox.Show("No se ha podido eliminar este usuario");
+                Cargar();
+            }
+            else
+            {
+                MessageBox.Show("No se ha seleccionado ningún cliente");
+            }
         }
 
         private void btn_Update_Click(object sender, EventArgs e)
@@ -140,6 +152,11 @@ namespace Ventas.CapaPresentacion
             txt_NumeroCedula.Text = string.Empty;
             cmb_sexo.SelectedIndex = 0;
             dateTimePicker.Value = DateTime.Now.AddYears(-16);
+        }
+
+        private void txt_Buscar_TextChanged(object sender, EventArgs e)
+        {
+            ActualizarBusqueda();
         }
     }
 }

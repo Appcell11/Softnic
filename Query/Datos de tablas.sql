@@ -20,10 +20,9 @@ GO
 INSERT INTO Examenes
 VALUES ('Sangre', 500, 1), ('Glucosa', 700, 1);
 GO
-INSERT INTO Recibo
-VALUES (1, 1, 1, 500, 1, 500, 0, 07/03/2024);
-select * from Recibo
-GO
+--INSERT INTO Recibo
+--VALUES (1, 1, 1, 500, 1, 500, 0, 07/03/2024);
+--select * from Recibo
 INSERT INTO Cierre_de_Caja
 VALUES (500, 0, 500, 1, 07/03/2024);
 GO

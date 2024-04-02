@@ -15,6 +15,8 @@ namespace Ventas.CapaPresentacion
     public partial class Login : Form
     {
         public static string Access = "false";
+        bool NotvisiblePass = true;
+        Image[] Images = { Properties.Resources.NotVisible, Properties.Resources.EyeIcon };
         public Login()
         {
             InitializeComponent();
@@ -23,7 +25,8 @@ namespace Ventas.CapaPresentacion
         private void Login_Load(object sender, EventArgs e)
         {
             NLogin.Perfiles().ForEach(perfil => cmb_Usuario.Items.Add(perfil));
-
+            txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
+            btn_VisiblePass.BackgroundImage = Images[1];
         }
 
         public string Acceso(string perfil, string contrasena)
@@ -51,6 +54,22 @@ namespace Ventas.CapaPresentacion
             else
             {
                 MessageBox.Show("Contraseña Incorrecta");
+            }
+        }
+
+        private void btn_VisiblePass_Click(object sender, EventArgs e)
+        {
+            if (NotvisiblePass == false)
+            {
+                NotvisiblePass = true;
+                txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
+                btn_VisiblePass.BackgroundImage = Images[1];
+            }
+            else
+            {
+                NotvisiblePass = false;
+                txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
+                btn_VisiblePass.BackgroundImage = Images[0];
             }
         }
     }
