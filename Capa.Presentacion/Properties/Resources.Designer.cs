@@ -133,6 +133,16 @@ namespace Ventas.CapaPresentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Minus_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Minus-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ModifyUser {
             get {
                 object obj = ResourceManager.GetObject("ModifyUser", resourceCulture);
@@ -146,6 +156,26 @@ namespace Ventas.CapaPresentacion.Properties {
         internal static System.Drawing.Bitmap NotVisible {
             get {
                 object obj = ResourceManager.GetObject("NotVisible", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pencil_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Pencil-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Plus_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Plus-Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

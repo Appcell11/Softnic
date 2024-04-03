@@ -399,5 +399,51 @@ BEGIN
 		Sexo
 END
 GO
+---------------------------------------------------
+--SP PARA OBTENER EL ULTIMO RECIBO
+
+CREATE OR ALTER PROC sp_UltimoRecibo
+AS
+BEGIN
+	select top 1 id_Recibo + 1 from Recibo order by id_Recibo desc
+END
+go
 -----------------------------------------
-SELECT * FROM Recibo
+
+-------------------------------------------------------
+---SP PARA AÑADIR LOS DETALLES AL RECIBO-----
+select * from detalleRecibo where id_Recibo = 5
+go
+CREATE OR ALTER PROC sp_AgregarDetalleRecibo(
+	@id_Recibo INT,
+	@id_Paciente INT,
+	@id_Examen INT,
+	@id_Estado INT,
+	@Importe MONEY,
+	@Fecha DATETIME
+)
+AS
+BEGIN
+	INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, @id_Estado, @Importe, @Fecha);
+	SELECT '1';
+END
+GO
+-------------------------------------------------------------
+-----SP PARA ELIMINAR DETALLES AL RECIBO------------------
+CREATE OR ALTER PROC sp_EliminarDetalleRecibo(
+	@Id INT
+)
+AS
+BEGIN
+	IF(SELECT @Id FROM DetalleRecibo WHERE id_Detalle = @Id) = @Id
+	BEGIN
+		UPDATE DetalleRecibo SET id_Estado = 3 WHERE id_Detalle = @Id;
+		SELECT '1';
+	END
+	ELSE
+	BEGIN
+		SELECT '0';
+	END
+END
+GO
+

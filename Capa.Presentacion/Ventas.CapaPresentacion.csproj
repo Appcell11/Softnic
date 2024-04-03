@@ -156,5 +156,14 @@
   <ItemGroup>
     <None Include="Resources\Clear-Icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pencil-Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

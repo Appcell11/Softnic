@@ -62,6 +62,10 @@
             this.dgv_Register = new System.Windows.Forms.DataGridView();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.btn_AdminUsuarios = new System.Windows.Forms.Button();
+            this.btn_NuevoRecibo = new System.Windows.Forms.Button();
+            this.btn_Update = new System.Windows.Forms.Button();
+            this.btn_Remove = new System.Windows.Forms.Button();
+            this.btn_Add = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
@@ -106,10 +110,12 @@
             // 
             // CajaPage
             // 
+            this.CajaPage.Controls.Add(this.btn_NuevoRecibo);
             this.CajaPage.Controls.Add(this.btn_AgregarCliente);
             this.CajaPage.Controls.Add(this.groupBox1);
             this.CajaPage.Controls.Add(this.cmb_Clientes);
             this.CajaPage.Controls.Add(this.label_NumRecibo);
+            this.CajaPage.Controls.Add(this.btn_Guardar);
             this.CajaPage.Controls.Add(this.cmb_Examenes);
             this.CajaPage.Controls.Add(this.label9);
             this.CajaPage.Controls.Add(this.label2);
@@ -139,20 +145,22 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_Update);
+            this.groupBox1.Controls.Add(this.btn_Remove);
+            this.groupBox1.Controls.Add(this.btn_Add);
             this.groupBox1.Controls.Add(this.cmb_Descuentos);
             this.groupBox1.Controls.Add(this.txt_importe);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label_Saldo);
-            this.groupBox1.Controls.Add(this.btn_Guardar);
             this.groupBox1.Controls.Add(this.label_Total);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Location = new System.Drawing.Point(567, 63);
+            this.groupBox1.Location = new System.Drawing.Point(547, 63);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(257, 226);
+            this.groupBox1.Size = new System.Drawing.Size(277, 226);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             // 
@@ -213,12 +221,12 @@
             // btn_Guardar
             // 
             this.btn_Guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Guardar.Location = new System.Drawing.Point(170, 198);
+            this.btn_Guardar.Location = new System.Drawing.Point(725, 35);
             this.btn_Guardar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Guardar.Name = "btn_Guardar";
-            this.btn_Guardar.Size = new System.Drawing.Size(82, 23);
+            this.btn_Guardar.Size = new System.Drawing.Size(99, 23);
             this.btn_Guardar.TabIndex = 26;
-            this.btn_Guardar.Text = "Guardar";
+            this.btn_Guardar.Text = "💾 Guardar";
             this.btn_Guardar.UseVisualStyleBackColor = true;
             this.btn_Guardar.Click += new System.EventHandler(this.btn_Guardar_Click);
             // 
@@ -289,11 +297,11 @@
             // label_NumRecibo
             // 
             this.label_NumRecibo.AutoSize = true;
-            this.label_NumRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_NumRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_NumRecibo.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label_NumRecibo.Location = new System.Drawing.Point(632, 10);
+            this.label_NumRecibo.Location = new System.Drawing.Point(632, 5);
             this.label_NumRecibo.Name = "label_NumRecibo";
-            this.label_NumRecibo.Size = new System.Drawing.Size(35, 16);
+            this.label_NumRecibo.Size = new System.Drawing.Size(49, 20);
             this.label_NumRecibo.TabIndex = 24;
             this.label_NumRecibo.Text = "0000";
             // 
@@ -437,6 +445,61 @@
             this.btn_AdminUsuarios.UseVisualStyleBackColor = true;
             this.btn_AdminUsuarios.Click += new System.EventHandler(this.btn_AdminUsuarios_Click);
             // 
+            // btn_NuevoRecibo
+            // 
+            this.btn_NuevoRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_NuevoRecibo.Location = new System.Drawing.Point(567, 35);
+            this.btn_NuevoRecibo.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_NuevoRecibo.Name = "btn_NuevoRecibo";
+            this.btn_NuevoRecibo.Size = new System.Drawing.Size(144, 23);
+            this.btn_NuevoRecibo.TabIndex = 33;
+            this.btn_NuevoRecibo.Text = "📄 Nuevo Recibo";
+            this.btn_NuevoRecibo.UseVisualStyleBackColor = true;
+            // 
+            // btn_Update
+            // 
+            this.btn_Update.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_Update.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Update.ForeColor = System.Drawing.Color.Black;
+            this.btn_Update.ImageKey = "(ninguno)";
+            this.btn_Update.Location = new System.Drawing.Point(180, 192);
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(91, 28);
+            this.btn_Update.TabIndex = 35;
+            this.btn_Update.Text = "🖊 Modificar";
+            this.btn_Update.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btn_Update.UseVisualStyleBackColor = false;
+            // 
+            // btn_Remove
+            // 
+            this.btn_Remove.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Remove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Remove.ForeColor = System.Drawing.Color.Black;
+            this.btn_Remove.Location = new System.Drawing.Point(99, 192);
+            this.btn_Remove.Name = "btn_Remove";
+            this.btn_Remove.Size = new System.Drawing.Size(75, 28);
+            this.btn_Remove.TabIndex = 34;
+            this.btn_Remove.Text = "➖ Quitar";
+            this.btn_Remove.UseVisualStyleBackColor = false;
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Add.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btn_Add.Location = new System.Drawing.Point(8, 192);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(82, 28);
+            this.btn_Add.TabIndex = 33;
+            this.btn_Add.Text = "➕ Agregar";
+            this.btn_Add.UseVisualStyleBackColor = false;
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -502,6 +565,10 @@
         private System.Windows.Forms.GroupBox GroupRegister;
         private System.Windows.Forms.DataGridView dgv_Register;
         private System.Windows.Forms.Button btn_AdminUsuarios;
+        private System.Windows.Forms.Button btn_NuevoRecibo;
+        private System.Windows.Forms.Button btn_Update;
+        private System.Windows.Forms.Button btn_Remove;
+        private System.Windows.Forms.Button btn_Add;
     }
 }
 

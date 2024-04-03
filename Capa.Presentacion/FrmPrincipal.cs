@@ -40,6 +40,7 @@ namespace Ventas.CapaPresentacion
             CargarDatos.CargarDatosCmb("sp_MostrarExamenes", 1).ForEach(item => cmb_Examenes.Items.Add(item));
             CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
             CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
+            label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
         }
 
         private void FrmPrincipal_Activated(object sender, EventArgs e)
@@ -74,9 +75,7 @@ namespace Ventas.CapaPresentacion
 
         private void btn_Guardar_Click(object sender, EventArgs e)
         {
-            var bindingSource = new BindingSource();
-            bindingSource.DataSource = CargarDatos.CargarInfoRecibo(int.Parse(cmb_Clientes.Text[0].ToString()));
-            dgv_Examenes.DataSource = bindingSource;
+            
         }
 
         private void FrmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
