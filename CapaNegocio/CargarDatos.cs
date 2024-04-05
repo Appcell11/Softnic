@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,26 @@ namespace CapaNegocio
 {
     public static class CargarDatos
     {
-        public static DataTable cargarInformacionExamenes()
+        public static List<Examenes> cargarInformacionExamenes()
         {
-            return ExecSP.Exec("sp_MostrarExamenes");
+            var list = new List<Examenes>();
+            foreach (var item in ExecSP.Exec("sp_MostrarExamenes").Select())
+            {
+                list.Add(
+                    new Examenes(int.Parse(item[0].ToString()), item[1].ToString(), SqlMoney.Parse(item[2].ToString()), item[3].ToString())
+                    );
+            }
+            return list;
         }
 
-        public static List<string> CargarDatosClientes()
+        public static List<Clientes> CargarDatosClientes()
         {
-            var list = new List<string>();
+            var list = new List<Clientes>();
             foreach (var item in ExecSP.Exec("sp_MostrarClientes").Select())
             {
-                list.Add(item[0]+ " " + item[1].ToString() + " " + item[3]);
+                list.Add(
+                    new Clientes(int.Parse(item[0].ToString()), item[1].ToString(), item[2].ToString(), item[3].ToString(), item[4].ToString(), item[5].ToString(), DateTime.Parse(item[6].ToString()), item[7].ToString())
+                    );
             }
             return list;
         }

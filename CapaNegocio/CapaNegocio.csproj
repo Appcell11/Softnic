@@ -45,6 +45,7 @@
     <Compile Include="Encriptar.cs" />
     <Compile Include="NClientes.cs" />
     <Compile Include="NLogin.cs" />
+    <Compile Include="NRecibo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

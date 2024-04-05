@@ -37,15 +37,10 @@
             this.btn_AgregarCliente = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmb_Descuentos = new System.Windows.Forms.ComboBox();
-            this.txt_importe = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label_Saldo = new System.Windows.Forms.Label();
             this.btn_Guardar = new System.Windows.Forms.Button();
             this.label_Total = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cmb_Clientes = new System.Windows.Forms.ComboBox();
             this.label_NumRecibo = new System.Windows.Forms.Label();
@@ -55,8 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Cancelar = new System.Windows.Forms.Button();
             this.btn_Imprimir = new System.Windows.Forms.Button();
-            this.btn_Buscar = new System.Windows.Forms.Button();
-            this.dgv_Examenes = new System.Windows.Forms.DataGridView();
+            this.dgv_detalleRecibo = new System.Windows.Forms.DataGridView();
             this.ManagPage = new System.Windows.Forms.TabPage();
             this.GroupRegister = new System.Windows.Forms.GroupBox();
             this.dgv_Register = new System.Windows.Forms.DataGridView();
@@ -70,8 +64,7 @@
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_importe)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_detalleRecibo)).BeginInit();
             this.ManagPage.SuspendLayout();
             this.GroupRegister.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Register)).BeginInit();
@@ -85,7 +78,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip.Location = new System.Drawing.Point(0, 406);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(840, 22);
+            this.statusStrip.Size = new System.Drawing.Size(827, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -105,30 +98,30 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(840, 403);
+            this.tabControl1.Size = new System.Drawing.Size(827, 403);
             this.tabControl1.TabIndex = 4;
             // 
             // CajaPage
             // 
-            this.CajaPage.Controls.Add(this.btn_NuevoRecibo);
+            this.CajaPage.Controls.Add(this.btn_Update);
+            this.CajaPage.Controls.Add(this.btn_Remove);
             this.CajaPage.Controls.Add(this.btn_AgregarCliente);
+            this.CajaPage.Controls.Add(this.btn_Add);
             this.CajaPage.Controls.Add(this.groupBox1);
             this.CajaPage.Controls.Add(this.cmb_Clientes);
             this.CajaPage.Controls.Add(this.label_NumRecibo);
-            this.CajaPage.Controls.Add(this.btn_Guardar);
             this.CajaPage.Controls.Add(this.cmb_Examenes);
             this.CajaPage.Controls.Add(this.label9);
             this.CajaPage.Controls.Add(this.label2);
             this.CajaPage.Controls.Add(this.label1);
             this.CajaPage.Controls.Add(this.btn_Cancelar);
             this.CajaPage.Controls.Add(this.btn_Imprimir);
-            this.CajaPage.Controls.Add(this.btn_Buscar);
-            this.CajaPage.Controls.Add(this.dgv_Examenes);
+            this.CajaPage.Controls.Add(this.dgv_detalleRecibo);
             this.CajaPage.Location = new System.Drawing.Point(4, 25);
             this.CajaPage.Margin = new System.Windows.Forms.Padding(2);
             this.CajaPage.Name = "CajaPage";
             this.CajaPage.Padding = new System.Windows.Forms.Padding(2);
-            this.CajaPage.Size = new System.Drawing.Size(832, 374);
+            this.CajaPage.Size = new System.Drawing.Size(819, 374);
             this.CajaPage.TabIndex = 0;
             this.CajaPage.Text = "Caja";
             this.CajaPage.UseVisualStyleBackColor = true;
@@ -145,22 +138,16 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btn_Update);
-            this.groupBox1.Controls.Add(this.btn_Remove);
-            this.groupBox1.Controls.Add(this.btn_Add);
             this.groupBox1.Controls.Add(this.cmb_Descuentos);
-            this.groupBox1.Controls.Add(this.txt_importe);
+            this.groupBox1.Controls.Add(this.btn_NuevoRecibo);
             this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.label_Saldo);
             this.groupBox1.Controls.Add(this.label_Total);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btn_Guardar);
             this.groupBox1.Location = new System.Drawing.Point(547, 63);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(277, 226);
+            this.groupBox1.Size = new System.Drawing.Size(263, 226);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             // 
@@ -168,60 +155,25 @@
             // 
             this.cmb_Descuentos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Descuentos.FormattingEnabled = true;
-            this.cmb_Descuentos.Location = new System.Drawing.Point(127, 53);
+            this.cmb_Descuentos.Location = new System.Drawing.Point(109, 15);
             this.cmb_Descuentos.Name = "cmb_Descuentos";
             this.cmb_Descuentos.Size = new System.Drawing.Size(120, 21);
             this.cmb_Descuentos.TabIndex = 32;
-            // 
-            // txt_importe
-            // 
-            this.txt_importe.DecimalPlaces = 2;
-            this.txt_importe.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txt_importe.Location = new System.Drawing.Point(127, 19);
-            this.txt_importe.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.txt_importe.Name = "txt_importe";
-            this.txt_importe.Size = new System.Drawing.Size(120, 20);
-            this.txt_importe.TabIndex = 31;
-            this.txt_importe.ThousandsSeparator = true;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(124, 114);
+            this.label18.Location = new System.Drawing.Point(115, 100);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(25, 16);
             this.label18.TabIndex = 30;
             this.label18.Text = "C$";
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(124, 89);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(25, 16);
-            this.label17.TabIndex = 29;
-            this.label17.Text = "C$";
-            // 
-            // label_Saldo
-            // 
-            this.label_Saldo.AutoSize = true;
-            this.label_Saldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Saldo.Location = new System.Drawing.Point(167, 89);
-            this.label_Saldo.Name = "label_Saldo";
-            this.label_Saldo.Size = new System.Drawing.Size(45, 16);
-            this.label_Saldo.TabIndex = 27;
-            this.label_Saldo.Text = "000.00";
-            // 
             // btn_Guardar
             // 
             this.btn_Guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Guardar.Location = new System.Drawing.Point(725, 35);
+            this.btn_Guardar.Location = new System.Drawing.Point(156, 198);
             this.btn_Guardar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Guardar.Name = "btn_Guardar";
             this.btn_Guardar.Size = new System.Drawing.Size(99, 23);
@@ -234,7 +186,7 @@
             // 
             this.label_Total.AutoSize = true;
             this.label_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Total.Location = new System.Drawing.Point(167, 115);
+            this.label_Total.Location = new System.Drawing.Point(153, 101);
             this.label_Total.Name = "label_Total";
             this.label_Total.Size = new System.Drawing.Size(45, 15);
             this.label_Total.TabIndex = 25;
@@ -244,40 +196,18 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 58);
+            this.label6.Location = new System.Drawing.Point(5, 16);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 16);
             this.label6.TabIndex = 19;
             this.label6.Text = "Descuento:";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(5, 24);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 16);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Importe:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(5, 89);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 16);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Saldo:";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 114);
+            this.label5.Location = new System.Drawing.Point(5, 101);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(105, 16);
@@ -299,7 +229,7 @@
             this.label_NumRecibo.AutoSize = true;
             this.label_NumRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_NumRecibo.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label_NumRecibo.Location = new System.Drawing.Point(632, 5);
+            this.label_NumRecibo.Location = new System.Drawing.Point(620, 37);
             this.label_NumRecibo.Name = "label_NumRecibo";
             this.label_NumRecibo.Size = new System.Drawing.Size(49, 20);
             this.label_NumRecibo.TabIndex = 24;
@@ -340,7 +270,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(564, 8);
+            this.label1.Location = new System.Drawing.Point(552, 40);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 17);
@@ -350,7 +280,7 @@
             // btn_Cancelar
             // 
             this.btn_Cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Cancelar.Location = new System.Drawing.Point(213, 292);
+            this.btn_Cancelar.Location = new System.Drawing.Point(117, 292);
             this.btn_Cancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(93, 23);
@@ -361,7 +291,7 @@
             // btn_Imprimir
             // 
             this.btn_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Imprimir.Location = new System.Drawing.Point(111, 292);
+            this.btn_Imprimir.Location = new System.Drawing.Point(15, 292);
             this.btn_Imprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Imprimir.Name = "btn_Imprimir";
             this.btn_Imprimir.Size = new System.Drawing.Size(98, 23);
@@ -369,30 +299,19 @@
             this.btn_Imprimir.Text = "🖨 Imprimir";
             this.btn_Imprimir.UseVisualStyleBackColor = true;
             // 
-            // btn_Buscar
+            // dgv_detalleRecibo
             // 
-            this.btn_Buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Buscar.Location = new System.Drawing.Point(15, 293);
-            this.btn_Buscar.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Buscar.Name = "btn_Buscar";
-            this.btn_Buscar.Size = new System.Drawing.Size(92, 22);
-            this.btn_Buscar.TabIndex = 10;
-            this.btn_Buscar.Text = "🔍 Buscar";
-            this.btn_Buscar.UseVisualStyleBackColor = true;
-            // 
-            // dgv_Examenes
-            // 
-            this.dgv_Examenes.AllowUserToAddRows = false;
-            this.dgv_Examenes.AllowUserToDeleteRows = false;
-            this.dgv_Examenes.AllowUserToResizeRows = false;
-            this.dgv_Examenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Examenes.Location = new System.Drawing.Point(15, 62);
-            this.dgv_Examenes.Margin = new System.Windows.Forms.Padding(2);
-            this.dgv_Examenes.Name = "dgv_Examenes";
-            this.dgv_Examenes.RowHeadersWidth = 62;
-            this.dgv_Examenes.RowTemplate.Height = 28;
-            this.dgv_Examenes.Size = new System.Drawing.Size(527, 227);
-            this.dgv_Examenes.TabIndex = 8;
+            this.dgv_detalleRecibo.AllowUserToAddRows = false;
+            this.dgv_detalleRecibo.AllowUserToDeleteRows = false;
+            this.dgv_detalleRecibo.AllowUserToResizeRows = false;
+            this.dgv_detalleRecibo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_detalleRecibo.Location = new System.Drawing.Point(15, 62);
+            this.dgv_detalleRecibo.Margin = new System.Windows.Forms.Padding(2);
+            this.dgv_detalleRecibo.Name = "dgv_detalleRecibo";
+            this.dgv_detalleRecibo.RowHeadersWidth = 62;
+            this.dgv_detalleRecibo.RowTemplate.Height = 28;
+            this.dgv_detalleRecibo.Size = new System.Drawing.Size(527, 227);
+            this.dgv_detalleRecibo.TabIndex = 8;
             // 
             // ManagPage
             // 
@@ -448,13 +367,14 @@
             // btn_NuevoRecibo
             // 
             this.btn_NuevoRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_NuevoRecibo.Location = new System.Drawing.Point(567, 35);
+            this.btn_NuevoRecibo.Location = new System.Drawing.Point(8, 198);
             this.btn_NuevoRecibo.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NuevoRecibo.Name = "btn_NuevoRecibo";
             this.btn_NuevoRecibo.Size = new System.Drawing.Size(144, 23);
             this.btn_NuevoRecibo.TabIndex = 33;
             this.btn_NuevoRecibo.Text = "📄 Nuevo Recibo";
             this.btn_NuevoRecibo.UseVisualStyleBackColor = true;
+            this.btn_NuevoRecibo.Click += new System.EventHandler(this.btn_NuevoRecibo_Click);
             // 
             // btn_Update
             // 
@@ -464,7 +384,7 @@
             this.btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Update.ForeColor = System.Drawing.Color.Black;
             this.btn_Update.ImageKey = "(ninguno)";
-            this.btn_Update.Location = new System.Drawing.Point(180, 192);
+            this.btn_Update.Location = new System.Drawing.Point(451, 294);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(91, 28);
             this.btn_Update.TabIndex = 35;
@@ -479,7 +399,7 @@
             this.btn_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Remove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Remove.ForeColor = System.Drawing.Color.Black;
-            this.btn_Remove.Location = new System.Drawing.Point(99, 192);
+            this.btn_Remove.Location = new System.Drawing.Point(370, 293);
             this.btn_Remove.Name = "btn_Remove";
             this.btn_Remove.Size = new System.Drawing.Size(75, 28);
             this.btn_Remove.TabIndex = 34;
@@ -493,18 +413,19 @@
             this.btn_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Add.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_Add.Location = new System.Drawing.Point(8, 192);
+            this.btn_Add.Location = new System.Drawing.Point(280, 294);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(82, 28);
             this.btn_Add.TabIndex = 33;
             this.btn_Add.Text = "➕ Agregar";
             this.btn_Add.UseVisualStyleBackColor = false;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 428);
+            this.ClientSize = new System.Drawing.Size(827, 428);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip);
             this.IsMdiContainer = true;
@@ -521,8 +442,7 @@
             this.CajaPage.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_importe)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Examenes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_detalleRecibo)).EndInit();
             this.ManagPage.ResumeLayout(false);
             this.GroupRegister.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Register)).EndInit();
@@ -538,15 +458,10 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage CajaPage;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown txt_importe;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label_Saldo;
         private System.Windows.Forms.Button btn_Guardar;
         private System.Windows.Forms.Label label_Total;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmb_Clientes;
         private System.Windows.Forms.Label label_NumRecibo;
@@ -556,8 +471,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Cancelar;
         private System.Windows.Forms.Button btn_Imprimir;
-        private System.Windows.Forms.Button btn_Buscar;
-        private System.Windows.Forms.DataGridView dgv_Examenes;
+        private System.Windows.Forms.DataGridView dgv_detalleRecibo;
         private System.Windows.Forms.TabPage ManagPage;
         private System.Windows.Forms.Button btn_AgregarCliente;
         private System.Windows.Forms.ComboBox cmb_Descuentos;

@@ -13,10 +13,20 @@ namespace CapaEntidades
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
+        public string NumeroCedula { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Sexo { get; set; }
-        public string Estado { get; set; }
-
-        public Clientes() { }
+        
+        public Clientes(int id_Cliente, string PrimerNombre, string SegundoNombre, string PrimerApellido, string SegundoApellido, string NumeroCedula, DateTime FechaNacimiento, string Sexo)
+        {
+            this.id_Cliente = id_Cliente;
+            this.PrimerNombre = PrimerNombre;
+            this.SegundoNombre = SegundoNombre;
+            this.PrimerApellido = PrimerApellido;
+            this.SegundoApellido = SegundoApellido;
+            this.NumeroCedula = NumeroCedula;
+            this.FechaNacimiento = FechaNacimiento;
+            this.Sexo = Sexo;
+        }
     }
 }

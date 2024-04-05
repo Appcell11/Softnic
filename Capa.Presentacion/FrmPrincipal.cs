@@ -1,4 +1,5 @@
 ﻿using CapaNegocio;
+using CapaEntidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,11 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlTypes;
 
 namespace Ventas.CapaPresentacion
 {
     public partial class FrmPrincipal : Form
     {
+        List<Examenes> ListExamenes = CargarDatos.cargarInformacionExamenes();
+        List<Clientes> ListClientes = CargarDatos.CargarDatosClientes();
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -34,13 +38,18 @@ namespace Ventas.CapaPresentacion
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             Empezar();
+            Cargar();
+
+        }
+
+        private void Cargar()
+        {
             cmb_Clientes.Items.Clear();
             cmb_Descuentos.Items.Clear();
             cmb_Examenes.Items.Clear();
-            CargarDatos.CargarDatosCmb("sp_MostrarExamenes", 1).ForEach(item => cmb_Examenes.Items.Add(item));
+            ListExamenes.ForEach(item => cmb_Examenes.Items.Add(item.Nombre));
             CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
-            CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
-            label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
+            ListClientes.ForEach(item => cmb_Clientes.Items.Add(item.PrimerNombre + " " + item.PrimerApellido));
         }
 
         private void FrmPrincipal_Activated(object sender, EventArgs e)
@@ -86,7 +95,29 @@ namespace Ventas.CapaPresentacion
         private void cmb_Clientes_MouseClick(object sender, MouseEventArgs e)
         {
             cmb_Clientes.Items.Clear();
-            CargarDatos.CargarDatosClientes().ForEach(item => cmb_Clientes.Items.Add(item));
+            ListClientes.ForEach(item => cmb_Clientes.Items.Add(item.PrimerNombre + " " + item.PrimerApellido));
+        }
+
+        private void btn_Add_Click(object sender, EventArgs e)
+        {
+            if(cmb_Examenes.SelectedItem != null && cmb_Clientes.SelectedItem != null)
+            {
+                int CliIndex = cmb_Clientes.SelectedIndex;
+                int ExamIndex = cmb_Examenes.SelectedIndex;
+                NRecibo.AgregarDetalleRecibo(int.Parse(label_NumRecibo.Text), ListClientes[CliIndex].id_Cliente, ListExamenes[ExamIndex].id_Examen, SqlMoney.Parse(label_Total.Text));
+                var bindingSource = new BindingSource();
+                bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text));
+                dgv_detalleRecibo.DataSource = bindingSource;
+            }
+            else
+            {
+                MessageBox.Show("Por favor selecciona un examen y un cliente para agregar el monto a tu recibo");
+            }
+        }
+
+        private void btn_NuevoRecibo_Click(object sender, EventArgs e)
+        {
+            label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
         }
     }
 }

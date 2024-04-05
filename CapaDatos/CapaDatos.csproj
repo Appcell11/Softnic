@@ -44,6 +44,7 @@
     <Compile Include="Conexion.cs" />
     <Compile Include="DClientes.cs" />
     <Compile Include="DLogin.cs" />
+    <Compile Include="DRecibo.cs" />
     <Compile Include="ExecSP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
