@@ -10,6 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlTypes;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using iTextSharp.tool.xml;
 
 namespace Ventas.CapaPresentacion
 {
@@ -44,7 +48,7 @@ namespace Ventas.CapaPresentacion
         private void Limpiar()
         {
             cmb_Clientes.Items.Clear();
-            cmb_Descuentos.Items.Clear();
+           
             cmb_Examenes.Items.Clear();
             dgv_detalleRecibo.DataSource = null;
         }
@@ -61,10 +65,10 @@ namespace Ventas.CapaPresentacion
             ListExamenes = CargarDatos.cargarInformacionExamenes();
             ListClientes = CargarDatos.CargarDatosClientes();
             cmb_Clientes.Items.Clear();
-            cmb_Descuentos.Items.Clear();
+            
             cmb_Examenes.Items.Clear();
             ListExamenes.ForEach(item => cmb_Examenes.Items.Add(item.Nombre));
-            CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
+            //CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
             ListClientes.ForEach(item => cmb_Clientes.Items.Add(item.PrimerNombre + " " + item.PrimerApellido));
             dgv_Register.DataSource = CargarDatos.CargarInfoDataGrid("sp_MostrarReporteRecibo");
         }
@@ -163,6 +167,38 @@ namespace Ventas.CapaPresentacion
             ActualizarTotal();
             if (Responce) MessageBox.Show("Se ha eliminado");
             else MessageBox.Show("Se ha producido un error");
+        }
+
+        private void btn_CierreCaja_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog guardar = new SaveFileDialog();
+            guardar.FileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf";
+            guardar.ShowDialog();
+
+            string paginahtml = Properties.Resources.plantilla.ToString();
+            string filas = string.Empty;
+            foreach(DataGridView row in dgv_Register.Rows)
+            {
+                filas += "<tr>";
+                
+            }
+
+            if(guardar.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fileStream = new FileStream(guardar.FileName,FileMode.Create))
+                {
+                    Document document = new Document(PageSize.A4, 25, 25, 25, 25);
+                    PdfWriter pdfWriter = PdfWriter.GetInstance(document, fileStream);
+                    document.Open();
+                    document.Add(new Phrase());
+                    using (StringReader reader = new StringReader(paginahtml))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(pdfWriter, document, reader);
+                    }
+                    document.Close();
+                    fileStream.Close();
+                }
+            }
         }
     }
 }

@@ -38,11 +38,9 @@
             this.btn_AgregarCliente = new System.Windows.Forms.Button();
             this.btn_Add = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmb_Descuentos = new System.Windows.Forms.ComboBox();
             this.btn_NuevoRecibo = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label_Total = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_Guardar = new System.Windows.Forms.Button();
             this.cmb_Clientes = new System.Windows.Forms.ComboBox();
@@ -58,6 +56,7 @@
             this.dgv_Register = new System.Windows.Forms.DataGridView();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.btn_AdminUsuarios = new System.Windows.Forms.Button();
+            this.btn_CierreCaja = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
@@ -164,11 +163,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cmb_Descuentos);
             this.groupBox1.Controls.Add(this.btn_NuevoRecibo);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.label_Total);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.btn_Guardar);
             this.groupBox1.Location = new System.Drawing.Point(547, 63);
@@ -176,15 +173,6 @@
             this.groupBox1.Size = new System.Drawing.Size(263, 226);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
-            // 
-            // cmb_Descuentos
-            // 
-            this.cmb_Descuentos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_Descuentos.FormattingEnabled = true;
-            this.cmb_Descuentos.Location = new System.Drawing.Point(109, 15);
-            this.cmb_Descuentos.Name = "cmb_Descuentos";
-            this.cmb_Descuentos.Size = new System.Drawing.Size(120, 21);
-            this.cmb_Descuentos.TabIndex = 32;
             // 
             // btn_NuevoRecibo
             // 
@@ -217,17 +205,6 @@
             this.label_Total.Size = new System.Drawing.Size(45, 15);
             this.label_Total.TabIndex = 25;
             this.label_Total.Text = "000.00";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 16);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 16);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Descuento:";
             // 
             // label5
             // 
@@ -376,6 +353,7 @@
             // 
             // FormUserGroup
             // 
+            this.FormUserGroup.Controls.Add(this.btn_CierreCaja);
             this.FormUserGroup.Controls.Add(this.btn_AdminUsuarios);
             this.FormUserGroup.Location = new System.Drawing.Point(9, 6);
             this.FormUserGroup.Name = "FormUserGroup";
@@ -393,6 +371,18 @@
             this.btn_AdminUsuarios.Text = "Control de Perfiles";
             this.btn_AdminUsuarios.UseVisualStyleBackColor = true;
             this.btn_AdminUsuarios.Click += new System.EventHandler(this.btn_AdminUsuarios_Click);
+            // 
+            // btn_CierreCaja
+            // 
+            this.btn_CierreCaja.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btn_CierreCaja.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_CierreCaja.Location = new System.Drawing.Point(6, 325);
+            this.btn_CierreCaja.Name = "btn_CierreCaja";
+            this.btn_CierreCaja.Size = new System.Drawing.Size(217, 35);
+            this.btn_CierreCaja.TabIndex = 11;
+            this.btn_CierreCaja.Text = "Cierrre de caja";
+            this.btn_CierreCaja.UseVisualStyleBackColor = false;
+            this.btn_CierreCaja.Click += new System.EventHandler(this.btn_CierreCaja_Click);
             // 
             // FrmPrincipal
             // 
@@ -434,7 +424,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button btn_Guardar;
         private System.Windows.Forms.Label label_Total;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmb_Clientes;
         private System.Windows.Forms.Label label_NumRecibo;
@@ -446,7 +435,6 @@
         private System.Windows.Forms.DataGridView dgv_detalleRecibo;
         private System.Windows.Forms.TabPage ManagPage;
         private System.Windows.Forms.Button btn_AgregarCliente;
-        private System.Windows.Forms.ComboBox cmb_Descuentos;
         private System.Windows.Forms.GroupBox FormUserGroup;
         private System.Windows.Forms.GroupBox GroupRegister;
         private System.Windows.Forms.DataGridView dgv_Register;
@@ -454,6 +442,7 @@
         private System.Windows.Forms.Button btn_NuevoRecibo;
         private System.Windows.Forms.Button btn_Remove;
         private System.Windows.Forms.Button btn_Add;
+        private System.Windows.Forms.Button btn_CierreCaja;
     }
 }
 
