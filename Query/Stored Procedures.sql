@@ -415,6 +415,8 @@ CREATE OR ALTER PROC sp_AgregarDetalleRecibo(
 )
 AS
 BEGIN
+	DECLARE @ImporteTotal MONEY;
+	SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
 	DECLARE @Importe MONEY;
 	SET @Importe = (SELECT Precio FROM Examenes WHERE id_Examen = @id_Examen);
 	IF(SELECT COUNT(id_Recibo) FROM Recibo WHERE id_Recibo = @id_Recibo) <= 0 
@@ -426,6 +428,8 @@ BEGIN
 	ELSE
 	BEGIN
 		INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, 4, @Importe, GETDATE());
+		SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
+		UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
 		SELECT '1';
 	END
 END	
@@ -460,9 +464,13 @@ CREATE OR ALTER PROC sp_EliminarDetalleRecibo(
 )
 AS
 BEGIN
+	DECLARE @ImporteTotal MONEY;
+	SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @Id AND id_Estado = 4);
 	IF(SELECT @Id FROM DetalleRecibo WHERE id_Detalle = @Id) = @Id
 	BEGIN
 		UPDATE DetalleRecibo SET id_Estado = 3 WHERE id_Detalle = @Id;
+		SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = 35/*@Id*/ AND id_Estado = 4);
+		UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @Id;
 		SELECT '1';
 	END
 	ELSE
@@ -515,9 +523,7 @@ CREATE OR ALTER PROC sp_MostrarImporteRecibo(
 )
 AS
 BEGIN
-	SELECT
-	Importe
-	FROM 
-	Recibo
-	WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
+	DECLARE @ImporteTotal MONEY SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = 35/*@Id*/ AND id_Estado = 4);
+	UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
+	SELECT Importe FROM Recibo WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
 END

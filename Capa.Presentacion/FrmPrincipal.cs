@@ -148,14 +148,17 @@ namespace Ventas.CapaPresentacion
         private void btn_NuevoRecibo_Click(object sender, EventArgs e)
         {
             label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
+            cmb_Clientes.Enabled = true;
         }
 
         private void btn_Remove_Click(object sender, EventArgs e)
         {
             int id_Detalle = int.Parse(dgv_detalleRecibo.CurrentRow.Cells[0].Value.ToString());
             bool Responce = NRecibo.EliminarDetalleRecibo(id_Detalle);
+            Cargar();
             var bindingSource = new BindingSource();
             bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text));
+            dgv_detalleRecibo.DataSource = bindingSource;
             ActualizarTotal();
             if (Responce) MessageBox.Show("Se ha eliminado");
             else MessageBox.Show("Se ha producido un error");
