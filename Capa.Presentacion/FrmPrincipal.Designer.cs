@@ -51,7 +51,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btn_Cancelar = new System.Windows.Forms.Button();
             this.btn_Imprimir = new System.Windows.Forms.Button();
             this.dgv_detalleRecibo = new System.Windows.Forms.DataGridView();
             this.ManagPage = new System.Windows.Forms.TabPage();
@@ -112,7 +111,6 @@
             this.CajaPage.Controls.Add(this.label9);
             this.CajaPage.Controls.Add(this.label2);
             this.CajaPage.Controls.Add(this.label1);
-            this.CajaPage.Controls.Add(this.btn_Cancelar);
             this.CajaPage.Controls.Add(this.btn_Imprimir);
             this.CajaPage.Controls.Add(this.dgv_detalleRecibo);
             this.CajaPage.Location = new System.Drawing.Point(4, 25);
@@ -317,17 +315,6 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Recibo:";
             // 
-            // btn_Cancelar
-            // 
-            this.btn_Cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Cancelar.Location = new System.Drawing.Point(117, 292);
-            this.btn_Cancelar.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Cancelar.Name = "btn_Cancelar";
-            this.btn_Cancelar.Size = new System.Drawing.Size(93, 25);
-            this.btn_Cancelar.TabIndex = 12;
-            this.btn_Cancelar.Text = "✖ Cancelar";
-            this.btn_Cancelar.UseVisualStyleBackColor = true;
-            // 
             // btn_Imprimir
             // 
             this.btn_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -455,7 +442,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_Cancelar;
         private System.Windows.Forms.Button btn_Imprimir;
         private System.Windows.Forms.DataGridView dgv_detalleRecibo;
         private System.Windows.Forms.TabPage ManagPage;

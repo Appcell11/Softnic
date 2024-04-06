@@ -378,7 +378,14 @@ GO
 CREATE OR ALTER PROC sp_UltimoRecibo
 AS
 BEGIN
-	select top 1 id_Recibo + 1 from Recibo order by id_Recibo desc
+	if(select COUNT(id_Recibo) from Recibo) > 0 
+	begin
+		select top 1 id_Recibo + 1 from Recibo order by id_Recibo desc
+	end
+	else
+	begin
+		select '1'
+	end
 END
 go
 -----------------------------------------------------
@@ -442,18 +449,15 @@ CREATE OR ALTER PROC sp_GuardarDetalleRecibo(
 )
 AS
 BEGIN
-	DECLARE @ImporteTotal MONEY;
-	SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
-	IF(SELECT id_Recibo FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4) > 0
+	IF(SELECT COUNT(id_Recibo) FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4) > 0
 	BEGIN
 		UPDATE DetalleRecibo SET id_Estado = 1 WHERE id_Recibo = @id_Recibo;
 		UPDATE Recibo SET id_Estado = 1 WHERE id_Recibo = @id_Recibo;
-		UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
 		SELECT '1';
 	END
 	ELSE
 	BEGIN
-		SELECT '0';
+		SELECT '0'
 	END
 END
 GO
@@ -523,7 +527,24 @@ CREATE OR ALTER PROC sp_MostrarImporteRecibo(
 )
 AS
 BEGIN
-	DECLARE @ImporteTotal MONEY SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = 35/*@Id*/ AND id_Estado = 4);
+	DECLARE @ImporteTotal MONEY SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
 	UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
 	SELECT Importe FROM Recibo WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
+END
+go
+-------------------------------------------------
+---SP PARA MOSTRAR TOTAL DE REGISTROS DE ESE DIA
+CREATE OR ALTER PROC sp_MostrarReporteRecibo
+AS
+BEGIN
+	SELECT 
+	id_Recibo AS Recibo,
+	Pacientes.PrimerNombre AS Nombre,
+	Pacientes.PrimerApellido AS Apellido,
+	Importe,
+	Fecha
+	FROM 
+	Recibo
+	INNER JOIN Pacientes ON Recibo.id_Paciente = Pacientes.id_Paciente
+	WHERE Recibo.id_Estado = 1 AND CAST(Recibo.Fecha AS DATE) = CAST(GETDATE() AS DATE)
 END

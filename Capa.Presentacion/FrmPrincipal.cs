@@ -66,6 +66,7 @@ namespace Ventas.CapaPresentacion
             ListExamenes.ForEach(item => cmb_Examenes.Items.Add(item.Nombre));
             CargarDatos.CargarDatosCmb("sp_MostrarDescuentos", 1).ForEach(item => cmb_Descuentos.Items.Add(item));
             ListClientes.ForEach(item => cmb_Clientes.Items.Add(item.PrimerNombre + " " + item.PrimerApellido));
+            dgv_Register.DataSource = CargarDatos.CargarInfoDataGrid("sp_MostrarReporteRecibo");
         }
 
         private void FrmPrincipal_Activated(object sender, EventArgs e)
@@ -101,7 +102,8 @@ namespace Ventas.CapaPresentacion
         private void btn_Guardar_Click(object sender, EventArgs e)
         {
             bool Responce = NRecibo.GuardarDetalleRecibo(int.Parse(label_NumRecibo.Text));
-            if (Responce) { 
+            if (Responce) {
+                dgv_Register.DataSource = CargarDatos.CargarInfoDataGrid("sp_MostrarReporteRecibo");
                 MessageBox.Show("El recibo se ha guardado con éxito");
                 Limpiar(); }
             else MessageBox.Show("Se ha producido un error");
@@ -155,7 +157,6 @@ namespace Ventas.CapaPresentacion
         {
             int id_Detalle = int.Parse(dgv_detalleRecibo.CurrentRow.Cells[0].Value.ToString());
             bool Responce = NRecibo.EliminarDetalleRecibo(id_Detalle);
-            Cargar();
             var bindingSource = new BindingSource();
             bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text));
             dgv_detalleRecibo.DataSource = bindingSource;

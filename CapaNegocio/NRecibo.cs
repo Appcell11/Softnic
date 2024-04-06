@@ -38,7 +38,15 @@ namespace CapaNegocio
 
         public static bool GuardarDetalleRecibo(int id_Recibo)
         {
-            string Response = DRecibo.GuardarDetalleRecibo(id_Recibo).Select()[0][0].ToString();
+            string Response = "0";
+            try
+            {
+                Response = DRecibo.GuardarDetalleRecibo(id_Recibo).Select()[0][0].ToString();
+            }
+            catch (Exception e)
+            { 
+                Console.WriteLine(e.Message);
+            }
             return Response == "1" ? true : false;
         }
 
