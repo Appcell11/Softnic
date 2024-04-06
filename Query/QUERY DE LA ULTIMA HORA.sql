@@ -59,7 +59,7 @@ id_Estado INT REFERENCES Estado(id_Estado),
 Importe MONEY,
 Fecha DATETIME
 );
-
+--select * from Recibo
 --ALTER TABLE Recibo DROP COLUMN Descuento
 --ALTER TABLE Recibo DROP COLUMN Saldo
 --ALTER TABLE Recibo DROP COLUMN Total_Pagar

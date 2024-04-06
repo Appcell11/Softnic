@@ -35,6 +35,20 @@ namespace Ventas.CapaPresentacion
             }
         }
 
+        private void ActualizarTotal()
+        {
+            string totalPagar = NRecibo.MostrarImporteRecibo(int.Parse(label_NumRecibo.Text)).Select()[0][0].ToString();
+            label_Total.Text = totalPagar.ToString();
+        }
+
+        private void Limpiar()
+        {
+            cmb_Clientes.Items.Clear();
+            cmb_Descuentos.Items.Clear();
+            cmb_Examenes.Items.Clear();
+            dgv_detalleRecibo.DataSource = null;
+        }
+
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             Empezar();
@@ -44,6 +58,8 @@ namespace Ventas.CapaPresentacion
 
         private void Cargar()
         {
+            ListExamenes = CargarDatos.cargarInformacionExamenes();
+            ListClientes = CargarDatos.CargarDatosClientes();
             cmb_Clientes.Items.Clear();
             cmb_Descuentos.Items.Clear();
             cmb_Examenes.Items.Clear();
@@ -84,7 +100,11 @@ namespace Ventas.CapaPresentacion
 
         private void btn_Guardar_Click(object sender, EventArgs e)
         {
-            
+            bool Responce = NRecibo.GuardarDetalleRecibo(int.Parse(label_NumRecibo.Text));
+            if (Responce) { 
+                MessageBox.Show("El recibo se ha guardado con éxito");
+                Limpiar(); }
+            else MessageBox.Show("Se ha producido un error");
         }
 
         private void FrmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
@@ -100,24 +120,45 @@ namespace Ventas.CapaPresentacion
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            if(cmb_Examenes.SelectedItem != null && cmb_Clientes.SelectedItem != null)
+            if(cmb_Examenes.SelectedItem != null && cmb_Clientes.SelectedItem != null && label_NumRecibo.Text != "0000")
             {
                 int CliIndex = cmb_Clientes.SelectedIndex;
                 int ExamIndex = cmb_Examenes.SelectedIndex;
-                NRecibo.AgregarDetalleRecibo(int.Parse(label_NumRecibo.Text), ListClientes[CliIndex].id_Cliente, ListExamenes[ExamIndex].id_Examen, SqlMoney.Parse(label_Total.Text));
-                var bindingSource = new BindingSource();
-                bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text));
-                dgv_detalleRecibo.DataSource = bindingSource;
+                bool responce = NRecibo.AgregarDetalleRecibo(int.Parse(label_NumRecibo.Text), ListClientes[CliIndex].id_Cliente, ListExamenes[ExamIndex].id_Examen);
+                if (responce)
+                {
+                    var bindingSource = new BindingSource();
+                    bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text));
+                    dgv_detalleRecibo.DataSource = bindingSource;
+                    if (bindingSource.Count > 0) cmb_Clientes.Enabled = false;
+                    ActualizarTotal();
+                    MessageBox.Show("Se ha añadido con éxito");
+                }
+                else MessageBox.Show("Ups, Se ha producido un error");
             }
-            else
+            else if(label_NumRecibo.Text == "0000")
             {
-                MessageBox.Show("Por favor selecciona un examen y un cliente para agregar el monto a tu recibo");
+                MessageBox.Show("Cree un nuevo recibo para empezar");
+            }else
+            {
+                MessageBox.Show("Por favor seleccione un examen y un cliente");
             }
         }
 
         private void btn_NuevoRecibo_Click(object sender, EventArgs e)
         {
             label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
+        }
+
+        private void btn_Remove_Click(object sender, EventArgs e)
+        {
+            int id_Detalle = int.Parse(dgv_detalleRecibo.CurrentRow.Cells[0].Value.ToString());
+            bool Responce = NRecibo.EliminarDetalleRecibo(id_Detalle);
+            var bindingSource = new BindingSource();
+            bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text));
+            ActualizarTotal();
+            if (Responce) MessageBox.Show("Se ha eliminado");
+            else MessageBox.Show("Se ha producido un error");
         }
     }
 }

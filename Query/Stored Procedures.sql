@@ -244,7 +244,7 @@ END
 EXEC sp_MostrarClientes
 --DELETE FROM Pacientes WHERE id_Paciente != 3
 ---------------------------------------------------------------
-
+go
 --SP para agregar un nuevo cliente
 CREATE OR ALTER PROC sp_AgregarCliente(
 	@PrimerNombre VARCHAR(20),
@@ -390,18 +390,18 @@ CREATE OR ALTER PROC sp_MostrarDetalleRecibo(
 AS
 BEGIN
 	SELECT 
+	id_Detalle AS ID,
 	id_Recibo AS Recibo,
 	Pacientes.PrimerNombre AS Nombre,
 	Pacientes.PrimerApellido AS Apellido,
 	Examenes.Nombre AS Examen,
 	Examenes.Precio AS Precio,
-	Importe,
 	Fecha
 	FROM 
 	DetalleRecibo
 	INNER JOIN Pacientes ON DetalleRecibo.id_Paciente = Pacientes.id_Paciente
 	INNER JOIN Examenes ON DetalleRecibo.id_Examen = Examenes.id_Examen
-	WHERE DetalleRecibo.id_Estado = 1 AND DetalleRecibo.id_Recibo = @id_Recibo
+	WHERE DetalleRecibo.id_Estado = 4 AND DetalleRecibo.id_Recibo = @id_Recibo
 END
 --select * from DetalleRecibo
 -------------------------------------------------------
@@ -411,23 +411,47 @@ GO
 CREATE OR ALTER PROC sp_AgregarDetalleRecibo(
 	@id_Recibo INT,
 	@id_Paciente INT,
-	@id_Examen INT,
-	@Importe MONEY
+	@id_Examen INT
 )
 AS
 BEGIN
+	DECLARE @Importe MONEY;
+	SET @Importe = (SELECT Precio FROM Examenes WHERE id_Examen = @id_Examen);
 	IF(SELECT COUNT(id_Recibo) FROM Recibo WHERE id_Recibo = @id_Recibo) <= 0 
 	BEGIN
-		INSERT INTO Recibo VALUES (@id_Paciente, 1, @Importe, GETDATE());
-		INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, 1, @Importe, GETDATE());
+		INSERT INTO Recibo VALUES (@id_Paciente, 4, @Importe, GETDATE());
+		INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, 4, @Importe, GETDATE());
 		SELECT '1';
 	END
 	ELSE
 	BEGIN
-		INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, 1, @Importe, GETDATE());
+		INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, 4, @Importe, GETDATE());
 		SELECT '1';
 	END
 END	
+GO
+------------------------------------------------------
+--SP PARA GUARDAR LOS DETALLES DEL RECIBO
+
+CREATE OR ALTER PROC sp_GuardarDetalleRecibo(
+	@id_Recibo INT
+)
+AS
+BEGIN
+	DECLARE @ImporteTotal MONEY;
+	SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
+	IF(SELECT id_Recibo FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4) > 0
+	BEGIN
+		UPDATE DetalleRecibo SET id_Estado = 1 WHERE id_Recibo = @id_Recibo;
+		UPDATE Recibo SET id_Estado = 1 WHERE id_Recibo = @id_Recibo;
+		UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
+		SELECT '1';
+	END
+	ELSE
+	BEGIN
+		SELECT '0';
+	END
+END
 GO
 -------------------------------------------------------------
 -----SP PARA ELIMINAR DETALLES AL RECIBO------------------
@@ -449,15 +473,51 @@ END
 GO
 ---------------------------------------------------------------
 ---SP PARA MODIFICAR DETALLES DEL RECIBO---------------------
-CREATE OR ALTER PROC sp_ModificarDetalleRecibo(
-	@id_detalle INT,
-	@id_Recibo INT,
-	@id_Examen INT,
-	@Importe MONEY
+--CREATE OR ALTER PROC sp_ModificarDetalleRecibo(
+--	@id_detalle INT,
+--	@id_Recibo INT,
+--	@id_Examen INT,
+--	@Importe MONEY
+--)
+--AS
+--BEGIN
+--	UPDATE DetalleRecibo SET id_Examen = @id_Examen WHERE id_Detalle = @id_detalle;
+--	UPDATE DetalleRecibo SET Importe = @Importe WHERE  id_Detalle = @id_detalle;
+--	SELECT '1';
+--END
+--GO
+-------------------------------------------------------------
+--SP PARA MOSTRAR INFORMACION RECIBO
+
+CREATE OR ALTER PROC sp_MostrarRecibo(
+	@id_Recibo INT
 )
 AS
 BEGIN
-	UPDATE DetalleRecibo SET id_Examen = @id_Examen WHERE id_Detalle = @id_detalle;
-	UPDATE DetalleRecibo SET Importe = @Importe WHERE  id_Detalle = @id_detalle;
-	SELECT '1';
+	SELECT 
+	id_Recibo AS Recibo,
+	Pacientes.PrimerNombre AS Nombre,
+	Pacientes.PrimerApellido AS Apellido,
+	Importe,
+	Fecha
+	FROM 
+	Recibo
+	INNER JOIN Pacientes ON Recibo.id_Paciente = Pacientes.id_Paciente
+	WHERE Recibo.id_Estado = 1 AND Recibo.id_Recibo = @id_Recibo
+END
+go
+---------------------------------------------
+
+--SP Mostrar total de importe por recibo
+
+CREATE OR ALTER PROC sp_MostrarImporteRecibo(
+	@id_Recibo INT
+)
+AS
+BEGIN
+	SELECT
+	Importe
+	FROM 
+	Recibo
+	WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
 END

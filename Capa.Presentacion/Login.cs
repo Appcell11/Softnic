@@ -64,12 +64,14 @@ namespace Ventas.CapaPresentacion
                 NotvisiblePass = true;
                 txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
                 btn_VisiblePass.BackgroundImage = Images[1];
+                txt_Contrasena.Focus();
             }
             else
             {
                 NotvisiblePass = false;
                 txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
                 btn_VisiblePass.BackgroundImage = Images[0];
+                txt_Contrasena.Focus();
             }
         }
     }

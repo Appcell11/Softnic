@@ -34,14 +34,17 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.CajaPage = new System.Windows.Forms.TabPage();
+            this.btn_Remove = new System.Windows.Forms.Button();
             this.btn_AgregarCliente = new System.Windows.Forms.Button();
+            this.btn_Add = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmb_Descuentos = new System.Windows.Forms.ComboBox();
+            this.btn_NuevoRecibo = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
-            this.btn_Guardar = new System.Windows.Forms.Button();
             this.label_Total = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.btn_Guardar = new System.Windows.Forms.Button();
             this.cmb_Clientes = new System.Windows.Forms.ComboBox();
             this.label_NumRecibo = new System.Windows.Forms.Label();
             this.cmb_Examenes = new System.Windows.Forms.ComboBox();
@@ -56,10 +59,6 @@
             this.dgv_Register = new System.Windows.Forms.DataGridView();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.btn_AdminUsuarios = new System.Windows.Forms.Button();
-            this.btn_NuevoRecibo = new System.Windows.Forms.Button();
-            this.btn_Update = new System.Windows.Forms.Button();
-            this.btn_Remove = new System.Windows.Forms.Button();
-            this.btn_Add = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
@@ -103,7 +102,6 @@
             // 
             // CajaPage
             // 
-            this.CajaPage.Controls.Add(this.btn_Update);
             this.CajaPage.Controls.Add(this.btn_Remove);
             this.CajaPage.Controls.Add(this.btn_AgregarCliente);
             this.CajaPage.Controls.Add(this.btn_Add);
@@ -126,6 +124,21 @@
             this.CajaPage.Text = "Caja";
             this.CajaPage.UseVisualStyleBackColor = true;
             // 
+            // btn_Remove
+            // 
+            this.btn_Remove.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Remove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Remove.ForeColor = System.Drawing.Color.Black;
+            this.btn_Remove.Location = new System.Drawing.Point(467, 292);
+            this.btn_Remove.Name = "btn_Remove";
+            this.btn_Remove.Size = new System.Drawing.Size(75, 22);
+            this.btn_Remove.TabIndex = 34;
+            this.btn_Remove.Text = "➖ Quitar";
+            this.btn_Remove.UseVisualStyleBackColor = false;
+            this.btn_Remove.Click += new System.EventHandler(this.btn_Remove_Click);
+            // 
             // btn_AgregarCliente
             // 
             this.btn_AgregarCliente.Location = new System.Drawing.Point(520, 36);
@@ -135,6 +148,21 @@
             this.btn_AgregarCliente.Text = "+";
             this.btn_AgregarCliente.UseVisualStyleBackColor = true;
             this.btn_AgregarCliente.Click += new System.EventHandler(this.btn_AgregarCliente_Click);
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Add.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btn_Add.Location = new System.Drawing.Point(377, 293);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(82, 22);
+            this.btn_Add.TabIndex = 33;
+            this.btn_Add.Text = "➕ Agregar";
+            this.btn_Add.UseVisualStyleBackColor = false;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // groupBox1
             // 
@@ -160,6 +188,18 @@
             this.cmb_Descuentos.Size = new System.Drawing.Size(120, 21);
             this.cmb_Descuentos.TabIndex = 32;
             // 
+            // btn_NuevoRecibo
+            // 
+            this.btn_NuevoRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_NuevoRecibo.Location = new System.Drawing.Point(8, 198);
+            this.btn_NuevoRecibo.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_NuevoRecibo.Name = "btn_NuevoRecibo";
+            this.btn_NuevoRecibo.Size = new System.Drawing.Size(144, 23);
+            this.btn_NuevoRecibo.TabIndex = 33;
+            this.btn_NuevoRecibo.Text = "📄 Nuevo Recibo";
+            this.btn_NuevoRecibo.UseVisualStyleBackColor = true;
+            this.btn_NuevoRecibo.Click += new System.EventHandler(this.btn_NuevoRecibo_Click);
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -169,18 +209,6 @@
             this.label18.Size = new System.Drawing.Size(25, 16);
             this.label18.TabIndex = 30;
             this.label18.Text = "C$";
-            // 
-            // btn_Guardar
-            // 
-            this.btn_Guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Guardar.Location = new System.Drawing.Point(156, 198);
-            this.btn_Guardar.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Guardar.Name = "btn_Guardar";
-            this.btn_Guardar.Size = new System.Drawing.Size(99, 23);
-            this.btn_Guardar.TabIndex = 26;
-            this.btn_Guardar.Text = "💾 Guardar";
-            this.btn_Guardar.UseVisualStyleBackColor = true;
-            this.btn_Guardar.Click += new System.EventHandler(this.btn_Guardar_Click);
             // 
             // label_Total
             // 
@@ -207,12 +235,24 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 101);
+            this.label5.Location = new System.Drawing.Point(5, 100);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(105, 16);
             this.label5.TabIndex = 18;
             this.label5.Text = "Total a pagar:";
+            // 
+            // btn_Guardar
+            // 
+            this.btn_Guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Guardar.Location = new System.Drawing.Point(156, 198);
+            this.btn_Guardar.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Guardar.Name = "btn_Guardar";
+            this.btn_Guardar.Size = new System.Drawing.Size(99, 23);
+            this.btn_Guardar.TabIndex = 26;
+            this.btn_Guardar.Text = "💾 Guardar";
+            this.btn_Guardar.UseVisualStyleBackColor = true;
+            this.btn_Guardar.Click += new System.EventHandler(this.btn_Guardar_Click);
             // 
             // cmb_Clientes
             // 
@@ -283,7 +323,7 @@
             this.btn_Cancelar.Location = new System.Drawing.Point(117, 292);
             this.btn_Cancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Cancelar.Name = "btn_Cancelar";
-            this.btn_Cancelar.Size = new System.Drawing.Size(93, 23);
+            this.btn_Cancelar.Size = new System.Drawing.Size(93, 25);
             this.btn_Cancelar.TabIndex = 12;
             this.btn_Cancelar.Text = "✖ Cancelar";
             this.btn_Cancelar.UseVisualStyleBackColor = true;
@@ -294,7 +334,7 @@
             this.btn_Imprimir.Location = new System.Drawing.Point(15, 292);
             this.btn_Imprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Imprimir.Name = "btn_Imprimir";
-            this.btn_Imprimir.Size = new System.Drawing.Size(98, 23);
+            this.btn_Imprimir.Size = new System.Drawing.Size(98, 25);
             this.btn_Imprimir.TabIndex = 11;
             this.btn_Imprimir.Text = "🖨 Imprimir";
             this.btn_Imprimir.UseVisualStyleBackColor = true;
@@ -307,9 +347,12 @@
             this.dgv_detalleRecibo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_detalleRecibo.Location = new System.Drawing.Point(15, 62);
             this.dgv_detalleRecibo.Margin = new System.Windows.Forms.Padding(2);
+            this.dgv_detalleRecibo.MultiSelect = false;
             this.dgv_detalleRecibo.Name = "dgv_detalleRecibo";
+            this.dgv_detalleRecibo.ReadOnly = true;
             this.dgv_detalleRecibo.RowHeadersWidth = 62;
             this.dgv_detalleRecibo.RowTemplate.Height = 28;
+            this.dgv_detalleRecibo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_detalleRecibo.Size = new System.Drawing.Size(527, 227);
             this.dgv_detalleRecibo.TabIndex = 8;
             // 
@@ -321,7 +364,7 @@
             this.ManagPage.Margin = new System.Windows.Forms.Padding(2);
             this.ManagPage.Name = "ManagPage";
             this.ManagPage.Padding = new System.Windows.Forms.Padding(2);
-            this.ManagPage.Size = new System.Drawing.Size(832, 374);
+            this.ManagPage.Size = new System.Drawing.Size(819, 374);
             this.ManagPage.TabIndex = 1;
             this.ManagPage.Text = "Mantenimiento";
             this.ManagPage.UseVisualStyleBackColor = true;
@@ -363,63 +406,6 @@
             this.btn_AdminUsuarios.Text = "Control de Perfiles";
             this.btn_AdminUsuarios.UseVisualStyleBackColor = true;
             this.btn_AdminUsuarios.Click += new System.EventHandler(this.btn_AdminUsuarios_Click);
-            // 
-            // btn_NuevoRecibo
-            // 
-            this.btn_NuevoRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_NuevoRecibo.Location = new System.Drawing.Point(8, 198);
-            this.btn_NuevoRecibo.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_NuevoRecibo.Name = "btn_NuevoRecibo";
-            this.btn_NuevoRecibo.Size = new System.Drawing.Size(144, 23);
-            this.btn_NuevoRecibo.TabIndex = 33;
-            this.btn_NuevoRecibo.Text = "📄 Nuevo Recibo";
-            this.btn_NuevoRecibo.UseVisualStyleBackColor = true;
-            this.btn_NuevoRecibo.Click += new System.EventHandler(this.btn_NuevoRecibo_Click);
-            // 
-            // btn_Update
-            // 
-            this.btn_Update.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_Update.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Update.ForeColor = System.Drawing.Color.Black;
-            this.btn_Update.ImageKey = "(ninguno)";
-            this.btn_Update.Location = new System.Drawing.Point(451, 294);
-            this.btn_Update.Name = "btn_Update";
-            this.btn_Update.Size = new System.Drawing.Size(91, 28);
-            this.btn_Update.TabIndex = 35;
-            this.btn_Update.Text = "🖊 Modificar";
-            this.btn_Update.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btn_Update.UseVisualStyleBackColor = false;
-            // 
-            // btn_Remove
-            // 
-            this.btn_Remove.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Remove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Remove.ForeColor = System.Drawing.Color.Black;
-            this.btn_Remove.Location = new System.Drawing.Point(370, 293);
-            this.btn_Remove.Name = "btn_Remove";
-            this.btn_Remove.Size = new System.Drawing.Size(75, 28);
-            this.btn_Remove.TabIndex = 34;
-            this.btn_Remove.Text = "➖ Quitar";
-            this.btn_Remove.UseVisualStyleBackColor = false;
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Add.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_Add.Location = new System.Drawing.Point(280, 294);
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(82, 28);
-            this.btn_Add.TabIndex = 33;
-            this.btn_Add.Text = "➕ Agregar";
-            this.btn_Add.UseVisualStyleBackColor = false;
-            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // FrmPrincipal
             // 
@@ -480,7 +466,6 @@
         private System.Windows.Forms.DataGridView dgv_Register;
         private System.Windows.Forms.Button btn_AdminUsuarios;
         private System.Windows.Forms.Button btn_NuevoRecibo;
-        private System.Windows.Forms.Button btn_Update;
         private System.Windows.Forms.Button btn_Remove;
         private System.Windows.Forms.Button btn_Add;
     }
