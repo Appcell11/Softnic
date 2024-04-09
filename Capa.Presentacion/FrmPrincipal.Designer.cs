@@ -55,8 +55,8 @@
             this.GroupRegister = new System.Windows.Forms.GroupBox();
             this.dgv_Register = new System.Windows.Forms.DataGridView();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
-            this.btn_AdminUsuarios = new System.Windows.Forms.Button();
             this.btn_CierreCaja = new System.Windows.Forms.Button();
+            this.btn_AdminUsuarios = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
@@ -362,16 +362,6 @@
             this.FormUserGroup.TabStop = false;
             this.FormUserGroup.Text = "Acciones";
             // 
-            // btn_AdminUsuarios
-            // 
-            this.btn_AdminUsuarios.Location = new System.Drawing.Point(6, 31);
-            this.btn_AdminUsuarios.Name = "btn_AdminUsuarios";
-            this.btn_AdminUsuarios.Size = new System.Drawing.Size(217, 35);
-            this.btn_AdminUsuarios.TabIndex = 10;
-            this.btn_AdminUsuarios.Text = "Control de Perfiles";
-            this.btn_AdminUsuarios.UseVisualStyleBackColor = true;
-            this.btn_AdminUsuarios.Click += new System.EventHandler(this.btn_AdminUsuarios_Click);
-            // 
             // btn_CierreCaja
             // 
             this.btn_CierreCaja.BackColor = System.Drawing.SystemColors.Highlight;
@@ -384,6 +374,16 @@
             this.btn_CierreCaja.UseVisualStyleBackColor = false;
             this.btn_CierreCaja.Click += new System.EventHandler(this.btn_CierreCaja_Click);
             // 
+            // btn_AdminUsuarios
+            // 
+            this.btn_AdminUsuarios.Location = new System.Drawing.Point(6, 31);
+            this.btn_AdminUsuarios.Name = "btn_AdminUsuarios";
+            this.btn_AdminUsuarios.Size = new System.Drawing.Size(217, 35);
+            this.btn_AdminUsuarios.TabIndex = 10;
+            this.btn_AdminUsuarios.Text = "Control de Perfiles";
+            this.btn_AdminUsuarios.UseVisualStyleBackColor = true;
+            this.btn_AdminUsuarios.Click += new System.EventHandler(this.btn_AdminUsuarios_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -393,6 +393,8 @@
             this.Controls.Add(this.statusStrip);
             this.IsMdiContainer = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(843, 467);
+            this.MinimumSize = new System.Drawing.Size(843, 467);
             this.Name = "FrmPrincipal";
             this.Text = "Principal";
             this.Activated += new System.EventHandler(this.FrmPrincipal_Activated);

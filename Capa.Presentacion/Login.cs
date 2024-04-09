@@ -51,9 +51,13 @@ namespace Ventas.CapaPresentacion
                 Menu.Show();
                 this.Hide();
             }
+            else if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text) == "Error")
+            {
+                MessageBox.Show("No se han podido procesar tus credenciales", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
-                MessageBox.Show("Contraseña Incorrecta");
+                MessageBox.Show("La contraseña ingresada es incorrecta", "Contraseña incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

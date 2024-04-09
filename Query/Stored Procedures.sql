@@ -123,22 +123,15 @@ CREATE OR ALTER PROC sp_ValidarAcceso(
 )
 AS
 BEGIN
-	IF(SELECT Nombre FROM Usuario WHERE Nombre = @NombreUsuario AND id_Estado = 1) = @NombreUsuario
+	IF(SELECT COUNT(*) FROM Usuario WHERE Nombre = @NombreUsuario AND Contraseña = @Contrasena AND id_Estado = 1) > 0
 	BEGIN
-		IF(SELECT Contraseña FROM Usuario WHERE Contraseña = @Contrasena AND id_Estado = 1) = @Contrasena
+		IF (SELECT id_Rol FROM Usuario WHERE Nombre = @NombreUsuario AND id_Estado = 1) = 1
 		BEGIN
-			IF (SELECT id_Rol FROM Usuario WHERE Nombre = @NombreUsuario AND id_Estado = 1) = 1
-			BEGIN
-				SELECT 'Admin'
-			END
-			ELSE
-			BEGIN
-				select '1';
-			END
+			SELECT 'Admin'
 		END
 		ELSE
 		BEGIN
-			SELECT '0';
+			select '1';
 		END
 	END
 	ELSE

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btn_clear = new System.Windows.Forms.Button();
             this.txt_Buscar = new System.Windows.Forms.TextBox();
             this.btn_Update = new System.Windows.Forms.Button();
@@ -53,7 +54,6 @@
             this.txt_SegundoNombre = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txt_PrimerNombre = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Clientes)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -74,6 +74,16 @@
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Lista de clientes";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 24);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Buscar";
             // 
             // btn_clear
             // 
@@ -359,16 +369,6 @@
             this.txt_PrimerNombre.Size = new System.Drawing.Size(184, 22);
             this.txt_PrimerNombre.TabIndex = 0;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 24);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Buscar";
-            // 
             // FrmNewCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,6 +379,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(748, 419);
+            this.MinimumSize = new System.Drawing.Size(748, 419);
             this.Name = "FrmNewCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes";

@@ -28,7 +28,15 @@ namespace CapaNegocio
         {
             var Access = new DLogin();
             string contraseñaEncriptada = Encriptar.GetSHA256(contraseña);
-            string ResultAccess = Access.ValidarCredenciales(nombre, contraseñaEncriptada).Select()[0][0].ToString();
+            string ResultAccess = "0";
+            try
+            {
+                ResultAccess = Access.ValidarCredenciales(nombre, contraseñaEncriptada).Select()[0][0].ToString();
+            }
+            catch
+            {
+                ResultAccess = "Error";
+            }
             return ResultAccess;
         }
 
