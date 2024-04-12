@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.cmb_Roles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -158,6 +158,7 @@
             // txt_Contrasena
             // 
             this.txt_Contrasena.Location = new System.Drawing.Point(6, 140);
+            this.txt_Contrasena.MaxLength = 16;
             this.txt_Contrasena.Name = "txt_Contrasena";
             this.txt_Contrasena.Size = new System.Drawing.Size(177, 20);
             this.txt_Contrasena.TabIndex = 4;
@@ -194,6 +195,7 @@
             // txt_NombreUsuario
             // 
             this.txt_NombreUsuario.Location = new System.Drawing.Point(6, 83);
+            this.txt_NombreUsuario.MaxLength = 20;
             this.txt_NombreUsuario.Name = "txt_NombreUsuario";
             this.txt_NombreUsuario.Size = new System.Drawing.Size(217, 20);
             this.txt_NombreUsuario.TabIndex = 0;
@@ -202,8 +204,8 @@
             // 
             this.dgv_Perfiles.AllowUserToAddRows = false;
             this.dgv_Perfiles.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Perfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -227,7 +229,9 @@
             this.Controls.Add(this.dgv_Perfiles);
             this.Controls.Add(this.FormUserGroup);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(558, 362);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(558, 362);
             this.Name = "FrmPerfilesUsuarios";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmPerfilesUsuarios";

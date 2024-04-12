@@ -346,6 +346,7 @@
             // 
             this.txt_SegundoNombre.Location = new System.Drawing.Point(5, 96);
             this.txt_SegundoNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_SegundoNombre.MaxLength = 20;
             this.txt_SegundoNombre.Name = "txt_SegundoNombre";
             this.txt_SegundoNombre.Size = new System.Drawing.Size(184, 22);
             this.txt_SegundoNombre.TabIndex = 1;
@@ -365,6 +366,7 @@
             // 
             this.txt_PrimerNombre.Location = new System.Drawing.Point(5, 46);
             this.txt_PrimerNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_PrimerNombre.MaxLength = 20;
             this.txt_PrimerNombre.Name = "txt_PrimerNombre";
             this.txt_PrimerNombre.Size = new System.Drawing.Size(184, 22);
             this.txt_PrimerNombre.TabIndex = 0;

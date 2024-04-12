@@ -34,10 +34,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txt_Contrasena = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cmb_Usuario = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txt_Usuario = new System.Windows.Forms.TextBox();
             this.btn_VisiblePass = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -82,16 +82,18 @@
             // 
             this.txt_Contrasena.Location = new System.Drawing.Point(128, 170);
             this.txt_Contrasena.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_Contrasena.MaxLength = 16;
             this.txt_Contrasena.Name = "txt_Contrasena";
             this.txt_Contrasena.Size = new System.Drawing.Size(137, 20);
             this.txt_Contrasena.TabIndex = 4;
             this.txt_Contrasena.UseSystemPasswordChar = true;
+            this.txt_Contrasena.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Contrasena_KeyDown);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txt_Usuario);
             this.groupBox1.Controls.Add(this.btn_VisiblePass);
             this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Controls.Add(this.cmb_Usuario);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
@@ -103,6 +105,25 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
+            // txt_Usuario
+            // 
+            this.txt_Usuario.Location = new System.Drawing.Point(128, 145);
+            this.txt_Usuario.MaxLength = 20;
+            this.txt_Usuario.Name = "txt_Usuario";
+            this.txt_Usuario.Size = new System.Drawing.Size(137, 20);
+            this.txt_Usuario.TabIndex = 1;
+            // 
+            // btn_VisiblePass
+            // 
+            this.btn_VisiblePass.BackgroundImage = global::Ventas.CapaPresentacion.Properties.Resources.EyeIcon;
+            this.btn_VisiblePass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_VisiblePass.Location = new System.Drawing.Point(270, 170);
+            this.btn_VisiblePass.Name = "btn_VisiblePass";
+            this.btn_VisiblePass.Size = new System.Drawing.Size(34, 20);
+            this.btn_VisiblePass.TabIndex = 9;
+            this.btn_VisiblePass.UseVisualStyleBackColor = true;
+            this.btn_VisiblePass.Click += new System.EventHandler(this.btn_VisiblePass_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Ventas.CapaPresentacion.Properties.Resources.User;
@@ -113,15 +134,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
-            // 
-            // cmb_Usuario
-            // 
-            this.cmb_Usuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_Usuario.FormattingEnabled = true;
-            this.cmb_Usuario.Location = new System.Drawing.Point(128, 144);
-            this.cmb_Usuario.Name = "cmb_Usuario";
-            this.cmb_Usuario.Size = new System.Drawing.Size(176, 21);
-            this.cmb_Usuario.TabIndex = 6;
             // 
             // button1
             // 
@@ -136,17 +148,6 @@
             this.button1.Text = "Entrar";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btn_VisiblePass
-            // 
-            this.btn_VisiblePass.BackgroundImage = global::Ventas.CapaPresentacion.Properties.Resources.EyeIcon;
-            this.btn_VisiblePass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_VisiblePass.Location = new System.Drawing.Point(270, 170);
-            this.btn_VisiblePass.Name = "btn_VisiblePass";
-            this.btn_VisiblePass.Size = new System.Drawing.Size(34, 20);
-            this.btn_VisiblePass.TabIndex = 9;
-            this.btn_VisiblePass.UseVisualStyleBackColor = true;
-            this.btn_VisiblePass.Click += new System.EventHandler(this.btn_VisiblePass_Click);
             // 
             // Login
             // 
@@ -164,6 +165,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio de Sesión";
             this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
             this.Load += new System.EventHandler(this.Login_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -180,8 +182,8 @@
         private System.Windows.Forms.TextBox txt_Contrasena;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox cmb_Usuario;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btn_VisiblePass;
+        private System.Windows.Forms.TextBox txt_Usuario;
     }
 }

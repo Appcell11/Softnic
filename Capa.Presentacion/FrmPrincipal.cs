@@ -15,6 +15,8 @@ using iTextSharp.text.pdf;
 using System.IO;
 using iTextSharp.tool.xml;
 using System.Linq.Expressions;
+using System.Drawing.Printing;
+using static System.Net.WebRequestMethods;
 
 namespace Ventas.CapaPresentacion
 {
@@ -116,9 +118,12 @@ namespace Ventas.CapaPresentacion
             bool Responce = NRecibo.GuardarDetalleRecibo(int.Parse(label_NumRecibo.Text));
             if (Responce) {
                 try
-                {
+                {   
+                    label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
+                    cmb_Clientes.Enabled = true;
                     dgv_Register.DataSource = CargarDatos.CargarInfoDataGrid("sp_MostrarReporteRecibo");
                     MessageBox.Show("El recibo se ha guardado con éxito");
+                    cmb_Clientes.Enabled = true;
                     Limpiar();
                 }
                 catch (Exception except)
@@ -166,9 +171,12 @@ namespace Ventas.CapaPresentacion
                 if (responce)
                 {
                     var bindingSource = new BindingSource();
-                    try { bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text)); }
+                    try 
+                    { 
+                        bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text)); 
+                        dgv_detalleRecibo.DataSource = bindingSource;
+                    }
                     catch (Exception except) { MessageBox.Show("Error: " + except.Source + " " + except.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                    dgv_detalleRecibo.DataSource = bindingSource;
                     if (bindingSource.Count > 0) cmb_Clientes.Enabled = false;
                     ActualizarTotal();
                     MessageBox.Show("El recibo se ha añadido con éxito", "Operación realizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -189,6 +197,8 @@ namespace Ventas.CapaPresentacion
             try
             {
                 label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
+                cmb_Clientes.SelectedItem = null;
+                dgv_detalleRecibo.Refresh();
                 cmb_Clientes.Enabled = true;
             }
             catch (Exception except ) { MessageBox.Show("Error: " + except.Source + " " + except.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -222,7 +232,7 @@ namespace Ventas.CapaPresentacion
         private void GenerarReporte()
         {
             SaveFileDialog guardar = new SaveFileDialog();
-            guardar.FileName = DateTime.Now.ToString("Reporte_" + "ddMMyyyyHHmmss") + ".pdf";
+            guardar.FileName = DateTime.Now.ToString("Reporte_" + "ddMMyyyyHHmm") + ".pdf";
             guardar.ShowDialog();
 
             string paginahtml = Properties.Resources.plantilla.ToString();
@@ -230,49 +240,109 @@ namespace Ventas.CapaPresentacion
             foreach (DataGridViewRow row in dgv_Register.Rows)
             {
                 filas += "<tr>";
-                filas += "<td>" + row.Cells[0].Value.ToString() + "</td>";
-                filas += "<td>" + row.Cells[1].Value.ToString() + "</td>";
-                filas += "<td>" + row.Cells[2].Value.ToString() + "</td>";
-                filas += "<td>" + row.Cells[3].Value.ToString() + "</td>";
-                filas += "<td>" + row.Cells[4].Value.ToString() + "</td>";
+                filas += "<td>" + row.Cells[0].Value + "</td>";
+                filas += "<td>" + row.Cells[1].Value + "</td>";
+                filas += "<td>" + row.Cells[2].Value + "</td>";
+                filas += "<td>" + row.Cells[3].Value + "</td>";
+                filas += "<td>" + row.Cells[4].Value + "</td>";
                 filas += "</tr>";
             }
+            paginahtml.Replace("@Fila", filas);
 
             if (guardar.ShowDialog() == DialogResult.OK)
             {
-                using (FileStream fileStream = new FileStream(guardar.FileName, FileMode.Create))
-                {
-                    Document document = new Document(PageSize.A4, 25, 25, 25, 25);
-                    PdfWriter pdfWriter = PdfWriter.GetInstance(document, fileStream);
-                    paginahtml.Replace("@fila", filas);
-                    document.Open();
-                    //document.Add(new Phrase());
-                    using (StringReader reader = new StringReader(paginahtml))
-                    {
-                        try
-                        {
-                            XMLWorkerHelper.GetInstance().ParseXHtml(pdfWriter, document, reader);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("No se ha podido eliminar el registro", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    document.Close();
-                    fileStream.Close();
-                }
+                //using (FileStream fileStream = new FileStream(guardar.FileName, FileMode.Create))
+                //{
+                //    Document document = new Document(PageSize.A4, 25, 25, 25, 25);
+                //    PdfWriter pdfWriter = PdfWriter.GetInstance(document, fileStream);
+                //    document.Open();
+                //    document.Add(new Phrase("Reporte de examenes realizados"));
+                //    try
+                //    {
+                //        XMLWorkerHelper.GetInstance().ParseXHtml(pdfWriter, document, new StringReader(paginahtml));
+                //    }
+                //    catch
+                //    {
+                //        MessageBox.Show("No se ha podido guardar el registro", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    }
+                //    finally
+                //    {
+                //        document.Close();
+                //        fileStream.Close();
+                //    }
             }
         }
 
         private void btn_CierreCaja_Click(object sender, EventArgs e)
         {
-            if(dgv_Register.Rows.Count > 0 && dgv_Register.Columns.Count > 0) {
+            if(dgv_Register.Rows.Count > 1 && dgv_Register.Columns.Count > 0) {
                 GenerarReporte();
             }
             else
             {
-                MessageBox.Show("No se ha podido crear el reporte", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se ha podido crear el reporte, revisa que el reporte no esté vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btn_CerrarSesion_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Estás seguro de que quieres cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            { 
+                this.Hide();
+                Login.Access = "0";
+                Empezar(); 
+            }
+            else
+            {
+                MessageBox.Show("No quiso");
+            }
+        }
+        
+        private void btn_Imprimir_Click(object sender, EventArgs e)
+        {
+            
+            int longPaper = dgv_detalleRecibo.Rows.Count * 50 + 240;
+            PrintPreviewDialog vista = new PrintPreviewDialog(); 
+            printDocument1 = new PrintDocument();
+            printDocument1.PrinterSettings.PrinterName = printDocument1.DefaultPageSettings.PrinterSettings.PrinterName;
+            PrinterSettings ps = new PrinterSettings();
+            PageSettings pageSettings = new PageSettings();
+            pageSettings.PaperSize = new PaperSize("Custom", 350, longPaper);
+            printDocument1.DefaultPageSettings = pageSettings;
+            printDocument1.PrinterSettings = ps;
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            vista.Document = printDocument1;
+            vista.Show();
+        }
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            int line = 10;
+            StringFormat center = new StringFormat();            
+            center.Alignment = StringAlignment.Center;
+            StringFormat left = new StringFormat();
+            left.Alignment = StringAlignment.Near;
+            System.Drawing.Font fontBold = new System.Drawing.Font("Arial", 14, FontStyle.Bold, GraphicsUnit.Point);
+            System.Drawing.Font font = new System.Drawing.Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
+            e.Graphics.DrawString("Recibo No." + label_NumRecibo.Text, fontBold, Brushes.Black, 170, line += 20, center);
+            e.Graphics.DrawString("Cliente:" + cmb_Clientes.Text, fontBold, Brushes.Black, 350 / 2, line += 30, center);
+
+            foreach (DataGridViewRow row in dgv_detalleRecibo.Rows)
+            {
+                if (row.Cells[4].Value.ToString().Length > 30)
+                {
+                    e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(0,30), font, Brushes.Black, 170, line += 40, center);
+                    //e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(21, row.Cells[4].Value.ToString().Length) + ": " + row.Cells[5].Value.ToString() + " Córdobas", font, Brushes.Black, 170, line += 40, center);
+                }
+                else
+                {
+                    e.Graphics.DrawString(row.Cells[4].Value.ToString() + ": " + row.Cells[5].Value.ToString() + " Córdobas", font, Brushes.Black, 170, line += 40, center);
+                }
+            }
+            e.Graphics.DrawString(string.Concat(Enumerable.Repeat("-", 170)), fontBold, Brushes.Black, 170, line += 40, center);
+            e.Graphics.DrawString("Total: " + label_Total.Text + " Córdobas", fontBold, Brushes.Black, 350 / 2, line += 40, center);
+            e.Graphics.DrawString("Fecha:" + DateTime.Now.ToString("d"), fontBold, Brushes.Black, 350/2, line += 40, center);
+
         }
     }
 }

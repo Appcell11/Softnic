@@ -11,18 +11,6 @@ namespace CapaNegocio
 {
     public class NLogin
     {
-        public static List<string> Perfiles()
-        {
-            var result = new List<string>();
-            var Login = new DLogin();
-
-            foreach (var item in Login.LogIn().Select())
-            {
-                result.Add(item[0].ToString());
-            }
-
-            return result;
-        }
 
         public static string ValidarAcceso(string nombre, string contraseña)
         {

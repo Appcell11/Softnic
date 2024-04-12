@@ -24,7 +24,6 @@ namespace Ventas.CapaPresentacion
 
         private void Login_Load(object sender, EventArgs e)
         {
-            NLogin.Perfiles().ForEach(perfil => cmb_Usuario.Items.Add(perfil));
             txt_Contrasena.UseSystemPasswordChar = NotvisiblePass;
             btn_VisiblePass.BackgroundImage = Images[1];
         }
@@ -35,23 +34,23 @@ namespace Ventas.CapaPresentacion
             return Access;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void IniciarSesion()
         {
-            if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text) == "Admin")
+            if (Acceso(txt_Usuario.Text, txt_Contrasena.Text) == "Admin")
             {
                 Access = "Admin";
                 var Menu = new FrmPrincipal();
                 Menu.Show();
                 this.Hide();
             }
-            else if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text) == "1")
+            else if (Acceso(txt_Usuario.Text, txt_Contrasena.Text) == "1")
             {
                 Access = "1";
                 var Menu = new FrmPrincipal();
                 Menu.Show();
                 this.Hide();
             }
-            else if(Acceso(cmb_Usuario.Text, txt_Contrasena.Text) == "Error")
+            else if (Acceso(txt_Usuario.Text, txt_Contrasena.Text) == "Error")
             {
                 MessageBox.Show("No se han podido procesar tus credenciales", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -59,6 +58,11 @@ namespace Ventas.CapaPresentacion
             {
                 MessageBox.Show("La contraseña ingresada es incorrecta", "Contraseña incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            IniciarSesion();
         }
 
         private void btn_VisiblePass_Click(object sender, EventArgs e)
@@ -77,6 +81,16 @@ namespace Ventas.CapaPresentacion
                 btn_VisiblePass.BackgroundImage = Images[0];
                 txt_Contrasena.Focus();
             }
+        }
+
+        private void txt_Contrasena_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter) IniciarSesion();
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

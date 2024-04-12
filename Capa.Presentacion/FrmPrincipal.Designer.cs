@@ -34,6 +34,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.CajaPage = new System.Windows.Forms.TabPage();
+            this.btn_CerrarSesion = new System.Windows.Forms.Button();
             this.btn_Remove = new System.Windows.Forms.Button();
             this.btn_AgregarCliente = new System.Windows.Forms.Button();
             this.btn_Add = new System.Windows.Forms.Button();
@@ -57,6 +58,7 @@
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.btn_CierreCaja = new System.Windows.Forms.Button();
             this.btn_AdminUsuarios = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.CajaPage.SuspendLayout();
@@ -100,6 +102,7 @@
             // 
             // CajaPage
             // 
+            this.CajaPage.Controls.Add(this.btn_CerrarSesion);
             this.CajaPage.Controls.Add(this.btn_Remove);
             this.CajaPage.Controls.Add(this.btn_AgregarCliente);
             this.CajaPage.Controls.Add(this.btn_Add);
@@ -120,6 +123,21 @@
             this.CajaPage.TabIndex = 0;
             this.CajaPage.Text = "Caja";
             this.CajaPage.UseVisualStyleBackColor = true;
+            // 
+            // btn_CerrarSesion
+            // 
+            this.btn_CerrarSesion.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btn_CerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_CerrarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_CerrarSesion.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn_CerrarSesion.Location = new System.Drawing.Point(696, 345);
+            this.btn_CerrarSesion.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_CerrarSesion.Name = "btn_CerrarSesion";
+            this.btn_CerrarSesion.Size = new System.Drawing.Size(114, 25);
+            this.btn_CerrarSesion.TabIndex = 35;
+            this.btn_CerrarSesion.Text = "Cerrar Sesión";
+            this.btn_CerrarSesion.UseVisualStyleBackColor = false;
+            this.btn_CerrarSesion.Click += new System.EventHandler(this.btn_CerrarSesion_Click);
             // 
             // btn_Remove
             // 
@@ -302,6 +320,7 @@
             this.btn_Imprimir.TabIndex = 11;
             this.btn_Imprimir.Text = "🖨 Imprimir";
             this.btn_Imprimir.UseVisualStyleBackColor = true;
+            this.btn_Imprimir.Click += new System.EventHandler(this.btn_Imprimir_Click);
             // 
             // dgv_detalleRecibo
             // 
@@ -384,6 +403,10 @@
             this.btn_AdminUsuarios.UseVisualStyleBackColor = true;
             this.btn_AdminUsuarios.Click += new System.EventHandler(this.btn_AdminUsuarios_Click);
             // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,6 +468,8 @@
         private System.Windows.Forms.Button btn_Remove;
         private System.Windows.Forms.Button btn_Add;
         private System.Windows.Forms.Button btn_CierreCaja;
+        private System.Windows.Forms.Button btn_CerrarSesion;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
 

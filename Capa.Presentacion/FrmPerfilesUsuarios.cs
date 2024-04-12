@@ -25,12 +25,13 @@ namespace Ventas.CapaPresentacion
         private bool ContrasenaSegura()
         {
             string contrasena = txt_Contrasena.Text;
+            bool contieneMayusculas = contrasena.Any(char.IsUpper);
             string pattern = @"\W";
             Regex regex = new Regex(pattern);
             bool contieneSimbolos = regex.IsMatch(contrasena);
 
-            if (contrasena.Length < 8) MessageBox.Show("La contraseña que ingresó es demasiado corta, ingrese una contraseña de entre 8 y 16 dígitos");
-            else if (!contieneSimbolos) MessageBox.Show("Para que tu contraseña sea segura añade por lo menos un símbolo");
+            if (contrasena.Length < 8) MessageBox.Show("La contraseña que ingresó es demasiado corta, ingrese una contraseña de entre 8 y 16 dígitos", "Contraseña no segura", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (!contieneSimbolos || !contieneMayusculas) MessageBox.Show("Para que tu contraseña sea segura añade por lo menos un símbolo y una letra mayúscula", "Contraseña no segura", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else return true;
             return false;
         }
@@ -39,21 +40,24 @@ namespace Ventas.CapaPresentacion
         {
             if(txt_Id.Text != string.Empty && txt_NombreUsuario.Text != string.Empty && txt_Contrasena.Text != string.Empty && cmb_Roles.Text != string.Empty)
             {
-                if (ContrasenaSegura())
+                if (ContrasenaSegura() && !txt_NombreUsuario.Text.Contains(" "))
                 {
                     string NombreUsuario = txt_NombreUsuario.Text;
                     string Contraseña = txt_Contrasena.Text;
                     int IdRol = cmb_Roles.Text == "Administrador" ? 1 : 2;
-                    bool response = NLogin.AñadirPerfilUsuario(NombreUsuario, Contraseña, IdRol);
-                    if (response) MessageBox.Show("El usuario se ha añadido con exito");
-                    else MessageBox.Show("Ocurrió un error al crear el usuario, revisa que el usuario no esté registrado");
+                    bool response = false;
+                    try { response = NLogin.AñadirPerfilUsuario(NombreUsuario, Contraseña, IdRol); }
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    if (response) MessageBox.Show("El usuario se ha añadido con exito", "Operación éxitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else MessageBox.Show("Ocurrió un error al crear el usuario, revisa que el usuario no esté registrado", "La operación ha fallado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txt_Id.Text = string.Empty;
                     txt_NombreUsuario.Text = string.Empty;
                     txt_Contrasena.Text = string.Empty;
                     Cargar();
                 }
+                else if (txt_NombreUsuario.Text.Contains(" ")) { MessageBox.Show("El nombre de usuario no debe contener espacios", "Usuario inválido", MessageBoxButtons.OK, MessageBoxIcon.Information); } ;
             }
-            else MessageBox.Show("Por favor rellena todos los campos solicitados");
+            else MessageBox.Show("Por favor rellena todos los campos solicitados", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void FrmPerfilesUsuarios_Load(object sender, EventArgs e)
@@ -108,15 +112,15 @@ namespace Ventas.CapaPresentacion
                     string Contraseña = txt_Contrasena.Text;
                     int IdRol = cmb_Roles.Text == "Administrador" ? 1 : 2;
                     bool response = NLogin.ModificarPerfilUsuario(Id, NombreUsuario, Contraseña, IdRol);
-                    if (response) MessageBox.Show("El usuario se ha modificado con exito");
-                    else MessageBox.Show("Ocurrió un error al modificar el usuario");
+                    if (response) MessageBox.Show("El usuario se ha modificado con exito", "Se ha añadido el usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else MessageBox.Show("Ocurrió un error al modificar el usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txt_Id.Text = string.Empty;
                     txt_NombreUsuario.Text = string.Empty;
                     txt_Contrasena.Text = string.Empty;
                     Cargar();
                 }
             }
-            else MessageBox.Show("Por favor rellena todos los campos solicitados");
+            else MessageBox.Show("Por favor rellena todos los campos solicitados", "Entrada de datos inválida", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btn_RemoveUser_Click(object sender, EventArgs e)
@@ -124,8 +128,8 @@ namespace Ventas.CapaPresentacion
             bool Result = false;
             DialogResult confirmacion = MessageBox.Show("¿Está seguro que quieres eliminar este usuario?", "Confirmar eliminar usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmacion == DialogResult.Yes) Result = NLogin.EliminarPerfilUsuario(int.Parse(txt_Id.Text));
-            if (Result) MessageBox.Show("Usuario Eliminado");
-            else MessageBox.Show("No se ha podido eliminar este usuario");
+            if (Result) MessageBox.Show("Usuario Eliminado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else MessageBox.Show("No se ha podido eliminar este usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Cargar();
         }
 
