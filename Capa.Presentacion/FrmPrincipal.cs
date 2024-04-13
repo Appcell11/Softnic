@@ -17,6 +17,7 @@ using iTextSharp.tool.xml;
 using System.Linq.Expressions;
 using System.Drawing.Printing;
 using static System.Net.WebRequestMethods;
+using System.Security.Permissions;
 
 namespace Ventas.CapaPresentacion
 {
@@ -194,10 +195,13 @@ namespace Ventas.CapaPresentacion
 
         private void btn_NuevoRecibo_Click(object sender, EventArgs e)
         {
+            var bindingSource = new BindingSource();
             try
             {
                 label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
                 cmb_Clientes.SelectedItem = null;
+                bindingSource.DataSource = NRecibo.MostrarDetalleRecibo(int.Parse(label_NumRecibo.Text));
+                dgv_detalleRecibo.DataSource = bindingSource;
                 dgv_detalleRecibo.Refresh();
                 cmb_Clientes.Enabled = true;
             }
@@ -231,46 +235,32 @@ namespace Ventas.CapaPresentacion
 
         private void GenerarReporte()
         {
-            SaveFileDialog guardar = new SaveFileDialog();
-            guardar.FileName = DateTime.Now.ToString("Reporte_" + "ddMMyyyyHHmm") + ".pdf";
-            guardar.ShowDialog();
-
-            string paginahtml = Properties.Resources.plantilla.ToString();
-            string filas = string.Empty;
-            foreach (DataGridViewRow row in dgv_Register.Rows)
+            Document doc = new Document(PageSize.LETTER);
+            try
             {
-                filas += "<tr>";
-                filas += "<td>" + row.Cells[0].Value + "</td>";
-                filas += "<td>" + row.Cells[1].Value + "</td>";
-                filas += "<td>" + row.Cells[2].Value + "</td>";
-                filas += "<td>" + row.Cells[3].Value + "</td>";
-                filas += "<td>" + row.Cells[4].Value + "</td>";
-                filas += "</tr>";
-            }
-            paginahtml.Replace("@Fila", filas);
+                FileStream fs = new FileStream(Path.Combine(Application.StartupPath, @"Reporte") + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + ".pdf" , FileMode.Create);
+                PdfWriter Writer = PdfWriter.GetInstance(doc, fs);
+                doc.AddTitle("ReporteSoftnic");
+                doc.Open();
+                iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
-            if (guardar.ShowDialog() == DialogResult.OK)
-            {
-                //using (FileStream fileStream = new FileStream(guardar.FileName, FileMode.Create))
-                //{
-                //    Document document = new Document(PageSize.A4, 25, 25, 25, 25);
-                //    PdfWriter pdfWriter = PdfWriter.GetInstance(document, fileStream);
-                //    document.Open();
-                //    document.Add(new Phrase("Reporte de examenes realizados"));
-                //    try
-                //    {
-                //        XMLWorkerHelper.GetInstance().ParseXHtml(pdfWriter, document, new StringReader(paginahtml));
-                //    }
-                //    catch
-                //    {
-                //        MessageBox.Show("No se ha podido guardar el registro", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    }
-                //    finally
-                //    {
-                //        document.Close();
-                //        fileStream.Close();
-                //    }
-            }
+                doc.Add(new Paragraph("Reporte de caja " + DateTime.Now.ToString("d")));
+                doc.Add(Chunk.NEWLINE);
+                foreach (DataGridViewRow row in dgv_Register.Rows)
+                {
+                    var IdRecibo = row.Cells[0].Value;
+                    var PacienteNombre = row.Cells[1].Value;
+                    var PacienteApellido = row.Cells[2].Value;
+                    var Importe = row.Cells[3].Value;
+                    var Fecha = row.Cells[4].Value;
+                    doc.Add(new Paragraph("No Recibo : " + IdRecibo + " - " + PacienteNombre + " - " + PacienteApellido + " - " + " C$ " + Importe + " - " + Fecha));
+                    doc.Add(Chunk.NEWLINE);
+                }
+                
+                doc.Close();
+                Writer.Close();
+                MessageBox.Show("Guardado en " + Path.Combine(Application.StartupPath, @"Reporte") + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + ".pdf", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void btn_CierreCaja_Click(object sender, EventArgs e)
@@ -300,9 +290,13 @@ namespace Ventas.CapaPresentacion
         
         private void btn_Imprimir_Click(object sender, EventArgs e)
         {
-            
+            ImprimirRecibo();   
+        }
+
+        private void ImprimirRecibo()
+        {
             int longPaper = dgv_detalleRecibo.Rows.Count * 50 + 240;
-            PrintPreviewDialog vista = new PrintPreviewDialog(); 
+            PrintPreviewDialog vista = new PrintPreviewDialog();
             printDocument1 = new PrintDocument();
             printDocument1.PrinterSettings.PrinterName = printDocument1.DefaultPageSettings.PrinterSettings.PrinterName;
             PrinterSettings ps = new PrinterSettings();
@@ -326,13 +320,15 @@ namespace Ventas.CapaPresentacion
             System.Drawing.Font font = new System.Drawing.Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
             e.Graphics.DrawString("Recibo No." + label_NumRecibo.Text, fontBold, Brushes.Black, 170, line += 20, center);
             e.Graphics.DrawString("Cliente:" + cmb_Clientes.Text, fontBold, Brushes.Black, 350 / 2, line += 30, center);
+            e.Graphics.DrawString(string.Concat(Enumerable.Repeat("-", 170)), fontBold, Brushes.Black, 170, line += 40, center);
 
             foreach (DataGridViewRow row in dgv_detalleRecibo.Rows)
             {
-                if (row.Cells[4].Value.ToString().Length > 30)
+                int stringLong = row.Cells[4].Value.ToString().Length;
+                if (stringLong > 20)
                 {
-                    e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(0,30), font, Brushes.Black, 170, line += 40, center);
-                    //e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(21, row.Cells[4].Value.ToString().Length) + ": " + row.Cells[5].Value.ToString() + " Córdobas", font, Brushes.Black, 170, line += 40, center);
+                    //e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(0,40), font, Brushes.Black, 170, line += 40, center);
+                    e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(0, 21) + "... : " + row.Cells[5].Value.ToString() + " Córdobas", font, Brushes.Black, 170, line += 30, center);
                 }
                 else
                 {

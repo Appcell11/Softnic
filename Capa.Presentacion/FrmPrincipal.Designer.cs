@@ -364,9 +364,14 @@
             // 
             // dgv_Register
             // 
+            this.dgv_Register.AllowUserToAddRows = false;
+            this.dgv_Register.AllowUserToDeleteRows = false;
             this.dgv_Register.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Register.Location = new System.Drawing.Point(7, 20);
             this.dgv_Register.Name = "dgv_Register";
+            this.dgv_Register.ReadOnly = true;
+            this.dgv_Register.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Register.ShowEditingIcon = false;
             this.dgv_Register.Size = new System.Drawing.Size(566, 340);
             this.dgv_Register.TabIndex = 0;
             // 

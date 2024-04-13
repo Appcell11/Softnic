@@ -251,9 +251,9 @@ CREATE OR ALTER PROC sp_AgregarCliente(
 AS
 BEGIN
 	IF(
-	SELECT NumeroCedula FROM Pacientes
+	SELECT COUNT(NumeroCedula) FROM Pacientes
 	WHERE NumeroCedula = @NumeroCedula
-	AND id_Estado = 1) = @NumeroCedula
+	AND id_Estado = 1) > 0
 	BEGIN
 		SELECT '0';
 	END
@@ -395,7 +395,7 @@ BEGIN
 	Pacientes.PrimerNombre AS Nombre,
 	Pacientes.PrimerApellido AS Apellido,
 	Examenes.Nombre AS Examen,
-	Examenes.Precio AS Precio,
+	CAST(Examenes.Precio AS DECIMAL) AS Precio,
 	Fecha
 	FROM 
 	DetalleRecibo
@@ -503,7 +503,7 @@ BEGIN
 	id_Recibo AS Recibo,
 	Pacientes.PrimerNombre AS Nombre,
 	Pacientes.PrimerApellido AS Apellido,
-	Importe,
+	CAST(Importe AS DECIMAL),
 	Fecha
 	FROM 
 	Recibo
@@ -522,7 +522,7 @@ AS
 BEGIN
 	DECLARE @ImporteTotal MONEY SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
 	UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
-	SELECT Importe FROM Recibo WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
+	SELECT CAST(Importe AS DECIMAL) FROM Recibo WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
 END
 go
 -------------------------------------------------
@@ -534,7 +534,7 @@ BEGIN
 	id_Recibo AS Recibo,
 	Pacientes.PrimerNombre AS Nombre,
 	Pacientes.PrimerApellido AS Apellido,
-	Importe,
+	CAST(Importe AS DECIMAL),
 	Fecha
 	FROM 
 	Recibo
