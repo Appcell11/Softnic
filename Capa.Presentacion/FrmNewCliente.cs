@@ -51,7 +51,7 @@ namespace Ventas.CapaPresentacion
         {
             if (txt_PrimerNombre.Text != string.Empty && txt_PrimerApellido.Text != string.Empty && txt_NumeroCedula.Text != string.Empty && cmb_sexo.Text != string.Empty && txt_NumeroCedula.Text.Length == 14 )
             {
-                if (dateTimePicker.Value < DateTime.Now.AddYears(-16) )
+                if (DateTime.Parse(dateTimePicker.Value.ToString()) < DateTime.Now.AddYears(-16) )
                 {
                     string PNombre = txt_PrimerNombre.Text;
                     string SNombre = txt_SegundoNombre.Text;
@@ -99,7 +99,7 @@ namespace Ventas.CapaPresentacion
         {
             if (txt_PrimerNombre.Text != string.Empty && txt_PrimerApellido.Text != string.Empty && txt_NumeroCedula.Text != string.Empty && cmb_sexo.Text != string.Empty && txt_NumeroCedula.Text.Length == 14)
             {
-                if (dateTimePicker.Value < DateTime.Now.AddYears(-16))
+                if (DateTime.Parse(dateTimePicker.Value.ToString()) < DateTime.Now.AddYears(-16))
                 {
                     int Id = int.Parse(dgv_Clientes.CurrentRow.Cells["ID"].Value.ToString());
                     string PNombre = txt_PrimerNombre.Text;

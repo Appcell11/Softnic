@@ -56,6 +56,7 @@
             this.GroupRegister = new System.Windows.Forms.GroupBox();
             this.dgv_Register = new System.Windows.Forms.DataGridView();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
+            this.btn_controlRecibos = new System.Windows.Forms.Button();
             this.btn_CierreCaja = new System.Windows.Forms.Button();
             this.btn_AdminUsuarios = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -250,6 +251,7 @@
             // cmb_Clientes
             // 
             this.cmb_Clientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Clientes.Enabled = false;
             this.cmb_Clientes.FormattingEnabled = true;
             this.cmb_Clientes.Location = new System.Drawing.Point(312, 36);
             this.cmb_Clientes.Name = "cmb_Clientes";
@@ -271,6 +273,7 @@
             // cmb_Examenes
             // 
             this.cmb_Examenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Examenes.Enabled = false;
             this.cmb_Examenes.FormattingEnabled = true;
             this.cmb_Examenes.Location = new System.Drawing.Point(15, 36);
             this.cmb_Examenes.Name = "cmb_Examenes";
@@ -360,7 +363,7 @@
             this.GroupRegister.Size = new System.Drawing.Size(579, 366);
             this.GroupRegister.TabIndex = 1;
             this.GroupRegister.TabStop = false;
-            this.GroupRegister.Text = "Registro de examenes realizados";
+            this.GroupRegister.Text = "Registro de examenes realizados hoy";
             // 
             // dgv_Register
             // 
@@ -368,6 +371,7 @@
             this.dgv_Register.AllowUserToDeleteRows = false;
             this.dgv_Register.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Register.Location = new System.Drawing.Point(7, 20);
+            this.dgv_Register.MultiSelect = false;
             this.dgv_Register.Name = "dgv_Register";
             this.dgv_Register.ReadOnly = true;
             this.dgv_Register.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -377,6 +381,7 @@
             // 
             // FormUserGroup
             // 
+            this.FormUserGroup.Controls.Add(this.btn_controlRecibos);
             this.FormUserGroup.Controls.Add(this.btn_CierreCaja);
             this.FormUserGroup.Controls.Add(this.btn_AdminUsuarios);
             this.FormUserGroup.Location = new System.Drawing.Point(9, 6);
@@ -385,6 +390,16 @@
             this.FormUserGroup.TabIndex = 0;
             this.FormUserGroup.TabStop = false;
             this.FormUserGroup.Text = "Acciones";
+            // 
+            // btn_controlRecibos
+            // 
+            this.btn_controlRecibos.Location = new System.Drawing.Point(6, 72);
+            this.btn_controlRecibos.Name = "btn_controlRecibos";
+            this.btn_controlRecibos.Size = new System.Drawing.Size(217, 35);
+            this.btn_controlRecibos.TabIndex = 12;
+            this.btn_controlRecibos.Text = "Control de Recibos";
+            this.btn_controlRecibos.UseVisualStyleBackColor = true;
+            this.btn_controlRecibos.Click += new System.EventHandler(this.btn_controlRecibos_Click);
             // 
             // btn_CierreCaja
             // 
@@ -410,6 +425,7 @@
             // 
             // printDocument1
             // 
+            this.printDocument1.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument1_EndPrint);
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // FrmPrincipal
@@ -475,6 +491,7 @@
         private System.Windows.Forms.Button btn_CierreCaja;
         private System.Windows.Forms.Button btn_CerrarSesion;
         private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.Button btn_controlRecibos;
     }
 }
 

@@ -130,6 +130,7 @@
             this.dgv_Clientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv_Clientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Clientes.Location = new System.Drawing.Point(7, 46);
+            this.dgv_Clientes.MultiSelect = false;
             this.dgv_Clientes.Name = "dgv_Clientes";
             this.dgv_Clientes.ReadOnly = true;
             this.dgv_Clientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

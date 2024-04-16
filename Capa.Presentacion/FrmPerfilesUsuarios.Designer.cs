@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.FormUserGroup = new System.Windows.Forms.GroupBox();
             this.cmb_Roles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -204,8 +204,8 @@
             // 
             this.dgv_Perfiles.AllowUserToAddRows = false;
             this.dgv_Perfiles.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Perfiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Perfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -213,6 +213,7 @@
             this.dgv_Perfiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Perfiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgv_Perfiles.Location = new System.Drawing.Point(252, 13);
+            this.dgv_Perfiles.MultiSelect = false;
             this.dgv_Perfiles.Name = "dgv_Perfiles";
             this.dgv_Perfiles.ReadOnly = true;
             this.dgv_Perfiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

@@ -111,7 +111,11 @@ namespace Ventas.CapaPresentacion
                     string NombreUsuario = txt_NombreUsuario.Text;
                     string Contraseña = txt_Contrasena.Text;
                     int IdRol = cmb_Roles.Text == "Administrador" ? 1 : 2;
-                    bool response = NLogin.ModificarPerfilUsuario(Id, NombreUsuario, Contraseña, IdRol);
+                    bool response = false;
+                    try { if (IdRol == 2 && !ultimoAdmin()) { response = NLogin.ModificarPerfilUsuario(Id, NombreUsuario, Contraseña, IdRol); }
+                        else MessageBox.Show("Tiene que haber por lo menos un administrador", "Acción no permitida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch { MessageBox.Show("Ocurrió un error al modificar el usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     if (response) MessageBox.Show("El usuario se ha modificado con exito", "Se ha añadido el usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else MessageBox.Show("Ocurrió un error al modificar el usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txt_Id.Text = string.Empty;
@@ -123,11 +127,24 @@ namespace Ventas.CapaPresentacion
             else MessageBox.Show("Por favor rellena todos los campos solicitados", "Entrada de datos inválida", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private bool ultimoAdmin()
+        {
+            int count = 0;
+            foreach (DataGridViewRow item in dgv_Perfiles.Rows)
+            {
+                if (item.Cells[1].Value.ToString() == "Administrador")
+                {
+                    count++;
+                }
+            }
+            return count > 1 ? false : true;
+        }
+
         private void btn_RemoveUser_Click(object sender, EventArgs e)
         {
             bool Result = false;
             DialogResult confirmacion = MessageBox.Show("¿Está seguro que quieres eliminar este usuario?", "Confirmar eliminar usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirmacion == DialogResult.Yes) Result = NLogin.EliminarPerfilUsuario(int.Parse(txt_Id.Text));
+            if (confirmacion == DialogResult.Yes && !ultimoAdmin()) Result = NLogin.EliminarPerfilUsuario(int.Parse(txt_Id.Text));
             if (Result) MessageBox.Show("Usuario Eliminado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else MessageBox.Show("No se ha podido eliminar este usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Cargar();

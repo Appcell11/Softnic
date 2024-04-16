@@ -123,8 +123,9 @@ namespace Ventas.CapaPresentacion
                     label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
                     cmb_Clientes.Enabled = true;
                     dgv_Register.DataSource = CargarDatos.CargarInfoDataGrid("sp_MostrarReporteRecibo");
-                    MessageBox.Show("El recibo se ha guardado con éxito");
+                    MessageBox.Show("El recibo se ha guardado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cmb_Clientes.Enabled = true;
+                    label_Total.Text = "0";
                     Limpiar();
                 }
                 catch (Exception except)
@@ -204,6 +205,7 @@ namespace Ventas.CapaPresentacion
                 dgv_detalleRecibo.DataSource = bindingSource;
                 dgv_detalleRecibo.Refresh();
                 cmb_Clientes.Enabled = true;
+                cmb_Examenes.Enabled = true;
             }
             catch (Exception except ) { MessageBox.Show("Error: " + except.Source + " " + except.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -229,7 +231,7 @@ namespace Ventas.CapaPresentacion
 
             }
             ActualizarTotal();
-            if (Responce) MessageBox.Show("Se ha eliminado el registro");
+            if (Responce) MessageBox.Show("Se ha eliminado el registro", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else { MessageBox.Show("No se ha podido eliminar el registro", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
@@ -265,7 +267,7 @@ namespace Ventas.CapaPresentacion
 
         private void btn_CierreCaja_Click(object sender, EventArgs e)
         {
-            if(dgv_Register.Rows.Count > 1 && dgv_Register.Columns.Count > 0) {
+            if(dgv_Register.Rows.Count > 0 ) {
                 GenerarReporte();
             }
             else
@@ -280,17 +282,22 @@ namespace Ventas.CapaPresentacion
             { 
                 this.Hide();
                 Login.Access = "0";
-                Empezar(); 
+                Empezar();
             }
             else
             {
                 MessageBox.Show("No quiso");
             }
         }
-        
+        bool imprimiendo = false;
         private void btn_Imprimir_Click(object sender, EventArgs e)
         {
-            ImprimirRecibo();   
+            if(dgv_detalleRecibo.Rows.Count > 0 && imprimiendo == false) ImprimirRecibo();
+        }
+
+        private void FormClosedHandler(object sender, EventArgs e)
+        {
+            imprimiendo = false;
         }
 
         private void ImprimirRecibo()
@@ -307,6 +314,8 @@ namespace Ventas.CapaPresentacion
             printDocument1.PrintPage += printDocument1_PrintPage;
             vista.Document = printDocument1;
             vista.Show();
+            if(vista.Created) { imprimiendo = true; }
+            vista.FormClosed += new FormClosedEventHandler(FormClosedHandler);
         }
 
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
@@ -339,6 +348,17 @@ namespace Ventas.CapaPresentacion
             e.Graphics.DrawString("Total: " + label_Total.Text + " Córdobas", fontBold, Brushes.Black, 350 / 2, line += 40, center);
             e.Graphics.DrawString("Fecha:" + DateTime.Now.ToString("d"), fontBold, Brushes.Black, 350/2, line += 40, center);
 
+        }
+
+        private void printDocument1_EndPrint(object sender, PrintEventArgs e)
+        {
+            imprimiendo = false;
+        }
+
+        private void btn_controlRecibos_Click(object sender, EventArgs e)
+        {
+            var FrmRecibos = new FrmControlRecibos();
+            FrmRecibos.ShowDialog();
         }
     }
 }
