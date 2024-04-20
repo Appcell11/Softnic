@@ -56,9 +56,15 @@ CREATE TABLE Recibo(
 id_Recibo INT PRIMARY KEY IDENTITY,
 id_Paciente INT REFERENCES Pacientes(id_Paciente),
 id_Estado INT REFERENCES Estado(id_Estado),
-Importe MONEY,
-Fecha DATETIME
+Subtotal MONEY,
+Fecha DATETIME,
+Iva MONEY,
+Total_a_pagar MONEY
 );
+--EXEC SP_RENAME 'Recibo.Importe', 'Subtotal';
+--ALTER TABLE Recibo
+--ADD Iva MONEY,
+--    Total_a_pagar MONEY;
 --select * from Recibo
 --ALTER TABLE Recibo DROP COLUMN Descuento
 --ALTER TABLE Recibo DROP COLUMN Saldo

@@ -61,5 +61,25 @@ namespace CapaNegocio
             DataTable Response = DRecibo.MostrarImporteRecibo(id_Recibo);
             return Response;
         }
+
+        public static DataTable BuscarRecibo(int id_Recibo)
+        {
+            DataTable Response = DRecibo.BuscarRecibo(id_Recibo);
+            return Response;
+        }
+
+        public static bool CambiarEstadoRecibo(int id_Recibo, int id_Estado)
+        {
+            string Response = "0";
+            try
+            {
+                Response = DRecibo.CambiarEstadoRecibo(id_Recibo, id_Estado).Select()[0][0].ToString();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return Response == "1" ? true : false;
+        }
     }
 }

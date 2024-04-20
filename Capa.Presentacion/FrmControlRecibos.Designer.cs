@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBoxActions = new System.Windows.Forms.GroupBox();
+            this.label_NoRecibo = new System.Windows.Forms.Label();
+            this.txt_numRecibo = new System.Windows.Forms.TextBox();
+            this.btn_cancelar = new System.Windows.Forms.Button();
+            this.btn_activarRecibo = new System.Windows.Forms.Button();
             this.Group_Recibos = new System.Windows.Forms.GroupBox();
             this.dgv_Recibos = new System.Windows.Forms.DataGridView();
-            this.btn_activarRecibo = new System.Windows.Forms.Button();
-            this.btn_cancelar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label_NoRecibo = new System.Windows.Forms.Label();
             this.groupBoxActions.SuspendLayout();
             this.Group_Recibos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Recibos)).BeginInit();
@@ -43,7 +43,7 @@
             // groupBoxActions
             // 
             this.groupBoxActions.Controls.Add(this.label_NoRecibo);
-            this.groupBoxActions.Controls.Add(this.textBox1);
+            this.groupBoxActions.Controls.Add(this.txt_numRecibo);
             this.groupBoxActions.Controls.Add(this.btn_cancelar);
             this.groupBoxActions.Controls.Add(this.btn_activarRecibo);
             this.groupBoxActions.Location = new System.Drawing.Point(12, 364);
@@ -52,6 +52,49 @@
             this.groupBoxActions.TabIndex = 0;
             this.groupBoxActions.TabStop = false;
             this.groupBoxActions.Text = "Acciones";
+            // 
+            // label_NoRecibo
+            // 
+            this.label_NoRecibo.AutoSize = true;
+            this.label_NoRecibo.Location = new System.Drawing.Point(6, 32);
+            this.label_NoRecibo.Name = "label_NoRecibo";
+            this.label_NoRecibo.Size = new System.Drawing.Size(58, 13);
+            this.label_NoRecibo.TabIndex = 3;
+            this.label_NoRecibo.Text = "No Recibo";
+            // 
+            // txt_numRecibo
+            // 
+            this.txt_numRecibo.Location = new System.Drawing.Point(70, 29);
+            this.txt_numRecibo.Name = "txt_numRecibo";
+            this.txt_numRecibo.Size = new System.Drawing.Size(153, 20);
+            this.txt_numRecibo.TabIndex = 2;
+            this.txt_numRecibo.TextChanged += new System.EventHandler(this.txt_numRecibo_TextChanged);
+            // 
+            // btn_cancelar
+            // 
+            this.btn_cancelar.BackColor = System.Drawing.Color.DarkRed;
+            this.btn_cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_cancelar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_cancelar.Location = new System.Drawing.Point(393, 19);
+            this.btn_cancelar.Name = "btn_cancelar";
+            this.btn_cancelar.Size = new System.Drawing.Size(110, 39);
+            this.btn_cancelar.TabIndex = 1;
+            this.btn_cancelar.Text = "Eliminar";
+            this.btn_cancelar.UseVisualStyleBackColor = false;
+            this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
+            // 
+            // btn_activarRecibo
+            // 
+            this.btn_activarRecibo.BackColor = System.Drawing.Color.Green;
+            this.btn_activarRecibo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_activarRecibo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_activarRecibo.Location = new System.Drawing.Point(277, 19);
+            this.btn_activarRecibo.Name = "btn_activarRecibo";
+            this.btn_activarRecibo.Size = new System.Drawing.Size(110, 39);
+            this.btn_activarRecibo.TabIndex = 0;
+            this.btn_activarRecibo.Text = "Activar";
+            this.btn_activarRecibo.UseVisualStyleBackColor = false;
+            this.btn_activarRecibo.Click += new System.EventHandler(this.btn_activarRecibo_Click);
             // 
             // Group_Recibos
             // 
@@ -65,6 +108,8 @@
             // 
             // dgv_Recibos
             // 
+            this.dgv_Recibos.AllowUserToAddRows = false;
+            this.dgv_Recibos.AllowUserToDeleteRows = false;
             this.dgv_Recibos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Recibos.Location = new System.Drawing.Point(7, 20);
             this.dgv_Recibos.MultiSelect = false;
@@ -73,46 +118,7 @@
             this.dgv_Recibos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Recibos.Size = new System.Drawing.Size(496, 320);
             this.dgv_Recibos.TabIndex = 0;
-            // 
-            // btn_activarRecibo
-            // 
-            this.btn_activarRecibo.BackColor = System.Drawing.Color.Green;
-            this.btn_activarRecibo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_activarRecibo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_activarRecibo.Location = new System.Drawing.Point(277, 19);
-            this.btn_activarRecibo.Name = "btn_activarRecibo";
-            this.btn_activarRecibo.Size = new System.Drawing.Size(110, 39);
-            this.btn_activarRecibo.TabIndex = 0;
-            this.btn_activarRecibo.Text = "Activar";
-            this.btn_activarRecibo.UseVisualStyleBackColor = false;
-            // 
-            // btn_cancelar
-            // 
-            this.btn_cancelar.BackColor = System.Drawing.Color.DarkRed;
-            this.btn_cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_cancelar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_cancelar.Location = new System.Drawing.Point(393, 19);
-            this.btn_cancelar.Name = "btn_cancelar";
-            this.btn_cancelar.Size = new System.Drawing.Size(110, 39);
-            this.btn_cancelar.TabIndex = 1;
-            this.btn_cancelar.Text = "Cancelar";
-            this.btn_cancelar.UseVisualStyleBackColor = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(70, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(153, 20);
-            this.textBox1.TabIndex = 2;
-            // 
-            // label_NoRecibo
-            // 
-            this.label_NoRecibo.AutoSize = true;
-            this.label_NoRecibo.Location = new System.Drawing.Point(6, 32);
-            this.label_NoRecibo.Name = "label_NoRecibo";
-            this.label_NoRecibo.Size = new System.Drawing.Size(58, 13);
-            this.label_NoRecibo.TabIndex = 3;
-            this.label_NoRecibo.Text = "No Recibo";
+            this.dgv_Recibos.SelectionChanged += new System.EventHandler(this.dgv_Recibos_SelectionChanged);
             // 
             // FrmControlRecibos
             // 
@@ -125,6 +131,7 @@
             this.MinimumSize = new System.Drawing.Size(549, 489);
             this.Name = "FrmControlRecibos";
             this.Text = "FrmControlRecibos";
+            this.Load += new System.EventHandler(this.FrmControlRecibos_Load);
             this.groupBoxActions.ResumeLayout(false);
             this.groupBoxActions.PerformLayout();
             this.Group_Recibos.ResumeLayout(false);
@@ -138,7 +145,7 @@
         private System.Windows.Forms.GroupBox groupBoxActions;
         private System.Windows.Forms.GroupBox Group_Recibos;
         private System.Windows.Forms.DataGridView dgv_Recibos;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_numRecibo;
         private System.Windows.Forms.Button btn_cancelar;
         private System.Windows.Forms.Button btn_activarRecibo;
         private System.Windows.Forms.Label label_NoRecibo;

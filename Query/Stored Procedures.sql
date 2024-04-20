@@ -374,6 +374,7 @@ BEGIN
 	if(select COUNT(id_Recibo) from Recibo) > 0 
 	begin
 		select top 1 id_Recibo + 1 from Recibo order by id_Recibo desc
+		select * from Recibo
 	end
 	else
 	begin
@@ -407,6 +408,7 @@ END
 -------------------------------------------------------
 ---SP PARA AÑADIR LOS DETALLES AL RECIBO-----
 select * from detalleRecibo where id_Recibo = 5
+select * from Recibo
 GO
 CREATE OR ALTER PROC sp_AgregarDetalleRecibo(
 	@id_Recibo INT,
@@ -421,15 +423,21 @@ BEGIN
 	SET @Importe = (SELECT Precio FROM Examenes WHERE id_Examen = @id_Examen);
 	IF(SELECT COUNT(id_Recibo) FROM Recibo WHERE id_Recibo = @id_Recibo) <= 0 
 	BEGIN
-		INSERT INTO Recibo VALUES (@id_Paciente, 4, @Importe, GETDATE());
+		INSERT INTO Recibo VALUES (@id_Paciente, 4, @Importe, GETDATE(), @ImporteTotal*0.15, @ImporteTotal+(@ImporteTotal*0.15));
 		INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, 4, @Importe, GETDATE());
+		SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
+		UPDATE Recibo SET Subtotal = @ImporteTotal WHERE id_Recibo = @id_Recibo;
+		UPDATE Recibo SET Iva = @ImporteTotal*0.15 WHERE id_Recibo = @id_Recibo;
+		UPDATE Recibo SET Total_a_pagar = @ImporteTotal + (@ImporteTotal*0.15) WHERE id_Recibo = @id_Recibo;
 		SELECT '1';
 	END
 	ELSE
 	BEGIN
 		INSERT INTO DetalleRecibo VALUES (@id_Recibo, @id_Paciente, @id_Examen, 4, @Importe, GETDATE());
 		SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
-		UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
+		UPDATE Recibo SET Subtotal = @ImporteTotal WHERE id_Recibo = @id_Recibo;
+		UPDATE Recibo SET Iva = @ImporteTotal*0.15 WHERE id_Recibo = @id_Recibo;
+		UPDATE Recibo SET Total_a_pagar = @ImporteTotal + (@ImporteTotal*0.15) WHERE id_Recibo = @id_Recibo;
 		SELECT '1';
 	END
 END	
@@ -463,11 +471,11 @@ AS
 BEGIN
 	DECLARE @ImporteTotal MONEY;
 	SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @Id AND id_Estado = 4);
-	IF(SELECT @Id FROM DetalleRecibo WHERE id_Detalle = @Id) = @Id
+	IF(SELECT COUNT(@Id) FROM DetalleRecibo WHERE id_Detalle = @Id) > 0
 	BEGIN
 		UPDATE DetalleRecibo SET id_Estado = 3 WHERE id_Detalle = @Id;
 		SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = 35/*@Id*/ AND id_Estado = 4);
-		UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @Id;
+		UPDATE Recibo SET Subtotal = @ImporteTotal WHERE id_Recibo = @Id;
 		SELECT '1';
 	END
 	ELSE
@@ -476,6 +484,7 @@ BEGIN
 	END
 END
 GO
+SELECT * FROM Recibo
 ---------------------------------------------------------------
 ---SP PARA MODIFICAR DETALLES DEL RECIBO---------------------
 --CREATE OR ALTER PROC sp_ModificarDetalleRecibo(
@@ -503,7 +512,9 @@ BEGIN
 	id_Recibo AS Recibo,
 	Pacientes.PrimerNombre AS Nombre,
 	Pacientes.PrimerApellido AS Apellido,
-	CAST(Importe AS DECIMAL),
+	CAST(Subtotal AS DECIMAL) AS Subtotal,
+	CAST(Iva AS DECIMAL) AS IVA,
+	CAST(Total_a_pagar AS DECIMAL) AS GranTotal,
 	Fecha
 	FROM 
 	Recibo
@@ -521,8 +532,8 @@ CREATE OR ALTER PROC sp_MostrarImporteRecibo(
 AS
 BEGIN
 	DECLARE @ImporteTotal MONEY SET @ImporteTotal = (SELECT SUM(Importe) as Importe FROM DetalleRecibo WHERE id_Recibo = @id_Recibo AND id_Estado = 4);
-	UPDATE Recibo SET Importe = @ImporteTotal WHERE id_Recibo = @id_Recibo;
-	SELECT CAST(Importe AS DECIMAL) FROM Recibo WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
+	UPDATE Recibo SET Subtotal = @ImporteTotal WHERE id_Recibo = @id_Recibo;
+	SELECT CAST(Subtotal AS DECIMAL) FROM Recibo WHERE id_Estado = 4 AND id_Recibo = @id_Recibo
 END
 go
 -------------------------------------------------
@@ -534,10 +545,74 @@ BEGIN
 	id_Recibo AS Recibo,
 	Pacientes.PrimerNombre AS Nombre,
 	Pacientes.PrimerApellido AS Apellido,
-	CAST(Importe AS DECIMAL),
+	CAST(Subtotal AS DECIMAL) AS Subtotal,
+	CAST(Iva AS DECIMAL) AS IVA,
+	CAST(Total_a_pagar AS DECIMAL) AS GranTotal,
 	Fecha
 	FROM 
 	Recibo
 	INNER JOIN Pacientes ON Recibo.id_Paciente = Pacientes.id_Paciente
 	WHERE Recibo.id_Estado = 1 AND CAST(Recibo.Fecha AS DATE) = CAST(GETDATE() AS DATE)
 END
+go
+-------------------------------------------------
+--------------------------------------------------
+--SP PARA MOSTRAR TODOS LOS RECIBOS EN LA BASE DE DATOS
+CREATE OR ALTER PROC sp_MostrarRecibos
+AS
+BEGIN
+	SELECT 
+	id_Recibo AS Recibo,
+	Pacientes.PrimerNombre AS Nombre,
+	Pacientes.PrimerApellido AS Apellido,
+	CAST(Subtotal AS DECIMAL) AS Subtotal,
+	CAST(Iva AS DECIMAL) AS IVA,
+	CAST(Total_a_pagar AS DECIMAL) AS GranTotal,
+	Estado.Nombre AS Estado,
+	Fecha
+	FROM 
+	Recibo
+	INNER JOIN Pacientes ON Recibo.id_Paciente = Pacientes.id_Paciente
+	INNER JOIN Estado ON Recibo.id_Estado = Estado.id_Estado
+	ORDER BY Fecha DESC
+END
+go
+----------------------------------------------------
+--SP PARA BUSCAR RECIBOS SEGUN SU NUMERO
+---------------------------------------------------
+CREATE OR ALTER PROC sp_BuscarRecibo (
+	@ValorBuscar VARCHAR(50)
+)
+AS
+BEGIN
+	SELECT 
+	id_Recibo AS Recibo,
+	Pacientes.PrimerNombre AS Nombre,
+	Pacientes.PrimerApellido AS Apellido,
+	CAST(Subtotal AS DECIMAL) AS Subtotal,
+	CAST(Iva AS DECIMAL) AS IVA,
+	CAST(Total_a_pagar AS DECIMAL) AS GranTotal,
+	Estado.Nombre AS Estado,
+	Fecha
+	FROM 
+	Recibo
+	INNER JOIN Pacientes ON Recibo.id_Paciente = Pacientes.id_Paciente
+	INNER JOIN Estado ON Recibo.id_Estado = Estado.id_Estado
+	WHERE 
+	id_Recibo like CONCAT('%',@ValorBuscar, '%')
+	ORDER BY Fecha DESC
+END
+GO
+--------------------------------------------------------------------
+--SP PARA CAMBIAR EL ESTADO DE UN RECIBO
+--------------------------------------------------------------------
+CREATE OR ALTER PROC sp_CambiarEstadoRecibo
+    @idRecibo INT,
+	@idEstado INT
+AS
+BEGIN
+    UPDATE Recibo
+    SET id_Estado = @idEstado
+    WHERE id_Recibo = @idRecibo;
+	SELECT '1'
+END;

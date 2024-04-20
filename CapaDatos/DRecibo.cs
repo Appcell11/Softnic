@@ -211,5 +211,62 @@ namespace CapaDatos
 
             return Responce;
         }
+
+        public static DataTable BuscarRecibo(int id_Recibo)
+        {
+            SqlDataReader Resultado;
+            DataTable Responce = new DataTable();
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("sp_BuscarRecibo", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@ValorBuscar", SqlDbType.Int).Value = id_Recibo;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Responce.Load(Resultado);
+                return Responce;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
+            }
+
+            return Responce;
+        }
+
+        public static DataTable CambiarEstadoRecibo(int id_Recibo, int id_Estado)
+        {
+            SqlDataReader Resultado;
+            DataTable Responce = new DataTable();
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("sp_CambiarEstadoRecibo", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@idRecibo", SqlDbType.Int).Value = id_Recibo;
+                Comando.Parameters.Add("@idEstado", SqlDbType.Int).Value = id_Estado;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Responce.Load(Resultado);
+                return Responce;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open) sqlcon.Close();
+            }
+
+            return Responce;
+        }
     }
 }

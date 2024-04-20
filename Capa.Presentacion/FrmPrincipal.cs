@@ -194,9 +194,9 @@ namespace Ventas.CapaPresentacion
             }
         }
 
+        public BindingSource bindingSource = new BindingSource();
         private void btn_NuevoRecibo_Click(object sender, EventArgs e)
         {
-            var bindingSource = new BindingSource();
             try
             {
                 label_NumRecibo.Text = CargarDatos.CargarInfoDataGrid("sp_UltimoRecibo").Select()[0][0].ToString();
@@ -206,6 +206,7 @@ namespace Ventas.CapaPresentacion
                 dgv_detalleRecibo.Refresh();
                 cmb_Clientes.Enabled = true;
                 cmb_Examenes.Enabled = true;
+                imprimiendo = false;
             }
             catch (Exception except ) { MessageBox.Show("Error: " + except.Source + " " + except.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -214,7 +215,7 @@ namespace Ventas.CapaPresentacion
         {
             int id_Detalle;
             bool Responce = false;
-            var bindingSource = new BindingSource();
+            //var bindingSource = new BindingSource();
             if(dgv_detalleRecibo.Rows.Count > 0)
             {
                 try
@@ -237,7 +238,9 @@ namespace Ventas.CapaPresentacion
 
         private void GenerarReporte()
         {
+            double GranTotal = 0;
             Document doc = new Document(PageSize.LETTER);
+            
             try
             {
                 FileStream fs = new FileStream(Path.Combine(Application.StartupPath, @"Reporte") + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + ".pdf" , FileMode.Create);
@@ -247,22 +250,31 @@ namespace Ventas.CapaPresentacion
                 iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
                 doc.Add(new Paragraph("Reporte de caja " + DateTime.Now.ToString("d")));
+                doc.Add(new Paragraph("---------------------------------------------------------------------------------------------------------"));
                 doc.Add(Chunk.NEWLINE);
                 foreach (DataGridViewRow row in dgv_Register.Rows)
                 {
                     var IdRecibo = row.Cells[0].Value;
                     var PacienteNombre = row.Cells[1].Value;
                     var PacienteApellido = row.Cells[2].Value;
-                    var Importe = row.Cells[3].Value;
-                    var Fecha = row.Cells[4].Value;
-                    doc.Add(new Paragraph("No Recibo : " + IdRecibo + " - " + PacienteNombre + " - " + PacienteApellido + " - " + " C$ " + Importe + " - " + Fecha));
+                    var Subtotal = row.Cells[3].Value;
+                    var Iva = row.Cells[4].Value;
+                    var TotalPagar = row.Cells[5].Value.ToString();
+                    var Fecha = row.Cells[6].Value;
+                    if(TotalPagar.Length > 0) GranTotal += double.Parse(TotalPagar);
+                    doc.Add(new Paragraph("No Recibo : " + IdRecibo + " --- " + PacienteNombre + " " + PacienteApellido + " --- " + " C$ " + Subtotal + " --- Iva: " + Iva + " --- Total: C$ " + TotalPagar + " --- " + Fecha));
                     doc.Add(Chunk.NEWLINE);
                 }
-                
+                doc.Add(new Paragraph("---------------------------------------------------------------------------------------------------------"));
+                doc.Add(new Paragraph("Gran Total: C$: " + GranTotal.ToString()));
                 doc.Close();
                 Writer.Close();
                 MessageBox.Show("Guardado en " + Path.Combine(Application.StartupPath, @"Reporte") + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + ".pdf", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }catch (Exception e) { MessageBox.Show(e.Message); }
+            finally
+            {
+                doc.Close();
+            }
         }
 
         private void btn_CierreCaja_Click(object sender, EventArgs e)
@@ -302,7 +314,7 @@ namespace Ventas.CapaPresentacion
 
         private void ImprimirRecibo()
         {
-            int longPaper = dgv_detalleRecibo.Rows.Count * 50 + 240;
+            int longPaper = dgv_detalleRecibo.Rows.Count * 100 + 240;
             PrintPreviewDialog vista = new PrintPreviewDialog();
             printDocument1 = new PrintDocument();
             printDocument1.PrinterSettings.PrinterName = printDocument1.DefaultPageSettings.PrinterSettings.PrinterName;
@@ -321,6 +333,9 @@ namespace Ventas.CapaPresentacion
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
             int line = 10;
+            int subtotal = int.Parse(label_Total.Text);
+            double iva = subtotal * 0.15;
+            double granTotal = iva + subtotal;
             StringFormat center = new StringFormat();            
             center.Alignment = StringAlignment.Center;
             StringFormat left = new StringFormat();
@@ -337,15 +352,16 @@ namespace Ventas.CapaPresentacion
                 if (stringLong > 20)
                 {
                     //e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(0,40), font, Brushes.Black, 170, line += 40, center);
-                    e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(0, 21) + "... : " + row.Cells[5].Value.ToString() + " Córdobas", font, Brushes.Black, 170, line += 30, center);
+                    e.Graphics.DrawString(row.Cells[4].Value.ToString().Substring(0, 21) + "... : C$ " + row.Cells[5].Value.ToString(), font, Brushes.Black, 170, line += 30, center);
                 }
                 else
                 {
-                    e.Graphics.DrawString(row.Cells[4].Value.ToString() + ": " + row.Cells[5].Value.ToString() + " Córdobas", font, Brushes.Black, 170, line += 40, center);
+                    e.Graphics.DrawString(row.Cells[4].Value.ToString() + ": C$ " + row.Cells[5].Value.ToString(), font, Brushes.Black, 170, line += 40, center);
                 }
             }
             e.Graphics.DrawString(string.Concat(Enumerable.Repeat("-", 170)), fontBold, Brushes.Black, 170, line += 40, center);
-            e.Graphics.DrawString("Total: " + label_Total.Text + " Córdobas", fontBold, Brushes.Black, 350 / 2, line += 40, center);
+            e.Graphics.DrawString("Subtotal: C$ " + subtotal.ToString() + "  " + "Iva: C$ " + iva.ToString(), fontBold, Brushes.Black, 170, line += 40, center);
+            e.Graphics.DrawString("Total: C$ " + granTotal.ToString(), fontBold, Brushes.Black, 350 / 2, line += 40, center);
             e.Graphics.DrawString("Fecha:" + DateTime.Now.ToString("d"), fontBold, Brushes.Black, 350/2, line += 40, center);
 
         }
